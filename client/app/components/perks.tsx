@@ -56,15 +56,15 @@ function Perks() {
 			if (step1.current.getClientRects()[0].y < screen.availHeight - 200) {
 				step1.current.classList.add("active");
 				let i = 1;
-				setTimeout(() => step2.current?.classList.add("active"), i++ * 300);
-				setTimeout(() => step3.current?.classList.add("active"), i++ * 300);
-				setTimeout(() => step4.current?.classList.add("active"), i++ * 300);
+				setTimeout(() => step2.current?.classList.add("active"), i++ * 150);
+				setTimeout(() => step3.current?.classList.add("active"), i++ * 150);
+				setTimeout(() => step4.current?.classList.add("active"), i++ * 150);
 			} else {
 				step1.current.classList.remove("active");
 				let i = 1;
-				setTimeout(() => step2.current?.classList.remove("active"), i++ * 300);
-				setTimeout(() => step3.current?.classList.remove("active"), i++ * 300);
-				setTimeout(() => step4.current?.classList.remove("active"), i++ * 300);
+				setTimeout(() => step2.current?.classList.remove("active"), i++ * 150);
+				setTimeout(() => step3.current?.classList.remove("active"), i++ * 150);
+				setTimeout(() => step4.current?.classList.remove("active"), i++ * 150);
 			}
 		});
 	}, []);

@@ -12,6 +12,7 @@ function switchTheme() {
         --foreground: #ffffff;
         --foreground2: #fbfbfb;
         --foreground3: #eee;
+		--foreground4: #aeaeae;
         --background-opacity: #00000099;`,
 		lightStyles = `
         --background3: #eee;
@@ -20,6 +21,7 @@ function switchTheme() {
         --foreground: #000000;
 		--foreground2: #171717;
 		--foreground3: #2b2b2b;
+		--foreground4: #515151;
         --background-opacity: #ffffff99;`;
 
 	let styles = null;
@@ -61,6 +63,7 @@ function loadTheme() {
         --foreground: #000000;
 		--foreground2: #171717;
 		--foreground3: #2b2b2b;
+		--foreground4: #515151;
         --background-opacity: #ffffff99;`,
 		lightStyles = `
         --background3: #1f1f1f;
@@ -68,6 +71,7 @@ function loadTheme() {
         --background: #000000;
         --foreground: #ffffff;
         --foreground2: #fbfbfb;
+		--foreground4: #aeaeae;
         --foreground3: #eee;
         --background-opacity: #00000099;`;
 
@@ -163,11 +167,11 @@ function Sun() {
 	);
 }
 
-interface prop{
-	visibility:boolean
+interface prop {
+	visibility: boolean;
 }
 
-function Theme(props:prop) {
+function Theme(props: prop) {
 	useEffect(() => {
 		const theme = localStorage.getItem("theme"),
 			sun = document.querySelector(".sun") as HTMLElement,

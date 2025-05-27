@@ -32,6 +32,9 @@
     transition: var(--transition);
     position: relative;
 }
+.step:hover .stepIcon{
+    
+}
 
 .stepIcon {
     width: 50px;

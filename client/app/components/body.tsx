@@ -5,6 +5,7 @@ import Featured from "./featured";
 import TopSellers from "./topSellers";
 import Achievement from "./achievements";
 import Subscribe from "./subscribe";
+import Footer from "./footer";
 
 function body() {
 	return (
@@ -16,6 +17,7 @@ function body() {
 			<TopSellers />
 			<Achievement />
 			<Subscribe />
+			<Footer />
 		</div>
 	);
 }
