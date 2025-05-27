@@ -173,7 +173,7 @@ function Body() {
 
 								<div className="continue">{google()} Sign up with Google</div>
 								<p>
-									Already have an account?{" "}
+									Don&apos;t have an account?{" "}
 									<span
 										style={{ color: "var(--themeClr)" }}
 										onClick={() => {
