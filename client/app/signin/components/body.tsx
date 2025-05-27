@@ -4,14 +4,6 @@ import Theme from "../../components/theme";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-function userIcon() {
-	return (
-		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user w-10 h-10 text-white">
-			<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-			<circle cx="12" cy="7" r="4"></circle>
-		</svg>
-	);
-}
 function errIcon() {
 	return (
 		<svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-shield-alert h-8 w-8 text-red-500">
@@ -122,15 +114,20 @@ function Body() {
 				{settings.loaded ? (
 					<>
 						<div className="part1">
-							{userIcon()}
-							<p>&quot;Easy Mart has completely transformed my online shopping experience. The quality of products and customer service is exceptional!&quot;</p>
-							<h3>Sarah Johnson</h3>
+							<h1>Discover Amazing Products</h1>
+							<p>Shop with confidence from thousands of verified sellers offering quality products at great prices.</p>
 							<div>
-								<div className="happyCostumers">
-									80k+ <p>Happy Customers</p>
+								<div>
+									100% <p>Secure Payments</p>
 								</div>
-								<div className="averageRating">
-									4.9★ <p>Happy Customers</p>
+								<div>
+									2-3 <p>Days Delivery</p>
+								</div>
+								<div>
+									30-Day <p>Return Policy</p>
+								</div>
+								<div>
+									24/7 <p>Support</p>
 								</div>
 							</div>
 						</div>
@@ -180,10 +177,10 @@ function Body() {
 									<span
 										style={{ color: "var(--themeClr)" }}
 										onClick={() => {
-											router.push("../signin");
+											router.push("../signup");
 										}}
 									>
-										Sign in
+										Sign up
 									</span>
 								</p>
 							</form>

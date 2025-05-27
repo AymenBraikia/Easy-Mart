@@ -21,7 +21,7 @@
 }
 
 .part1>* {
-    max-width: 60%;
+    max-width: 95%;
     text-align: center;
 }
 
@@ -43,13 +43,15 @@
 
 .part1>div {
     display: flex;
-    gap: 80px;
+    gap: 20px;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .part1>div>* {
-    width: 200px;
+    width: 40%;
     height: 80px;
     border-radius: 10px;
     background-color: #4ed17e;
@@ -69,7 +71,7 @@
 }
 
 input:focus::placeholder,
-input:focus{
+input:focus {
     color: var(--themeClr) !important;
 }
 
