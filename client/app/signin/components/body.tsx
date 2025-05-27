@@ -137,21 +137,21 @@ function Body() {
 
 							<form ref={form} action={settings.production ? settings.serverUrl + "/signup" : "http://localhost:8000/signin"} method="POST">
 								<div style={{ position: "relative", width: "100%" }}>
-									<label className="icon" htmlFor="#email">
+									<label className="icon" htmlFor="email">
 										{mail()}
 									</label>
 									<input ref={emailInp} required type="email" id="email" name="email" className="email" placeholder="Email address" />
 								</div>
 
 								<div style={{ position: "relative", width: "100%" }}>
-									<label className="icon" htmlFor="#username">
+									<label className="icon" htmlFor="username">
 										{usernameIcon()}
 									</label>
 									<input ref={usernameInp} required type="text" id="username" name="username" className="username" placeholder="Username" />
 								</div>
 
 								<div style={{ position: "relative", width: "100%" }}>
-									<label className="icon" htmlFor="#password">
+									<label className="icon" htmlFor="password">
 										{lock()}
 									</label>
 									<input ref={passwordInp} required type="password" id="password" name="password" className="password" placeholder="Password" />
@@ -159,12 +159,12 @@ function Body() {
 
 								<div style={{ position: "relative", width: "100%", display: "flex", justifyContent: "flex-start", alignItems: "center" }}>
 									<input type="checkbox" name="remember" id="remember" />
-									<label htmlFor="#remember">Remember me</label>
+									<label htmlFor="remember">Remember me</label>
 								</div>
 
 								<div style={{ position: "relative", width: "100%", display: "flex", justifyContent: "flex-start", alignItems: "center" }}>
 									<input required type="checkbox" name="terms" id="terms" />
-									<label htmlFor="#terms">I agree to the Terms of Service and Privacy Policy</label>
+									<label htmlFor="terms">I agree to the Terms of Service and Privacy Policy</label>
 								</div>
 
 								<input type="submit" value="Create account" />
