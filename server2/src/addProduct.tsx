@@ -1,19 +1,20 @@
 import connectDB from "./db";
 
 const db = (async () => {
-    return (await connectDB()).db("EasyMart");
+	return (await connectDB()).db("EasyMart");
 })();
 
-interface product {
+interface prod {
 	name: string;
-	imgSrc: StaticImageData;
+	imgSrc: string;
+	secondaryImgs: string[];
 	ratingCount: string;
 	rating: string;
 	priceNew: number;
 	priceOld: number;
 }
 
-const products: product[] = [
+const products: prod[] = [
 	{
 		name: "Wireless Bluetooth Headphones",
 		imgSrc: headPhones,
@@ -64,7 +65,23 @@ const products: product[] = [
 	},
 ];
 
+function addOneProduct(product: prod) {}
 
-function addOneProduct(product:prod){
-
-}
+[
+	{
+		name: "Wireless Bluetooth Headphones",
+		imgSrc: "https://m.media-amazon.com/images/I/61+nFsZhavL._AC_SX522_.jpg",
+		secondaryImgs: [
+			"https://m.media-amazon.com/images/I/61+nFsZhavL._AC_SX522_.jpg",
+			"https://m.media-amazon.com/images/I/61FS0sNWBmL._AC_SX522_.jpg",
+			"https://m.media-amazon.com/images/I/61JxEeZnMEL._AC_SX522_.jpg",
+			"https://m.media-amazon.com/images/I/61gXfbPZGfL._AC_SX679_.jpg",
+		],
+		ratingCount: "142",
+		rating: "4.5",
+		priceNew: 89.99,
+		priceOld: 129.99,
+	},
+].forEach((prod: prod) => {
+	addOneProduct(prod);
+});
