@@ -1,0 +1,22 @@
+.body {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    height: fit-content;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 50px;
+    padding: 50px;
+    background-color: var(--background2);
+}
+
+.title{
+    width: 100%;
+}
+.title>p{
+    margin-top: 15px;
+    color: var(--foreground4);
+}

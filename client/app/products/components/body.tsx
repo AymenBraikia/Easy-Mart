@@ -1,5 +1,17 @@
+import "./body.css";
+
+import ProdSettings from "./productSettings";
+
 function body() {
-	return <div style={{ position: "absolute", top: "80px", left: "0", height: "fit-content", width: "100vw", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", rowGap: 50 }}></div>;
+	return (
+		<div className="body">
+			<div className="title">
+				<h1>All Products</h1>
+				<p>Discover amazing products from trusted sellers</p>
+			</div>
+			<ProdSettings />
+		</div>
+	);
 }
 
 export default body;
