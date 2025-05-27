@@ -1,4 +1,4 @@
-.featruedContainer {
+.featuredContainer {
     width: 100vw;
     height: fit-content;
     padding: 0 50px;
@@ -9,13 +9,13 @@
     row-gap: 20px;
 }
 
-.featruedContainer>div {
+.featuredContainer>div {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.featruedContainer>div {
+.featuredContainer>div {
     width: 100%;
     height: fit-content;
 }
@@ -113,4 +113,9 @@
 
 .atc:hover {
     filter: brightness(0.9);
+}
+.rating{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

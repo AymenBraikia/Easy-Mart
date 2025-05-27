@@ -16,7 +16,7 @@ function Introduction() {
 			<div className="mrt100" style={{ display: "flex", justifyContent: "center", alignItems: "center", columnGap: 50 }}>
 				<div
 					onClick={() => {
-						router.push("../chat");
+						router.push("../products");
 					}}
 					className="btn introBtn br bold"
 				>
@@ -24,7 +24,7 @@ function Introduction() {
 				</div>
 				<div
 					onClick={() => {
-						router.push("../chat");
+						router.push("../products");
 					}}
 					className="btn introBtn  br bold"
 				>
