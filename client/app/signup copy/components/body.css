@@ -1,0 +1,236 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    color: var(--foreground);
+}
+
+.container>* {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.part1 {
+    row-gap: 25px;
+    background-color: var(--themeClr);
+    color: var(--background);
+}
+
+.part1>* {
+    max-width: 60%;
+    text-align: center;
+}
+
+.part1>svg {
+    width: 80px;
+    height: 80px;
+    background-color: #4ed17e;
+    border-radius: 50%;
+    padding: 20px;
+}
+
+.part1>p {
+    font-size: 20px;
+}
+
+.part1>h3 {
+    color: #DCFCE7;
+}
+
+.part1>div {
+    display: flex;
+    gap: 80px;
+    justify-content: center;
+    align-items: center;
+}
+
+.part1>div>* {
+    width: 200px;
+    height: 80px;
+    border-radius: 10px;
+    background-color: #4ed17e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 24px;
+    font-weight: bold;
+    gap: 5px;
+}
+
+.part1>div>*>p {
+    color: var(--background3);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+input:focus::placeholder,
+input:focus{
+    color: var(--themeClr) !important;
+}
+
+
+
+.part2 {
+    background-color: var(--background3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    row-gap: 25px;
+}
+
+.part2>* {
+    width: 60%;
+    text-align: flex-start;
+}
+
+form {
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+input[type="submit"] {
+    background-color: var(--themeClr) !important;
+    border: 3px solid transparent;
+}
+
+input[type="submit"]:hover {
+    color: var(--themeClr) !important;
+    background-color: transparent !important;
+    border-color: var(--themeClr);
+}
+
+input[type="text"],
+input[type="submit"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    height: 50px;
+    padding: 20px;
+    padding-left: 50px;
+    color: var(--foreground);
+    background-color: var(--background2);
+    outline: none;
+    border: 2px solid var(--background3);
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+    transition: var(--transition);
+    color: var(--foreground);
+}
+
+input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+}
+
+label {
+    font-size: 14px;
+}
+
+.icon {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-40%);
+}
+
+input[type="submit"] {
+    color: var(--background3);
+    background-color: var(--foreground);
+    padding: unset;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+input[type="submit"]:hover {
+    background-color: var(--background);
+    color: var(--foreground);
+}
+
+form>p {
+    width: fit-content;
+    background-color: var(--background3);
+    box-sizing: unset;
+    padding: 10px;
+    font-size: 14px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.continue {
+    width: 100%;
+    height: 50px;
+    color: var(--foreground);
+    border: 2px solid var(--foreground);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    transition: var(--transition);
+    border-radius: 5px;
+}
+
+.continue:hover {
+    color: var(--background2);
+    border: 2px solid var(--background2);
+    background-color: var(--foreground);
+
+}
+
+form>p>span {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+form>p>span:hover {
+    text-decoration: underline;
+}
+
+
+.alert {
+    z-index: 50;
+    position: absolute;
+    right: 0;
+    top: 50px;
+    width: fit-content;
+    height: fit-content;
+    min-width: 300px;
+    min-height: 60px;
+    max-width: 500px;
+    background-color: #18070a;
+    border: 1px solid #a80000;
+    border-radius: 5px;
+    color: #ef4444;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    column-gap: 20px;
+    padding: 10px;
+    transform: translateX(100%);
+    transition: transform var(--transition);
+}
+
+.alert.active {
+    transform: translateX(-20px);
+}
+
+.alert p {
+    max-width: calc(100% - 70px);
+}
