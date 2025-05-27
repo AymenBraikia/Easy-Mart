@@ -1,0 +1,45 @@
+.shopContainer {
+    width: 100vw;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.list {
+    width: 100vw;
+    height: 200px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.list>* {
+    height: 150px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 10px;
+    background-color: var(--background3);
+    padding: 20px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.list>*:hover>.ico {
+    font-size: 55px;
+}
+
+.list>*:hover {
+    transform: translateY(-20px);
+    box-shadow: 0 15px 30px -13px var(--foreground3);
+}
+
+.ico {
+    font-size: 40px;
+    transition: var(--transition);
+}

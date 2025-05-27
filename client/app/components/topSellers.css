@@ -1,0 +1,142 @@
+.topSellersContainer {
+    width: 100vw;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 50px;
+    background-color: #00ff0a17;
+    padding: 50px;
+}
+
+.topSellersContainer>p {
+    font-size: 20px;
+}
+
+.topSellersContainer>h1 {
+    font-size: 40px;
+}
+
+.sellers {
+    width: 100vw;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.seller {
+    width: 400px;
+    height: 350px;
+    background-color: var(--background);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 20px;
+    border: 2px solid var(--background3);
+    box-shadow: 0 0 0 0 var(--foreground3);
+    transition: var(--transition);
+}
+
+.seller:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px -20px var(--foreground3);
+    cursor: pointer;
+}
+.seller:hover .name{
+    color: var(--themeClr);
+}
+
+.pfp {
+    position: relative;
+}
+
+.badge {
+    width: 100px;
+    height: 23px;
+    position: absolute;
+    left: 50%;
+    top: 90%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--themeClr);
+    color: var(--background);
+    border-radius: 50px;
+    font-weight: 500;
+}
+
+.pfp>img {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    border: 3px solid var(--themeClr);
+    background-color: var(--background3);
+    box-shadow: 0 15px 30px -10px var(--foreground3);
+}
+
+.seller .name {
+    font-weight: bold;
+    font-size: 25px;
+    color: var(--foreground4);
+    transition: var(--transition);
+}
+
+.rating {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.products {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.sales,
+.prodCount {
+    position: relative;
+}
+
+.sales::before {
+    content: "Sales";
+}
+
+.prodCount::before {
+    content: "Products";
+
+}
+
+.sales::before,
+.prodCount::before {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 400;
+    color: var(--foreground4);
+    font-size: 14px;
+}
+
+.visit {
+    margin-top: 20px;
+    background-image: var(--gradient);
+    color: var(--background);
+    width: 90%;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.visit:hover {
+    filter: brightness(0.9);
+}

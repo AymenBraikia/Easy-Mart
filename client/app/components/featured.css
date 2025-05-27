@@ -1,0 +1,116 @@
+.featruedContainer {
+    width: 100vw;
+    height: fit-content;
+    padding: 0 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    row-gap: 20px;
+}
+
+.featruedContainer>div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.featruedContainer>div {
+    width: 100%;
+    height: fit-content;
+}
+
+.viewAll {
+    border: 1px solid var(--background3);
+}
+
+.viewAll:hover {
+    background-color: #00ff2a26;
+    border-color: #00ff2ab5;
+}
+
+.productsList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    row-gap: 20px;
+    column-gap: 15px;
+    flex-wrap: wrap;
+}
+
+.product {
+    height: 550px;
+    width: 400px;
+    cursor: pointer;
+    border: 2px solid var(--background3);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.product:hover .productName {
+    color: var(--themeClr);
+}
+
+.product:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px -13px var(--foreground3);
+}
+
+.productImg {
+    width: 400px !important;
+    height: 400px !important;
+    background-color: var(--background3);
+}
+
+.productInfo {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    height: 150px;
+}
+
+.productInfo>div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 15px;
+}
+
+.productName {
+    font-size: 18px;
+    transition: var(--transition);
+}
+
+.productPrice {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+
+}
+
+.old {
+    text-decoration: line-through;
+    color: var(--foreground4);
+    font-weight: 300;
+}
+
+.new {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.atc {
+    color: var(--background);
+    font-weight: bold;
+    background-image: var(--gradient);
+    position: relative;
+    margin-top: 20px;
+
+}
+
+.atc:hover {
+    filter: brightness(0.9);
+}

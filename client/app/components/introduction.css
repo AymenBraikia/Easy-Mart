@@ -1,0 +1,37 @@
+.introductionContainer{
+    background-image: var(--gradient);
+    width: 100%;
+    height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: var(--background);
+}
+
+.welcomeMessage {
+    height: fit-content;
+    width: 720px;
+    position: relative;
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.word {
+    background-image: var(--gradient);
+    background-clip: text;
+    color: transparent;
+    height: 50px;
+}
+
+.introBtn{
+    background-color: var(--background);
+    color: var(--themeClr);
+    border: 15px !important;
+}
+.introBtn:hover{
+    color: var(--background);
+    background-color: transparent;
+    transform: scale(1.1);
+}

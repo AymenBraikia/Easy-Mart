@@ -1,0 +1,27 @@
+.achievementsContainer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-image: var(--gradient);
+    width: 100vw;
+    height: 250px;
+}
+
+.achievement {
+    width: 150px;
+    height: 125px;
+    color: var(--background);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.achievementIcon {
+    width: 35px;
+}
+
+.count {
+    font-weight: bold;
+    font-size: 40px;
+}

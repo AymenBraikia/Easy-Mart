@@ -1,0 +1,53 @@
+.subContainer {
+    width: 100vw;
+    height: 350px;
+    background-color: var(--background2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.subTitle {
+    font-size: 40px;
+}
+
+.subContainer p {
+    font-size: 14px;
+    color: var(--foreground4);
+}
+
+.subDescription {
+    font-size: 18px !important;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.emailInput {
+    width: 400px;
+    background-color: var(--background);
+    color: var(--foreground);
+    padding: 15px;
+    outline: none;
+    border: 1px solid var(--background3);
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+input[type="submit"] {
+    height: 50px;
+    background-image: var(--gradient);
+    outline: none;
+    border: unset;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 0 30px;
+}
+
