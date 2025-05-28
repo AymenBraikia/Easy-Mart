@@ -1,7 +1,7 @@
 import connectDB from "./db";
 
 const client = (async () => {
-	return (await connectDB()).db("EasyMart");
+	return (await connectDB()).db("easyMart");
 })();
 
 interface prod {
@@ -18,7 +18,7 @@ interface prod {
 async function addOneProduct(product: prod) {
 	const db = await client
 
-	db.collection("EasyMart")
+	db.collection("products").insertOne(product)
 }
 
 [

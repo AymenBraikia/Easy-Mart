@@ -9,8 +9,8 @@
     align-items: center;
     flex-direction: column;
     row-gap: 50px;
-    padding: 50px;
-    background-color: var(--background2);
+    padding: 50px 100px;
+    background-color: var(--background3);
 }
 
 .title{

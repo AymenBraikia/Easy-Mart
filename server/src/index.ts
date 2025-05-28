@@ -3,7 +3,7 @@ import connectDB from "./db";
 import cors from "cors";
 
 const db = (async () => {
-	return (await connectDB()).db("EasyMart");
+	return (await connectDB()).db("easyMart");
 })();
 
 const app = express();
@@ -17,12 +17,16 @@ app.use(
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("../public"));
 
 const port = 8000;
 
 app.get("/", (req, res) => {
 	res.send("Hello TypeScript with Express!");
+});
+app.get("/products", async (req, res) => {
+	const data = await (await db).collection("products").find({}).toArray();
+
+	res.json(JSON.stringify(data));
 });
 interface userInfo {
 	email: string;
