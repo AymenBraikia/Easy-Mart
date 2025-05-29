@@ -1,3 +1,4 @@
+"use client"
 // import "./responsive.css";
 import Header from "../components/header";
 import Body from "./components/body";

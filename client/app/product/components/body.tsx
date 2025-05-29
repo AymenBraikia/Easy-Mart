@@ -1,3 +1,4 @@
+"use client"
 import "./body.css";
 import Images from "./images";
 
