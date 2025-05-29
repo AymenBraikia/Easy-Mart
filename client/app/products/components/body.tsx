@@ -238,7 +238,7 @@ function Body() {
 								</h4>
 								<div className="productPrice">
 									<div className="new">${product.price}</div>
-									<div className="old">${(product.price + 50).toFixed(2)}</div>
+									<div className="old">${(product.price + product.price + product.price * 0.3).toFixed(2)}</div>
 								</div>
 								<div className="btn atc">{cart()}Add to Cart</div>
 							</div>
