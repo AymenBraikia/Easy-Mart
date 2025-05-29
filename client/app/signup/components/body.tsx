@@ -1,7 +1,7 @@
 "use client";
 import "./body.css";
 import Theme from "../../components/theme";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 function userIcon() {
@@ -112,7 +112,7 @@ function Body() {
 			.catch((err) => console.error("Failed to load settings:", err));
 	}, [settings]);
 
-	const router = useRouter();
+	// const router = useRouter();
 
 	return (
 		<>
@@ -180,7 +180,8 @@ function Body() {
 									<span
 										style={{ color: "var(--themeClr)" }}
 										onClick={() => {
-											router.push("../signin");
+											// router.push("../signin");
+											location.href = ("../signin");
 										}}
 									>
 										Sign in

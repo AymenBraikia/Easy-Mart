@@ -5,7 +5,7 @@ import "./body.css";
 import Nav from "./nav";
 import Image from "next/image";
 import { useState, useEffect, useRef, MouseEvent, useMemo } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import "./productSettings.css";
 import "./productsList.css";
 
@@ -75,7 +75,7 @@ interface Product {
 }
 
 function Body() {
-	const router = useRouter();
+	// const router = useRouter();
 
 	const [settings, setSettings] = useState({ loaded: false, production: false, serverUrl: "" });
 	const [products, setProducts] = useState<Product[]>([]);
@@ -218,7 +218,8 @@ function Body() {
 									id: product.id.toString(),
 								});
 
-								router.push(`/product?${params.toString()}`);
+								location.href = `/product?${params.toString()}`;
+								// router.push(`/product?${params.toString()}`);
 							}}
 							key={product.id}
 							data-price={product.price}

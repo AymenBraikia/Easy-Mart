@@ -1,9 +1,9 @@
 "use client";
 import "./introduction.css";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 function Introduction() {
-	const router = useRouter();
+	// const router = useRouter();
 
 	return (
 		<div className="introductionContainer">
@@ -16,7 +16,8 @@ function Introduction() {
 			<div className="mrt100" style={{ display: "flex", justifyContent: "center", alignItems: "center", columnGap: 50 }}>
 				<div
 					onClick={() => {
-						router.push("../products");
+						location.href = ("../products");
+						// router.push("../products");
 					}}
 					className="btn introBtn br bold"
 				>
@@ -24,7 +25,8 @@ function Introduction() {
 				</div>
 				<div
 					onClick={() => {
-						router.push("../products");
+						location.href = ("../products");
+						// router.push("../products");
 					}}
 					className="btn introBtn  br bold"
 				>
