@@ -1,0 +1,61 @@
+.navSection {
+    background-color: var(--background);
+    border: 2px solid var(--background4);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    row-gap: 15px;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+label {
+    margin-left: 10px;
+}
+
+.rangeInput {
+    appearance: none;
+    height: 5px;
+    width: 100%;
+    background-color: var(--foreground);
+    border-radius: 5px;
+}
+
+.rangeInput::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--background);
+    border: 2px solid var(--foreground);
+    cursor: pointer;
+}
+
+.numberInputs {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    color: var(--foreground4);
+}
+
+.numberInputs>*::-webkit-outer-spin-button,
+.numberInputs>*::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.numberInputs>* {
+    color: var(--foreground);
+    background-color: var(--background2);
+    outline: none;
+    border: 2px solid var(--background4);
+    width: 75px;
+    padding: 10px 5px;
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 5px;
+    ;
+}

@@ -28,6 +28,14 @@ app.get("/products", async (req, res) => {
 
 	res.json(JSON.stringify(data));
 });
+app.get("/singleProduct", async (req, res) => {
+	console.clear();
+	const { id } = req.query;
+
+	const data = await (await db).collection("products").findOne({ id: Number(id) });
+
+	res.json(JSON.stringify(data));
+});
 interface userInfo {
 	email: string;
 	password: string;

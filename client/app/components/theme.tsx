@@ -6,6 +6,7 @@ function switchTheme() {
 		sun = document.querySelector(".sun") as HTMLElement,
 		moon = document.querySelector(".moon") as HTMLElement,
 		darkStyles = `
+		--btnBright:brightness(0.7);
 		--background4: #515151;
         --background3: #1f1f1f;
         --background2: #151515;
@@ -16,7 +17,8 @@ function switchTheme() {
 		--foreground4: #aeaeae;
         --background-opacity: #00000099;`,
 		lightStyles = `
-		--background4: #e7e7e7;
+		--btnBright:brightness(0.9);
+       	--background4: #e7e7e7;
         --background3: #eee;
         --background2: #fbfbfb;
         --background: #ffffff;
@@ -59,6 +61,8 @@ function switchTheme() {
 function loadTheme() {
 	const root = document.querySelector(":root") as HTMLElement,
 		darkStyles = `
+		--btnBright:brightness(0.9);
+       	--background4: #e7e7e7;
         --background3: #eee;
         --background2: #fbfbfb;
         --background: #ffffff;
@@ -68,13 +72,15 @@ function loadTheme() {
 		--foreground4: #515151;
         --background-opacity: #ffffff99;`,
 		lightStyles = `
+		--btnBright:brightness(0.7);
+		--background4: #515151;
         --background3: #1f1f1f;
         --background2: #151515;
         --background: #000000;
         --foreground: #ffffff;
         --foreground2: #fbfbfb;
-		--foreground4: #aeaeae;
         --foreground3: #eee;
+		--foreground4: #aeaeae;
         --background-opacity: #00000099;`;
 
 	let styles = null;

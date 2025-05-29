@@ -21,9 +21,12 @@
     transition: var(--transition);
 }
 
+.displayStyle>*.active>* {
+    background-color: var(--foreground) !important;
+    color: var(--background) !important;
+}
 
-.gridIcon.active,
-.listIcon.active {
+.displayStyle>*.active {
     background-color: var(--foreground) !important;
     color: var(--background) !important;
 }
@@ -58,16 +61,16 @@
     box-sizing: unset;
     width: 180px;
 
-    display: flex;
-    flex-direction: column;
     border: 2px solid var(--background4);
     border-radius: 5px;
     overflow: hidden;
     opacity: 0;
     transition: var(--transition);
     display: none;
+    z-index: 4;
 }
-.filtersList.active{
+
+.filtersList.active {
     display: block;
     opacity: 1;
     top: 45px;
@@ -86,6 +89,15 @@
     background-color: var(--themeClr);
     color: white;
 }
-.block{
+
+.block {
     display: block !important;
 }
+
+.notSelected {
+    display: none !important;
+}
+
+/* .displayIcon{
+    width: ;
+} */
