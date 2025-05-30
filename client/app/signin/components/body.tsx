@@ -68,7 +68,7 @@ function Body() {
 		form.current?.addEventListener("submit", (ev) => {
 			ev.preventDefault();
 
-			fetch(settings.production ? settings.serverUrl + "/signup" : "http://localhost:8000/signup", {
+			fetch(settings.production ? settings.serverUrl : "http://localhost:8000" + "/signin", {
 				method: "post",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
@@ -92,7 +92,7 @@ function Body() {
 		});
 	});
 
-	const [settings, setSettings] = useState({ production: null, serverUrl: null, loaded: false });
+	const [settings, setSettings] = useState({ production: null, serverUrl: "", loaded: false });
 
 	useEffect(() => {
 		if (settings.loaded) return;
@@ -132,10 +132,10 @@ function Body() {
 							</div>
 						</div>
 						<div className="part2">
-							<h2 style={{ color: "var(--themeClr)" }}>Create Your Account</h2>
+							<h2 style={{ color: "var(--themeClr)" }}>Sign in Your Account</h2>
 							<p style={{ color: "var(--foreground3)" }}>Join thousands of happy customers shopping on Easy Mart</p>
 
-							<form ref={form} action={settings.production ? settings.serverUrl + "/signup" : "http://localhost:8000/signin"} method="POST">
+							<form ref={form} action={settings.production ? settings.serverUrl : "http://localhost:8000" + "/signin"} method="POST">
 								<div style={{ position: "relative", width: "100%" }}>
 									<label className="icon" htmlFor="email">
 										{mail()}
@@ -167,18 +167,18 @@ function Body() {
 									<label htmlFor="terms">I agree to the Terms of Service and Privacy Policy</label>
 								</div>
 
-								<input type="submit" value="Create account" />
+								<input type="submit" value="Sign in" />
 
 								<p>or continue with</p>
 
-								<div className="continue">{google()} Sign up with Google</div>
+								<div className="continue">{google()}Continue with Google</div>
 								<p>
 									Don&apos;t have an account?{" "}
 									<span
 										style={{ color: "var(--themeClr)" }}
 										onClick={() => {
 											// router.push("../signup");
-											location.href = ("../signup");
+											location.href = "../signup";
 										}}
 									>
 										Sign up

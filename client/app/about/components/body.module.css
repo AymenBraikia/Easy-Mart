@@ -1,0 +1,155 @@
+.contaienrcontainer {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 80px;
+    left: 0;
+    padding: 50px;
+    gap: 30px;
+    margin-bottom: 80px;
+}
+
+.intro {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.impactDescription,
+.introDescription {
+    font-size: 20px;
+    color: var(--foreground4);
+}
+
+.community,
+.impact,
+.mission,
+.story {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.communityTitle,
+.impactTitle,
+.perkTitle,
+.missionTitle,
+.storyTitle{
+    font-size: 28px;
+}
+
+.communityDescription,
+.impactDescription,
+.perkDescription,
+.missionDescription,
+.storyDescription {
+    color: var(--foreground4);
+    font-size: 17px;
+}
+.perkDescription,
+.storyDescription {
+    text-align: start;
+}
+
+
+.perks {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.perk {
+    width: 22%;
+    min-width: 200px;
+    min-height: 230px;
+    padding: 20px;
+    background-color: var(--background);
+    border: 2px solid var(--background3);
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.perkIcon {
+    color: var(--themeClr);
+    width: 40px;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.stat {
+    width: 22%;
+    min-width: 300px;
+    min-height: 125px;
+    padding: 20px;
+    background-color: #28c76f14;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    color: var(--themeClr);
+}
+
+.statValue {
+    font-size: 35px;
+}
+
+.statName {
+    color: var(--foreground4);
+}
+
+.community {
+    width: 100%;
+    min-height: 300px;
+    background-color: var(--background2);
+}
+
+.communityDescription {
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.signup,
+.seller {
+    box-sizing: unset;
+    padding: 15px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: unset;
+    margin: 15px;
+    cursor: pointer;
+    background-color: var(--themeClr);
+    border: 2px solid var(--themeClr);
+    transition: var(--transition);
+}
+
+.seller {
+    color: var(--themeClr);
+    background-color: #28c76f14;
+    border: 2px solid var(--themeClr);
+}
+
+
+.signup:hover,
+.seller:hover {
+    filter: brightness(0.8);
+}

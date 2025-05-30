@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 80px;
+    left: 0;
+    padding: 50px;
+    gap: 30px;
+    margin-bottom: 80px;
+}
+
+.heart {
+    width: 90px;
+    color: var(--background4);
+}
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+}
+
+.shoppingBtn {
+    box-sizing: unset;
+    padding: 10px 15px;
+    font-size: 17px;
+    border-radius: 5px;
+    border: unset;
+    cursor: pointer;
+    background-color: var(--themeClr);
+    transition: var(--transition);
+}
+
+.shoppingBtn:hover {
+    background-color: #1a9e55;
+}
