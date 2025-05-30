@@ -1,6 +1,18 @@
 "use client";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import styles from "./body.module.css";
+
+interface productInterface {
+	name: string;
+	description: string;
+	image: string;
+	secondaryImgs: string[];
+	rating: { rate: number; count: number };
+	price: number;
+	id: number;
+	category: string;
+}
 
 function heart() {
 	return (
@@ -28,29 +40,71 @@ function Body() {
 
 	fetchSettings();
 
+	async function atc(prod: productInterface) {
+		fetch(settings.production ? settings.serverUrl : "http://localhost:8000" + "/atc", {
+			method: "post",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ id: prod.id, username: getCookie("username") }),
+		});
+	}
+
 	useEffect(() => {
 		if (!getCookie("username")) location.pathname = "";
 
 		if (!settings.loaded) return;
 
 		(async () => {
-			const products = JSON.parse(await (await fetch(settings.production ? settings.serverUrl : "http://localhost:8000" + "/cart?user=" + getCookie("username"))).json());
-			
-			setProducts(products)
-		
+			const products = JSON.parse(await (await fetch(settings.production ? settings.serverUrl : "http://localhost:8000" + "/cart?username=" + getCookie("username"))).json());
+
+			setProducts(products.cart);
 		})();
-	}, [products, settings.loaded, settings.production, settings.serverUrl]);
+	}, [settings.loaded]);
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.empty}>
-				{heart()}
-				<h1>Your wishlist is empty</h1>
-				<p>
-					Save items you love to your wishlist and find them here <br /> anytime.
-				</p>
-				<button className={styles.shoppingBtn}>Continue Shopping</button>
-			</div>
+			{products.length ? (
+				<div className={styles.content}>
+					<h1 className={styles.contentTitle}>My Wishlist</h1>
+					<div className={styles.products}>
+						{...products.map((prod: productInterface) => {
+							return (
+								<div key={prod.id} className={styles.product}>
+									<div className={styles.prodImg}>
+										<Image fill src={prod.secondaryImgs[0]} alt={prod.name} />
+									</div>
+									<div className={styles.prodInfo}>
+										<div className={styles.name}>{prod.name}</div>
+										<div className={styles.price}>
+											<div className={styles.old}>${prod.price}</div>
+											<div className={styles.new}>${(prod.price + prod.price * 0.3).toFixed(2)}</div>
+										</div>
+										<div
+											onClick={() => {
+												if (getCookie("username")) atc(prod);
+												else location.pathname = "/signup";
+											}}
+											className={styles.atc}
+										>
+											Add to Cart
+										</div>
+									</div>
+								</div>
+							);
+						})}
+					</div>
+				</div>
+			) : (
+				<div className={styles.empty}>
+					{heart()}
+					<h1>Your wishlist is empty</h1>
+					<p>
+						Save items you love to your wishlist and find them here <br /> anytime.
+					</p>
+					<button className={styles.shoppingBtn}>Continue Shopping</button>
+				</div>
+			)}
 		</div>
 	);
 }

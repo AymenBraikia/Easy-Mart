@@ -74,6 +74,11 @@ interface Product {
 	category: string;
 }
 
+function getCookie(name: string): string | null {
+	const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+	return match ? match[2] : null;
+}
+
 function Body() {
 	// const router = useRouter();
 
@@ -123,6 +128,16 @@ function Body() {
 	}
 
 	fetchData();
+
+	async function atc(prod: Product) {
+		fetch(settings.production ? settings.serverUrl : "http://localhost:8000" + "/atc", {
+			method: "post",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ id: prod.id, username: getCookie("username") }),
+		});
+	}
 
 	// gets products data
 	useEffect(() => {
@@ -241,7 +256,15 @@ function Body() {
 									<div className="new">${product.price}</div>
 									<div className="old">${(product.price + product.price + product.price * 0.3).toFixed(2)}</div>
 								</div>
-								<div className="btn atc">{cart()}Add to Cart</div>
+								<div
+									onClick={() => {
+										if (getCookie("username")) atc(product);
+										else location.pathname = "/signup";
+									}}
+									className="btn atc"
+								>
+									{cart()}Add to Cart
+								</div>
 							</div>
 						</div>
 					))}

@@ -139,6 +139,11 @@ function star() {
 	);
 }
 
+function getCookie(name: string): string | null {
+	const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+	return match ? match[2] : null;
+}
+
 function Images() {
 	const filterList = useRef<HTMLDivElement>(null);
 	const selectBtn = useRef<HTMLButtonElement>(null);
@@ -156,6 +161,16 @@ function Images() {
 
 		const newSettings = await (await fetch("/settings.json")).json();
 		setSettings(newSettings);
+	}
+
+	async function atc(prod: product) {
+		fetch(settings.production ? settings.serverUrl : "http://localhost:8000" + "/atc", {
+			method: "post",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ id: prod.id, username: getCookie("username") }),
+		});
 	}
 
 	fetchSettings();
@@ -256,7 +271,15 @@ function Images() {
 					</div>
 				</div>
 				<div className="buttons">
-					<div className="btn atc">{cart()}Add to Cart</div>
+					<div
+						onClick={() => {
+							if (getCookie("username")) atc(product);
+							else location.pathname = "/signup";
+						}}
+						className="btn atc"
+					>
+						{cart()}Add to Cart
+					</div>
 					<div className="btn wishList">{heart()}Wishlist</div>
 					<div className="btn buy">Buy Now</div>
 				</div>
