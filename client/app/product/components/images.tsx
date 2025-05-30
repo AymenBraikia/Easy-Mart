@@ -147,6 +147,7 @@ function getCookie(name: string): string | null {
 function Images() {
 	const filterList = useRef<HTMLDivElement>(null);
 	const selectBtn = useRef<HTMLButtonElement>(null);
+	const atcBtn = useRef<HTMLDivElement>(null);
 
 	const mainImg = useRef<HTMLImageElement>(null);
 	const id = useSearchParams().get("id");
@@ -272,6 +273,7 @@ function Images() {
 				</div>
 				<div className="buttons">
 					<div
+						ref={atcBtn}
 						onClick={() => {
 							if (getCookie("username")) atc(product);
 							else location.pathname = "/signup";

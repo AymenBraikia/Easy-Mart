@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, MouseEvent, useRef } from "react";
 import Image from "next/image";
 import styles from "./body.module.css";
 
@@ -22,6 +22,16 @@ function heart() {
 	);
 }
 
+function cart() {
+	return (
+		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-shopping-cart w-4 h-4">
+			<circle cx="8" cy="21" r="1"></circle>
+			<circle cx="19" cy="21" r="1"></circle>
+			<path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+		</svg>
+	);
+}
+
 function getCookie(name: string): string | null {
 	const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
 	return match ? match[2] : null;
@@ -30,6 +40,8 @@ function getCookie(name: string): string | null {
 function Body() {
 	const [products, setProducts] = useState([]);
 	const [settings, setSettings] = useState({ serverUrl: "", loaded: false, production: null });
+
+	const atcBtn = useRef<HTMLDivElement>(null);
 
 	async function fetchSettings() {
 		if (settings.loaded) return;
@@ -70,24 +82,34 @@ function Body() {
 					<div className={styles.products}>
 						{...products.map((prod: productInterface) => {
 							return (
-								<div key={prod.id} className={styles.product}>
+								<div
+									key={prod.id}
+									onClick={(ev: MouseEvent) => {
+										if ((ev.target as HTMLElement).textContent?.trim() == "Add to Cart") return;
+
+										location.href = `/product?id=${prod.id}`;
+										// router.push(`/product?${params.toString()}`);
+									}}
+									className={styles.product}
+								>
 									<div className={styles.prodImg}>
 										<Image fill src={prod.secondaryImgs[0]} alt={prod.name} />
 									</div>
 									<div className={styles.prodInfo}>
-										<div className={styles.name}>{prod.name}</div>
+										<h3>{prod.name}</h3>
 										<div className={styles.price}>
-											<div className={styles.old}>${prod.price}</div>
-											<div className={styles.new}>${(prod.price + prod.price * 0.3).toFixed(2)}</div>
+											<h3 className={styles.new}>${prod.price}</h3>
+											<div className={styles.old}>${(prod.price + prod.price * 0.3).toFixed(2)}</div>
 										</div>
 										<div
+											ref={atcBtn}
 											onClick={() => {
 												if (getCookie("username")) atc(prod);
 												else location.pathname = "/signup";
 											}}
 											className={styles.atc}
 										>
-											Add to Cart
+											{cart()} Add to Cart
 										</div>
 									</div>
 								</div>

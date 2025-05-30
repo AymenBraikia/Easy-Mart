@@ -89,6 +89,7 @@ function Body() {
 
 	const filterList = useRef<HTMLDivElement>(null);
 	const selectBtn = useRef<HTMLButtonElement>(null);
+	const atcBtn = useRef<HTMLDivElement>(null);
 
 	function handleDisplayClick(ev: MouseEvent) {
 		document.querySelector(".gridIcon")?.parentElement?.classList.remove("active");
@@ -228,12 +229,10 @@ function Body() {
 				<div className="productsContainer">
 					{sortedProducts.map((product) => (
 						<div
-							onClick={() => {
-								const params = new URLSearchParams({
-									id: product.id.toString(),
-								});
+							onClick={(ev: MouseEvent) => {
+								if ((ev.target as HTMLElement).classList.contains("atc")) return;
 
-								location.href = `/product?${params.toString()}`;
+								location.href = `/product?id=${product.id}`;
 								// router.push(`/product?${params.toString()}`);
 							}}
 							key={product.id}
@@ -257,6 +256,7 @@ function Body() {
 									<div className="old">${(product.price + product.price + product.price * 0.3).toFixed(2)}</div>
 								</div>
 								<div
+									ref={atcBtn}
 									onClick={() => {
 										if (getCookie("username")) atc(product);
 										else location.pathname = "/signup";
