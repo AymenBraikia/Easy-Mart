@@ -73,15 +73,19 @@ function Body() {
 	}, [settings.loaded]);
 
 	function remove(click: MouseEvent) {
-		const id = click.currentTarget.getAttribute("data-id");
+		const id = Number(click.currentTarget.getAttribute("data-id"));
 
 		if (!id) return;
 
-		setProducts(
-			products.filter((e: productInterface) => {
-				return e.id !== Number(id);
-			})
-		);
+		setProducts(products.filter((e: productInterface) => e.id !== id));
+
+		fetch(settings.production ? settings.serverUrl : "http://localhost:8000" + "/removeCart", {
+			method: "post",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ username: getCookie("username"), id: id }),
+		});
 	}
 
 	return (
@@ -160,7 +164,9 @@ function Body() {
 					{cart()}
 					<h1>Your cart is empty</h1>
 					<p>Looks like you haven&apos;t added any products to your cart yet.</p>
-					<button className={styles.shoppingBtn}>Continue Shopping</button>
+					<button onClick={() => (location.pathname = "/products")} className={styles.shoppingBtn}>
+						Continue Shopping
+					</button>
 				</div>
 			)}
 		</div>

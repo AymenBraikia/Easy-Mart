@@ -68,9 +68,9 @@ function Body() {
 		if (!settings.loaded) return;
 
 		(async () => {
-			const products = JSON.parse(await (await fetch(settings.production ? settings.serverUrl : "http://localhost:8000" + "/cart?username=" + getCookie("username"))).json());
+			const products = JSON.parse(await (await fetch(settings.production ? settings.serverUrl : "http://localhost:8000" + "/wishList?username=" + getCookie("username"))).json());
 
-			setProducts(products.cart);
+			setProducts(products.wishList);
 		})();
 	}, [settings.loaded]);
 
@@ -124,7 +124,9 @@ function Body() {
 					<p>
 						Save items you love to your wishlist and find them here <br /> anytime.
 					</p>
-					<button className={styles.shoppingBtn}>Continue Shopping</button>
+					<button onClick={() => (location.pathname = "/products")} className={styles.shoppingBtn}>
+						Continue Shopping
+					</button>
 				</div>
 			)}
 		</div>

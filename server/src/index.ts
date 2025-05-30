@@ -38,6 +38,21 @@ app.get("/singleProduct", async (req, res) => {
 	res.json(JSON.stringify(data));
 });
 
+app.get("/wishList", async (req, res) => {
+	const { username } = req.query;
+
+	const userData = await (await db).collection("users").findOne({ username: username });
+
+	if (!userData) {
+		res.status(400).json(JSON.stringify({ success: false, reason: "user not found" }));
+		return;
+	}
+
+	const data = (await getAllProducts()).filter((e) => userData.wishList.includes(e.id));
+
+	res.json(JSON.stringify({ wishList: data }));
+});
+
 app.get("/cart", async (req, res) => {
 	const { username } = req.query;
 
@@ -52,6 +67,64 @@ app.get("/cart", async (req, res) => {
 
 	res.json(JSON.stringify({ cart: data }));
 });
+
+app.post("/atw", async (req, res) => {
+	const data = await (await db).collection("users").findOne({ username: req.body.username });
+	if (!data) {
+		res.status(400).json(JSON.stringify({ success: false, reason: "user not found" }));
+		return;
+	}
+
+	(await db).collection("users").updateOne(
+		{ username: req.body.username },
+		{
+			$set: {
+				wishList: [...data.wishList, req.body.id],
+			},
+		}
+	);
+
+	res.json(JSON.stringify({ success: true }));
+});
+
+app.post("/removeCart", async (req, res) => {
+	const data = await (await db).collection("users").findOne({ username: req.body.username });
+	if (!data) {
+		res.status(400).json(JSON.stringify({ success: false, reason: "user not found" }));
+		return;
+	}
+
+	(await db).collection("users").updateOne(
+		{ username: req.body.username },
+		{
+			$set: {
+				cart: [...data.cart.filter((e: number) => e !== req.body.id)],
+			},
+		}
+	);
+
+	res.json(JSON.stringify({ success: true }));
+});
+
+app.post("/removeWishList", async (req, res) => {
+	const data = await (await db).collection("users").findOne({ username: req.body.username });
+	if (!data) {
+		res.status(400).json(JSON.stringify({ success: false, reason: "user not found" }));
+		return;
+	}
+
+	(await db).collection("users").updateOne(
+		{ username: req.body.username },
+		{
+			$set: {
+				wishList: [...data.wishList.filter((e: number) => e !== req.body.id)],
+			},
+		}
+	);
+
+	res.json(JSON.stringify({ success: true }));
+});
+
 app.post("/atc", async (req, res) => {
 	const data = await (await db).collection("users").findOne({ username: req.body.username });
 	if (!data) {
