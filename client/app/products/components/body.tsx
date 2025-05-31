@@ -212,7 +212,7 @@ function Body() {
 						</div>
 
 						<div className="displayStyle">
-							<div data-displaystyle={"grid"} onClick={handleDisplayClick}>
+							<div data-displaystyle={"grid"} className="active" onClick={handleDisplayClick}>
 								{grid()}
 							</div>
 							<div data-displaystyle={"list"} onClick={handleDisplayClick}>

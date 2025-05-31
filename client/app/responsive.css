@@ -170,34 +170,37 @@
         min-width: unset !important;
         min-height: unset !important;
     }
-    
+
     .productItem.list {
         min-height: 150px !important;
         height: 150px !important;
         flex-wrap: nowrap !important;
     }
 
-    .productItem.list .productInfo{
+    .productItem.list .productInfo {
+        justify-content: space-evenly;
         gap: 5px !important;
     }
 
-    .productItem.list .new{
+    .productItem.list .new {
         font-size: 16px;
     }
-    .productItem.list .old{
+
+    .productItem.list .old {
         font-size: 14px;
     }
-    .productItem.list .atc{
+
+    .productItem.list .atc {
         font-size: 0px;
         width: calc(100% - 20px);
         height: 30px;
         padding: unset !important;
     }
-    
-    .productItem.list h3{
+
+    .productItem.list h3 {
         font-size: 14px;
     }
-    
+
 
 
 

@@ -61,16 +61,20 @@ function Body() {
 
 		if (!settings.loaded) return;
 
-		(async () => {
-			const prods = JSON.parse(await (await fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/cart?username=" + getCookie("username"))).json());
+		(() => {
+			const data = localStorage.getItem("cartList");
+
+			if (!data) return;
+
+			const prods = JSON.parse(data);
 
 			if (!prods.length) return;
-			
-			setProducts(prods.cart);
+
+			setProducts(prods);
 
 			let total = 0;
 
-			prods.cart.forEach((e: productInterface) => (total += e.price));
+			prods.forEach((e: productInterface) => (total += e.price));
 
 			setTotalPrice(total);
 		})();

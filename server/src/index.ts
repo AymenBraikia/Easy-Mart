@@ -50,6 +50,10 @@ app.get("/wishList", async (req, res) => {
 
 	const data = (await getAllProducts()).filter((e) => userData.wishList.includes(e.id));
 
+	for (const e of data) {
+		e.secondaryImgs.length = 1;
+	}
+
 	res.json(JSON.stringify({ wishList: data }));
 });
 
@@ -65,10 +69,12 @@ app.get("/cart", async (req, res) => {
 
 	const data = (await getAllProducts()).filter((e) => userData.cart.includes(e.id));
 
+	for (const e of data) {
+		e.secondaryImgs.length = 1;
+	}
+
 	res.json(JSON.stringify({ cart: data }));
 });
-
-
 
 app.post("/removeCart", async (req, res) => {
 	const data = await (await db).collection("users").findOne({ username: req.body.username });
