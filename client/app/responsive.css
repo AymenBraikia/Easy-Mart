@@ -76,6 +76,17 @@
     .product,
     .productImg {
         width: 100% !important;
+        max-width: 400px !important;
+    }
+
+    .product {
+        height: unset !important;
+        aspect-ratio: 1/1.5;
+    }
+
+    .productImg {
+        aspect-ratio: 1/1;
+        height: unset !important;
     }
 
     .atc {
@@ -84,6 +95,12 @@
 
     .sellers {
         flex-direction: column;
+    }
+    .seller{
+        height: unset !important;
+        width: 90vw !important;
+        aspect-ratio: 1/1;
+        padding: 20px;
     }
 
     .badge {

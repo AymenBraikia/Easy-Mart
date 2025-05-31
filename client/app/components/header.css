@@ -154,3 +154,9 @@ header>h1 {
     font-weight: bold;
     border-radius: 50%;
 }
+
+@media (min-width: 300px) and (max-width: 1050px) {
+    header .section{
+        display: none;
+    }
+}

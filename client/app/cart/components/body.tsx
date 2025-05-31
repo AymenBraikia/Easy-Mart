@@ -59,25 +59,21 @@ function Body() {
 	useEffect(() => {
 		if (!getCookie("username")) location.pathname = "/signin";
 
-		if (!settings.loaded) return;
+		const data = localStorage.getItem("cartList");
 
-		(() => {
-			const data = localStorage.getItem("cartList");
+		if (!data) return;
 
-			if (!data) return;
+		const prods = JSON.parse(data);
 
-			const prods = JSON.parse(data);
+		if (!prods.length) return;
 
-			if (!prods.length) return;
+		setProducts(prods);
 
-			setProducts(prods);
+		let total = 0;
 
-			let total = 0;
+		prods.forEach((e: productInterface) => (total += e.price));
 
-			prods.forEach((e: productInterface) => (total += e.price));
-
-			setTotalPrice(total);
-		})();
+		setTotalPrice(total);
 	}, [settings.loaded]);
 
 	function remove(click: MouseEvent) {

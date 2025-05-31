@@ -65,13 +65,19 @@ function Body() {
 	useEffect(() => {
 		if (!getCookie("username")) location.pathname = "/signin";
 
-		if (!settings.loaded) return;
+		const data = localStorage.getItem("wishList");
 
-		(async () => {
-			const products = JSON.parse(await (await fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/wishList?username=" + getCookie("username"))).json());
+		if (!data) return;
 
-			if (products.length) setProducts(products.wishList);
-		})();
+		const prods = JSON.parse(data);
+
+		if (!prods.length) return;
+
+		setProducts(prods);
+
+		let total = 0;
+
+		prods.forEach((e: productInterface) => (total += e.price));
 	}, [settings.loaded]);
 
 	return (

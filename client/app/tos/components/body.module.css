@@ -53,3 +53,9 @@
     list-style-type: disc;
     margin-top: 20px;
 }
+
+@media (min-width: 300px) and (max-width: 600px) {
+    .rulesBody {
+        padding: 40px;
+    }
+}

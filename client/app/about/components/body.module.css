@@ -41,7 +41,7 @@
 .impactTitle,
 .perkTitle,
 .missionTitle,
-.storyTitle{
+.storyTitle {
     font-size: 28px;
 }
 
@@ -53,6 +53,7 @@
     color: var(--foreground4);
     font-size: 17px;
 }
+
 .perkDescription,
 .storyDescription {
     text-align: start;
@@ -152,4 +153,24 @@
 .signup:hover,
 .seller:hover {
     filter: brightness(0.8);
+}
+
+@media (min-width: 300px) and (max-width: 600px) {
+    .community {
+        padding: 20px;
+    }
+
+    .perks {
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .perk {
+        width: 100%;
+    }
+
+    .introDescription {
+        text-align: center;
+    }
 }
