@@ -132,12 +132,12 @@ function Header() {
 				{!username ? (
 					<>
 						<div className="btn wish headerBtn" onClick={() => (location.href = "/wishList")}>
-							{heart()}Wish List
+							{heart()}
 						</div>
 						<div className="btn cart headerBtn" onClick={() => (location.href = "/cart")}>
 							{cart()}
 						</div>
-						<div className="btn headerBtn" onClick={() => (location.href = "/signin")}>
+						<div className="btn headerBtn signin" onClick={() => (location.href = "/signin")}>
 							{profile()}Sign In
 						</div>
 						{/* <div className="btn headerBtn" onClick={() => router.push("/signin")}>
