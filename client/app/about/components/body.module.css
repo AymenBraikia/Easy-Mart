@@ -83,7 +83,7 @@
 }
 
 .perkIcon {
-    color: var(--themeClr);
+    color: #284385;
     width: 40px;
 }
 
@@ -100,14 +100,14 @@
     min-width: 300px;
     min-height: 125px;
     padding: 20px;
-    background-color: #28c76f14;
+    background-color: #2842852e;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 10px;
-    color: var(--themeClr);
+    color: #284385;
 }
 
 .statValue {
@@ -144,8 +144,8 @@
 }
 
 .seller {
-    color: var(--themeClr);
-    background-color: #28c76f14;
+    color: var(--foreground);
+    background-color: #2842852e;
     border: 2px solid var(--themeClr);
 }
 
