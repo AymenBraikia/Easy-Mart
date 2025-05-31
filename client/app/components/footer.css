@@ -47,12 +47,12 @@ footer>div {
 }
 
 .footerTitle {
-    color: var(--themeClr);
+    color: white;
 }
 
 footer hr {
     width: 80%;
-    background-color: rgb(30 41 59);
+    background-color: #1e293b;
     border: unset;
     height: 1px;
 }
