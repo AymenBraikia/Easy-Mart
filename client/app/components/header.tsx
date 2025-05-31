@@ -128,6 +128,9 @@ function Header() {
 				<div onClick={() => (location.href = "/about")} className="section">
 					About Us
 				</div>
+				<div onClick={() => (location.href = "/tos")} className="section">
+					Terms of Use
+				</div>
 
 				{!username ? (
 					<>
