@@ -232,3 +232,74 @@ hr {
     height: 2px;
     background-color: var(--background3);
 }
+
+@media (min-width: 300px) and (max-width: 1000px) {
+
+    .Container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+    }
+
+    .main {
+        max-width: 95vw;
+        height: unset;
+        aspect-ratio: 1/1;
+    }
+
+    .secondary {
+        width: 95vw;
+    }
+
+    .next,
+    .prev {
+        display: none;
+    }
+
+    .productInfo {
+        width: 95vw;
+    }
+
+    .atc {
+        width: 50%;
+    }
+
+    .buy {
+        width: calc(86% + 20px);
+    }
+}
+
+@media (min-width: 1001px) and (max-width: 1500px) {
+
+    .Container {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+        width: 100vw;
+        gap: 50px;
+    }
+
+    .main {
+        max-width: 40vw;
+        height: unset;
+        aspect-ratio: 1/1;
+    }
+
+    .secondary {
+        width: 40vw;
+    }
+
+    .productInfo {
+        width: 40vw;
+    }
+
+    .atc {
+        width: 50%;
+    }
+
+    .buy {
+        width: calc(86% + 20px);
+    }
+}
