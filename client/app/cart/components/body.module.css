@@ -230,3 +230,26 @@
     color: #EF4444;
     cursor: pointer;
 }
+
+@media (min-width: 300px) and (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+
+    .container2 {
+        flex-direction: column;
+    }
+
+    .wrapper {
+        width: 100%;
+    }
+    .details{
+        display: none;
+    }
+    .products {
+        padding: unset;
+    }
+    .product{
+        flex-direction: column;
+    }
+}
