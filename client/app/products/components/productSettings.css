@@ -39,6 +39,7 @@
     font-weight: 500;
     font-size: 14px;
     border: 2px solid var(--background4);
+    color: var(--foreground) !important;
     outline: none;
     position: relative;
     border-radius: 5px;

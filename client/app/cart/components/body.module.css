@@ -199,9 +199,9 @@
 .checkout {
     padding: 10px;
     width: 100%;
-    background-color: var(--themeClr);
+    background-image: var(--gradient);
     text-align: center;
-    color: var(--background);
+    color: white;
     border-radius: 5px;
     font-weight: 500;
     cursor: pointer;

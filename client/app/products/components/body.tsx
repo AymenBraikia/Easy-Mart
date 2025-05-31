@@ -128,7 +128,9 @@ function Body() {
 		setSettings(newSettings);
 	}
 
-	fetchData();
+	useEffect(() => {
+		fetchData();
+	}, []);
 
 	async function atc(prod: Product) {
 		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/atc", {
@@ -195,7 +197,10 @@ function Body() {
 				<p>Discover amazing products from trusted sellers</p>
 			</div>
 			{settings.loaded && products.length ? (
-				<div className="sortingContainer" style={{ width: "100%", height: 80, borderRadius: 15, border: "2px solid var(--background4)", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0 50px", backgroundColor: "var(--background)" }}>
+				<div
+					className="sortingContainer"
+					style={{ width: "100%", height: 80, borderRadius: 15, border: "2px solid var(--background4)", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0 50px", backgroundColor: "var(--background)" }}
+				>
 					<div className="count">{products.length} products found</div>
 					<div className="display">
 						<div style={{ position: "relative" }}>
