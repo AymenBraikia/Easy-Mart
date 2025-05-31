@@ -112,7 +112,9 @@ function Header() {
 
 	return (
 		<header ref={header}>
-			<h1 style={{ position: "relative", left: "10%" }}>Easy Mart</h1>
+			<h1 onClick={() => (location.pathname = "/")} style={{ position: "relative", left: "10%" }}>
+				Easy Mart
+			</h1>
 
 			<nav className="navbar">
 				<div
@@ -123,11 +125,13 @@ function Header() {
 				>
 					Contact
 				</div>
-				<div onClick={() => (location.href = "/about")}  className="section">About Us</div>
+				<div onClick={() => (location.href = "/about")} className="section">
+					About Us
+				</div>
 
 				{!username ? (
 					<>
-						<div  className="btn wish headerBtn" onClick={() => (location.href = "/wishList")}>
+						<div className="btn wish headerBtn" onClick={() => (location.href = "/wishList")}>
 							{heart()}Wish List
 						</div>
 						<div className="btn cart headerBtn" onClick={() => (location.href = "/cart")}>

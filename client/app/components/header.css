@@ -22,6 +22,7 @@ header>h1 {
     background-image: var(--gradient);
     background-clip: text;
     color: transparent;
+    cursor: pointer;
 }
 
 .logo {
