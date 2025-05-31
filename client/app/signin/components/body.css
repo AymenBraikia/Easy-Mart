@@ -3,7 +3,7 @@
     height: 100vh;
     display: flex;
     flex-direction: row-reverse;
-    color: white;
+    color: var(--foreground);
 }
 
 .container>* {
@@ -112,7 +112,7 @@ input[type="password"] {
     height: 50px;
     padding: 20px;
     padding-left: 50px;
-    color: white;
+    color: var(--foreground);
     background-color: var(--background2);
     outline: none;
     border: 2px solid var(--background3);

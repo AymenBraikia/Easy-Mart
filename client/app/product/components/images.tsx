@@ -173,8 +173,9 @@ function Images() {
 			body: JSON.stringify({ id: prod.id, username: getCookie("username") }),
 		});
 	}
-
-	fetchSettings();
+	useEffect(() => {
+		fetchSettings();
+	}, []);
 
 	useEffect(() => {
 		(async function () {

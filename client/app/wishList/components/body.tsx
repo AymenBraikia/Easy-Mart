@@ -43,14 +43,16 @@ function Body() {
 
 	const atcBtn = useRef<HTMLDivElement>(null);
 
+	useEffect(() => {
+		fetchSettings();
+	});
+
 	async function fetchSettings() {
 		if (settings.loaded) return;
 
 		const newSettings = await (await fetch("/settings.json")).json();
 		setSettings(newSettings);
 	}
-
-	fetchSettings();
 
 	async function atc(prod: productInterface) {
 		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/atc", {

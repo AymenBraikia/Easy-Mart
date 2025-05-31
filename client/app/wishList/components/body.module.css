@@ -106,11 +106,11 @@
     cursor: pointer;
     background-color: var(--themeClr);
     transition: var(--transition);
-    color: var(--background);
+    color: white;
 }
 
 .atc:hover {
-    background-color: #1a9e55;
+    background-color: #284385;
 }
 
 .prodImg {
