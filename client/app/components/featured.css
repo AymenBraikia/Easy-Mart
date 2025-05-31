@@ -26,6 +26,7 @@
 
 .viewAll {
     border: 1px solid var(--background3);
+    color: var(--foreground) !important;
 }
 
 .viewAll:hover {
