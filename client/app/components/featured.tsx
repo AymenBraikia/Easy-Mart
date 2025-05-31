@@ -102,8 +102,9 @@ interface product {
 	id: number;
 	category: string;
 }
-function productComponent(info: product, index: number, atc: (prod: product) => void, atw: (prod: product) => void, wishList: product[]) {
+function productComponent(info: product, index: number, atc: (prod: product) => void, atw: (prod: product) => void, wishList: product[], cart: product[]) {
 	const isInWishList = wishList.find((e) => e.id == info.id);
+	const isInCart = cart.find((e) => e.id == info.id);
 
 	return (
 		<div key={index} data-id={info.id} className="product">
@@ -145,7 +146,7 @@ function productComponent(info: product, index: number, atc: (prod: product) => 
 						<div className="new">${info.price}</div>
 						<div className="old">${(info.price + info.price * 0.3).toFixed(2)}</div>
 					</div>
-					<div onClick={() => (getCookie("username") ? atc(info) : (location.pathname = "/signup"))} className="atc btn br">
+					<div onClick={() => (getCookie("username") ? atc(info) : (location.pathname = "/signup"))} className={`atc btn br ${isInCart ? "active" : ""}`}>
 						Add to Cart
 					</div>
 				</div>
@@ -158,6 +159,7 @@ function Featured() {
 	const [products, setProducts] = useState<Product[]>([]);
 	const [settings, setSettings] = useState({ loaded: false, production: false, serverUrl: "" });
 	const [wishList, setWishList] = useState<Product[]>([]);
+	const [cartList, setCartList] = useState<Product[]>([]);
 
 	// fetch settings.json file to get the server url (localhost for dev)
 	useEffect(() => {
@@ -175,17 +177,41 @@ function Featured() {
 		const wish = localStorage.getItem("wishList");
 
 		if (wish) setWishList(JSON.parse(wish));
+
+		const cart = localStorage.getItem("CartList");
+
+		if (cart) setCartList(JSON.parse(cart));
 	}, []);
 
+	// async function atc(prod: Product) {
+	// 	fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/atc", {
+	// 		method: "post",
+	// 		headers: {
+	// 			"Content-Type": "application/json",
+	// 		},
+	// 		body: JSON.stringify({ id: prod.id, username: getCookie("username") }),
+	// 	});
+	// }
+
 	async function atc(prod: Product) {
-		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/atc", {
+		const isAlreadyIn = cartList.find((e: Product) => e.id == prod.id);
+
+		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + (isAlreadyIn ? "/removeCart" : "/atc"), {
 			method: "post",
 			headers: {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({ id: prod.id, username: getCookie("username") }),
 		});
+
+		const updatedCartList: Product[] = isAlreadyIn ? cartList.filter((e: Product) => e.id !== prod.id) : [...cartList, prod];
+
+		setCartList(updatedCartList);
+		localStorage.setItem("CartList", JSON.stringify(updatedCartList));
+
+		document.querySelector(".cart")?.setAttribute("data-len", updatedCartList.length.toString());
 	}
+
 	async function atw(prod: Product) {
 		const isAlreadyIn = wishList.find((e: Product) => e.id == prod.id);
 
@@ -201,6 +227,8 @@ function Featured() {
 
 		setWishList(updatedWishList);
 		localStorage.setItem("wishList", JSON.stringify(updatedWishList));
+
+		document.querySelector(".wish")?.setAttribute("data-len", updatedWishList.length.toString());
 	}
 
 	// gets products data
@@ -228,7 +256,7 @@ function Featured() {
 			</div>
 			<div className="productsList">
 				{...products.map((el: product, index: number) => {
-					return productComponent(el, index, atc, atw, wishList);
+					return productComponent(el, index, atc, atw, wishList, cartList);
 				})}
 			</div>
 		</div>
