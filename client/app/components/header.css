@@ -19,9 +19,10 @@ header.active {
 }
 
 header>h1 {
-    background-image: var(--gradient);
+    /* background-image: var(--gradient);
     background-clip: text;
-    color: transparent;
+    color: transparent; */
+    color: #284385;
     cursor: pointer;
 }
 
