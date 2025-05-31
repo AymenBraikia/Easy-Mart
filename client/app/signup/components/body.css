@@ -28,7 +28,7 @@
 .part1>svg {
     width: 80px;
     height: 80px;
-    background-color: #4ed17e;
+    background-color: #284385;
     border-radius: 50%;
     padding: 20px;
 }
@@ -38,7 +38,7 @@
 }
 
 .part1>h3 {
-    color: #DCFCE7;
+    color: #99b6ff;
 }
 
 .part1>div {
@@ -52,7 +52,7 @@
     width: 200px;
     height: 80px;
     border-radius: 10px;
-    background-color: #4ed17e;
+    background-color: #284385;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,7 +69,7 @@
 }
 
 input:focus::placeholder,
-input:focus{
+input:focus {
     color: var(--themeClr) !important;
 }
 
@@ -233,4 +233,23 @@ form>p>span:hover {
 
 .alert p {
     max-width: calc(100% - 70px);
+}
+
+
+@media (min-width: 300px) and (max-width: 1000px) {
+    .container {
+        overflow: hidden;
+        height: fit-content !important;
+        flex-direction: column !important;
+    }
+
+    .part2,
+    .part1 {
+        width: 100vw;
+        height: 100vh !important;
+    }
+
+    .part2>* {
+        width: 80vw !important;
+    }
 }

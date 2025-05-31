@@ -39,7 +39,7 @@
 }
 
 .part1>h3 {
-    color: #DCFCE7;
+    color: #99b6ff;
 }
 
 .part1>div {
@@ -236,4 +236,21 @@ form>p>span:hover {
 
 .alert p {
     max-width: calc(100% - 70px);
+}
+
+@media (min-width: 300px) and (max-width: 1000px) {
+    .container {
+        overflow: hidden;
+        height: fit-content !important;
+        flex-direction: column !important;
+    }
+
+    .part2,
+    .part1 {
+        width: 100vw;
+        height: 100vh !important;
+    }
+    .part2>*{
+        width: 80vw !important;
+    }
 }
