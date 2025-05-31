@@ -1,5 +1,5 @@
 "use client";
-// import "./responsive.css";
+import "../responsive.css";
 import Header from "../components/header";
 import Body from "./components/body";
 import { Suspense } from "react";

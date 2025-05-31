@@ -1,12 +1,6 @@
-// import Header from "./components/header";
+import "../responsive.css";
 import Body from "./components/body";
 
-
 export default function Home() {
-	return (
-		<>
-			{/* <Header /> */}
-			<Body />
-		</>
-	);
+	return <Body />;
 }

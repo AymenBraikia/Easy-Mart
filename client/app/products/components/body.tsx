@@ -195,7 +195,7 @@ function Body() {
 				<p>Discover amazing products from trusted sellers</p>
 			</div>
 			{settings.loaded && products.length ? (
-				<div style={{ width: "100%", height: 80, borderRadius: 15, border: "2px solid var(--background4)", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0 50px", backgroundColor: "var(--background)" }}>
+				<div className="sortingContainer" style={{ width: "100%", height: 80, borderRadius: 15, border: "2px solid var(--background4)", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0 50px", backgroundColor: "var(--background)" }}>
 					<div className="count">{products.length} products found</div>
 					<div className="display">
 						<div style={{ position: "relative" }}>
@@ -224,7 +224,7 @@ function Body() {
 			) : (
 				<h1>Loading...</h1>
 			)}
-			<div style={{ display: "flex", justifyContent: "center", gap: 50, width: "100vw", padding: "0 50px" }}>
+			<div className="contentWrapper" style={{ display: "flex", justifyContent: "center", gap: 50, width: "100vw", padding: "0 50px" }}>
 				<Nav />
 				<div className="productsContainer">
 					{sortedProducts.map((product) => (
