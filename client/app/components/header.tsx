@@ -85,7 +85,7 @@ function Header() {
 		async function get_cartList() {
 			const cartData = JSON.parse(await (await fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/cart?username=" + name)).json()).cart;
 
-			localStorage.setItem("wishList", JSON.stringify(cartData));
+			localStorage.setItem("cartList", JSON.stringify(cartData));
 
 			cartBtn.current?.classList.add("active");
 			cartBtn.current?.setAttribute("data-len", cartData.length.toString());

@@ -102,13 +102,15 @@ interface product {
 	id: number;
 	category: string;
 }
-function productComponent(info: product, index: number, atc: (prod: product) => void, atw: (prod: product) => void) {
+function productComponent(info: product, index: number, atc: (prod: product) => void, atw: (prod: product) => void, wishList: product[]) {
+	const isInWishList = wishList.find((e) => e.id == info.id);
+
 	return (
 		<div key={index} data-id={info.id} className="product">
 			<div className="productImg">
 				<div
 					data-wish={info.id}
-					className="atw"
+					className={`atw ${isInWishList ? "active" : ""}`}
 					onClick={() => {
 						atw(info);
 						document.querySelector(`[data-wish="${info.id}"]`)?.classList.toggle("active");
@@ -155,6 +157,7 @@ function productComponent(info: product, index: number, atc: (prod: product) => 
 function Featured() {
 	const [products, setProducts] = useState<Product[]>([]);
 	const [settings, setSettings] = useState({ loaded: false, production: false, serverUrl: "" });
+	const [wishList, setWishList] = useState<Product[]>([]);
 
 	// fetch settings.json file to get the server url (localhost for dev)
 	useEffect(() => {
@@ -168,6 +171,12 @@ function Featured() {
 		fetchSettings();
 	});
 
+	useEffect(() => {
+		const wish = localStorage.getItem("wishList");
+
+		if (wish) setWishList(JSON.parse(wish));
+	}, []);
+
 	async function atc(prod: Product) {
 		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/atc", {
 			method: "post",
@@ -178,13 +187,20 @@ function Featured() {
 		});
 	}
 	async function atw(prod: Product) {
-		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/atw", {
+		const isAlreadyIn = wishList.find((e: Product) => e.id == prod.id);
+
+		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + (isAlreadyIn ? "/removeWishList" : "/atw"), {
 			method: "post",
 			headers: {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({ id: prod.id, username: getCookie("username") }),
 		});
+
+		const updatedWishList: Product[] = isAlreadyIn ? wishList.filter((e: Product) => e.id !== prod.id) : [...wishList, prod];
+
+		setWishList(updatedWishList);
+		localStorage.setItem("wishList", JSON.stringify(updatedWishList));
 	}
 
 	// gets products data
@@ -212,7 +228,7 @@ function Featured() {
 			</div>
 			<div className="productsList">
 				{...products.map((el: product, index: number) => {
-					return productComponent(el, index, atc, atw);
+					return productComponent(el, index, atc, atw, wishList);
 				})}
 			</div>
 		</div>

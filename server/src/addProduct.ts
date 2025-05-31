@@ -14,7 +14,7 @@ interface prod {
 	id: number;
 	category: string;
 }
-let counter = 0,
+let counter = 1,
 	reseted = false;
 
 async function addOneProduct(product: prod) {
