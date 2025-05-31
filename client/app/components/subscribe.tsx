@@ -5,7 +5,7 @@ function Subscribe() {
 		<div className="subContainer">
 			<h1 className="subTitle">Stay Updated</h1>
 			<p className="subDescription">Get the latest deals, new arrivals, and exclusive offers delivered to your inbox</p>
-			<form action="/subscribe" method="post">
+			<form>
 				<input required type="email" name="email" placeholder="Enter your email address" className="emailInput" />
 				<input className="btn" type="submit" value="Subscribe" />
 			</form>
