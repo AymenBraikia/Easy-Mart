@@ -49,7 +49,7 @@
 }
 
 .seller:hover .name {
-    color: white;
+    color: var(--foreground);
 }
 
 .pfp {
