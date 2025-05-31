@@ -71,11 +71,6 @@
     font-weight: 500;
 }
 
-input:focus::placeholder,
-input:focus {
-    color: var(--themeClr) !important;
-}
-
 
 
 .part2 {
