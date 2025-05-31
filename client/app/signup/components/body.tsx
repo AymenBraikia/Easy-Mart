@@ -178,7 +178,6 @@ function Body() {
 								<p>
 									Already have an account?{" "}
 									<span
-										style={{ color: "var(--themeClr)" }}
 										onClick={() => {
 											// router.push("../signin");
 											location.href = "../signin";
