@@ -165,4 +165,7 @@ header>h1 {
     header .signin{
         font-size:0 ;
     }
+    .headerBtn{
+        padding: 5px 10px;
+    }
 }
