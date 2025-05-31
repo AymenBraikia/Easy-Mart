@@ -238,6 +238,7 @@
 
     .container2 {
         flex-direction: column;
+        gap: 20px;
     }
 
     .wrapper {
