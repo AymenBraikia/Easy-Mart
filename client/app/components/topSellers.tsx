@@ -21,7 +21,7 @@ function TopSellers() {
 					<div className="name">TechStore Pro</div>
 
 					<div className="rating">
-						⭐ 4.9 <span style={{ color: "var(--foreground4)",fontWeight:400 }}>rating</span>
+						⭐ 4.9 <span style={{ color: "var(--foreground4)", fontWeight: 400, marginLeft: 10 }}>rating</span>
 					</div>
 
 					<div className="products">
@@ -40,7 +40,7 @@ function TopSellers() {
 					<div className="name">EcoFashion</div>
 
 					<div className="rating">
-						⭐ 4.8 <span style={{ color: "var(--foreground4)",fontWeight:400 }}>rating</span>
+						⭐ 4.8 <span style={{ color: "var(--foreground4)", fontWeight: 400, marginLeft: 10 }}>rating</span>
 					</div>
 
 					<div className="products">
@@ -59,7 +59,7 @@ function TopSellers() {
 					<div className="name">PhotoGear</div>
 
 					<div className="rating">
-						⭐ 4.7 <span style={{ color: "var(--foreground4)",fontWeight:400 }}>rating</span>
+						⭐ 4.7 <span style={{ color: "var(--foreground4)", fontWeight: 400, marginLeft: 10 }}>rating</span>
 					</div>
 
 					<div className="products">

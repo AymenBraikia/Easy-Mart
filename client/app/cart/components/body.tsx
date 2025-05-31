@@ -45,14 +45,16 @@ function Body() {
 	const [products, setProducts] = useState([]);
 	const [settings, setSettings] = useState({ serverUrl: "", loaded: false, production: null });
 
-	async function fetchSettings() {
-		if (settings.loaded) return;
+	useEffect(() => {
+		async function fetchSettings() {
+			if (settings.loaded) return;
 
-		const newSettings = await (await fetch("/settings.json")).json();
-		setSettings(newSettings);
-	}
+			const newSettings = await (await fetch("/settings.json")).json();
+			setSettings(newSettings);
+		}
 
-	fetchSettings();
+		fetchSettings();
+	});
 
 	useEffect(() => {
 		if (!getCookie("username")) location.pathname = "";
@@ -60,7 +62,7 @@ function Body() {
 		if (!settings.loaded) return;
 
 		(async () => {
-			const prods = JSON.parse(await (await fetch(settings.production ? settings.serverUrl : "http://localhost:8000" + "/cart?username=" + getCookie("username"))).json());
+			const prods = JSON.parse(await (await fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/cart?username=" + getCookie("username"))).json());
 
 			setProducts(prods.cart);
 
@@ -79,7 +81,7 @@ function Body() {
 
 		setProducts(products.filter((e: productInterface) => e.id !== id));
 
-		fetch(settings.production ? settings.serverUrl : "http://localhost:8000" + "/removeCart", {
+		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/removeCart", {
 			method: "post",
 			headers: {
 				"Content-Type": "application/json",

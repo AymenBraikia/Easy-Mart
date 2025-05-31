@@ -63,7 +63,7 @@ function list() {
 	);
 }
 
-interface Product {
+export interface Product {
 	name: string;
 	description: string;
 	image: string;
@@ -74,7 +74,7 @@ interface Product {
 	category: string;
 }
 
-function getCookie(name: string): string | null {
+export function getCookie(name: string): string | null {
 	const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
 	return match ? match[2] : null;
 }
@@ -131,7 +131,7 @@ function Body() {
 	fetchData();
 
 	async function atc(prod: Product) {
-		fetch(settings.production ? settings.serverUrl : "http://localhost:8000" + "/atc", {
+		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/atc", {
 			method: "post",
 			headers: {
 				"Content-Type": "application/json",

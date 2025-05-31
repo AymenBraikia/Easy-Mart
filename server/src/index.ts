@@ -68,24 +68,7 @@ app.get("/cart", async (req, res) => {
 	res.json(JSON.stringify({ cart: data }));
 });
 
-app.post("/atw", async (req, res) => {
-	const data = await (await db).collection("users").findOne({ username: req.body.username });
-	if (!data) {
-		res.status(400).json(JSON.stringify({ success: false, reason: "user not found" }));
-		return;
-	}
 
-	(await db).collection("users").updateOne(
-		{ username: req.body.username },
-		{
-			$set: {
-				wishList: [...data.wishList, req.body.id],
-			},
-		}
-	);
-
-	res.json(JSON.stringify({ success: true }));
-});
 
 app.post("/removeCart", async (req, res) => {
 	const data = await (await db).collection("users").findOne({ username: req.body.username });
@@ -137,6 +120,25 @@ app.post("/atc", async (req, res) => {
 		{
 			$set: {
 				cart: [...data.cart, req.body.id],
+			},
+		}
+	);
+
+	res.json(JSON.stringify({ success: true }));
+});
+
+app.post("/atw", async (req, res) => {
+	const data = await (await db).collection("users").findOne({ username: req.body.username });
+	if (!data) {
+		res.status(400).json(JSON.stringify({ success: false, reason: "user not found" }));
+		return;
+	}
+
+	(await db).collection("users").updateOne(
+		{ username: req.body.username },
+		{
+			$set: {
+				wishList: [...data.wishList, req.body.id],
 			},
 		}
 	);

@@ -53,7 +53,7 @@ function Body() {
 	fetchSettings();
 
 	async function atc(prod: productInterface) {
-		fetch(settings.production ? settings.serverUrl : "http://localhost:8000" + "/atc", {
+		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/atc", {
 			method: "post",
 			headers: {
 				"Content-Type": "application/json",
@@ -68,7 +68,7 @@ function Body() {
 		if (!settings.loaded) return;
 
 		(async () => {
-			const products = JSON.parse(await (await fetch(settings.production ? settings.serverUrl : "http://localhost:8000" + "/wishList?username=" + getCookie("username"))).json());
+			const products = JSON.parse(await (await fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/wishList?username=" + getCookie("username"))).json());
 
 			setProducts(products.wishList);
 		})();

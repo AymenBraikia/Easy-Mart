@@ -126,3 +126,31 @@ header>h1 {
     text-overflow: ellipsis;
     max-width: 130px;
 }
+
+.cart,
+.wish {
+    position: relative;
+}
+
+.cart.active::before,
+.wish.active::before {
+    display: flex;
+}
+
+.cart::before,
+.wish::before {
+    content: attr(data-len);
+    width: 16px;
+    height: 16px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 10%;
+    top: 0%;
+    background-color: var(--themeClr);
+    color: var(--background);
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 50%;
+}

@@ -165,7 +165,7 @@ function Images() {
 	}
 
 	async function atc(prod: product) {
-		fetch(settings.production ? settings.serverUrl : "http://localhost:8000" + "/atc", {
+		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/atc", {
 			method: "post",
 			headers: {
 				"Content-Type": "application/json",
@@ -180,7 +180,7 @@ function Images() {
 		(async function () {
 			if (!settings.loaded) return;
 
-			fetch(settings.production ? settings.serverUrl : "http://localhost:8000" + "/singleProduct" + "?id=" + id)
+			fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/singleProduct" + "?id=" + id)
 				.then((e) => e.json())
 				.then((data) => JSON.parse(data))
 				.then((results) => {

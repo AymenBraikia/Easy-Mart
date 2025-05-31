@@ -68,7 +68,7 @@ function Body() {
 		form.current?.addEventListener("submit", (ev) => {
 			ev.preventDefault();
 
-			fetch(settings.production ? settings.serverUrl : "http://localhost:8000" + "/signin", {
+			fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/signin", {
 				method: "post",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
@@ -135,7 +135,7 @@ function Body() {
 							<h2 style={{ color: "var(--themeClr)" }}>Sign in Your Account</h2>
 							<p style={{ color: "var(--foreground3)" }}>Join thousands of happy customers shopping on Easy Mart</p>
 
-							<form ref={form} action={settings.production ? settings.serverUrl : "http://localhost:8000" + "/signin"} method="POST">
+							<form ref={form} action={(settings.production ? settings.serverUrl : "http://localhost:8000") + "/signin"} method="POST">
 								<div style={{ position: "relative", width: "100%" }}>
 									<label className="icon" htmlFor="email">
 										{mail()}

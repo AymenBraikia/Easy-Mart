@@ -52,12 +52,49 @@ function Header() {
 	// const router = useRouter();
 	const scrollProgress = useRef<HTMLDivElement>(null);
 	const header = useRef<HTMLDivElement>(null);
+	const cartBtn = useRef<HTMLDivElement>(null);
+	const wishBtn = useRef<HTMLDivElement>(null);
 
 	const [username, setUsername] = useState<string | null>(null);
+	const [settings, setSettings] = useState({ loaded: false, production: false, serverUrl: "" });
+
+	// fetch settings.json file to get the server url (localhost for dev)
+	useEffect(() => {
+		async function fetchSettings() {
+			if (settings.loaded) return;
+
+			const newSettings = await (await fetch("/settings.json")).json();
+			setSettings(newSettings);
+		}
+
+		fetchSettings();
+	});
 
 	useEffect(() => {
 		const name = getCookie("username");
 		setUsername(name);
+
+		async function get_wishList() {
+			const wishData = JSON.parse(await (await fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/wishList?username=" + name)).json()).wishList;
+
+			localStorage.setItem("wishList", JSON.stringify(wishData));
+
+			wishBtn.current?.classList.add("active");
+			wishBtn.current?.setAttribute("data-len", wishData.length.toString());
+		}
+		async function get_cartList() {
+			const cartData = JSON.parse(await (await fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/cart?username=" + name)).json()).cart;
+
+			localStorage.setItem("wishList", JSON.stringify(cartData));
+
+			cartBtn.current?.classList.add("active");
+			cartBtn.current?.setAttribute("data-len", cartData.length.toString());
+		}
+
+		if (name) {
+			get_wishList();
+			get_cartList();
+		}
 
 		const handleScroll = () => {
 			if (scrollY > 50) header.current?.classList.add("active");
@@ -71,7 +108,7 @@ function Header() {
 
 		document.addEventListener("scroll", handleScroll);
 		return () => document.removeEventListener("scroll", handleScroll);
-	}, []);
+	}, [settings.production, settings.serverUrl]);
 
 	return (
 		<header ref={header}>
@@ -93,10 +130,10 @@ function Header() {
 
 				{!username ? (
 					<>
-						<div className="btn headerBtn" onClick={() => (location.href = "/wishList")}>
+						<div className="btn wish headerBtn" onClick={() => (location.href = "/wishList")}>
 							{heart()}Wish List
 						</div>
-						<div className="btn headerBtn" onClick={() => (location.href = "/cart")}>
+						<div className="btn cart headerBtn" onClick={() => (location.href = "/cart")}>
 							{cart()}
 						</div>
 						<div className="btn headerBtn" onClick={() => (location.href = "/signin")}>
@@ -129,10 +166,10 @@ function Header() {
 							<h4 className="profileUsername">{username}</h4>
 							<Pfp />
 						</div>
-						<div className="btn headerBtn" onClick={() => (location.href = "/wishList")}>
+						<div ref={wishBtn} className="btn wish headerBtn" onClick={() => (location.href = "/wishList")}>
 							{heart()}
 						</div>
-						<div className="btn headerBtn" onClick={() => (location.href = "/cart")}>
+						<div ref={cartBtn} className="btn cart headerBtn" onClick={() => (location.href = "/cart")}>
 							{cart()}
 						</div>
 					</>
