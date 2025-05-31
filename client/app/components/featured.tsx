@@ -146,8 +146,8 @@ function productComponent(info: product, index: number, atc: (prod: product) => 
 						<div className="new">${info.price}</div>
 						<div className="old">${(info.price + info.price * 0.3).toFixed(2)}</div>
 					</div>
-					<div onClick={() => (getCookie("username") ? atc(info) : (location.pathname = "/signup"))} className={`atc btn br ${isInCart ? "active" : ""}`}>
-						Add to Cart
+					<div onClick={() => (getCookie("username") ? atc(info) : (location.pathname = "/signup"))} className={"atc btn br"}>
+						{isInCart ? "Remove from Cart" : "Add to Cart"}
 					</div>
 				</div>
 			</div>
@@ -183,18 +183,14 @@ function Featured() {
 		if (cart) setCartList(JSON.parse(cart));
 	}, []);
 
-	// async function atc(prod: Product) {
-	// 	fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/atc", {
-	// 		method: "post",
-	// 		headers: {
-	// 			"Content-Type": "application/json",
-	// 		},
-	// 		body: JSON.stringify({ id: prod.id, username: getCookie("username") }),
-	// 	});
-	// }
-
 	async function atc(prod: Product) {
 		const isAlreadyIn = cartList.find((e: Product) => e.id == prod.id);
+
+		const atcBtn = document.querySelector(`[data-id="${prod.id}"] .atc`);
+
+		if (atcBtn)
+			if (isAlreadyIn) atcBtn.textContent = "Add to Cart";
+			else atcBtn.textContent = "Remove from Cart";
 
 		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + (isAlreadyIn ? "/removeCart" : "/atc"), {
 			method: "post",
