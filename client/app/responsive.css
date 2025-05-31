@@ -1,0 +1,141 @@
+@media (min-width:300px) and (max-width:600px) {
+    * {
+        overflow-x: hidden;
+    }
+
+    .welcomeMessage {
+        font-size: 25px !important;
+    }
+
+    .introductionContainer>* {
+        max-width: 90% !important;
+    }
+
+    .introductionContainer>.mrt100 {
+        max-width: 100vw !important;
+        width: 100% !important;
+        gap: 15px !important;
+    }
+
+    .introBtn {
+        text-align: center;
+        padding: 10px 15px !important;
+    }
+
+    .steps {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .step {
+        overflow-x: unset !important;
+        width: 60% !important;
+        max-width: unset !important;
+        left: 50px;
+        padding: 20px;
+    }
+
+
+    .shopContainer {
+        height: fit-content !important;
+        text-align: center;
+    }
+
+    .list {
+        flex-wrap: wrap;
+        height: fit-content !important;
+        gap: 20px;
+    }
+
+    .list>* {
+        width: 150px !important;
+        font-size: 14px;
+        padding: unset !important;
+    }
+
+    .featuredText>p {
+        font-size: 16px !important;
+    }
+
+    .featuredText {
+        gap: 15px;
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+
+    .viewAll {
+        width: 120px !important;
+        padding: 15px 0 !important;
+    }
+
+
+    .featuredContainer {
+        padding: 0 20px !important;
+    }
+
+    .productsList,
+    .product,
+    .productImg {
+        width: 100% !important;
+    }
+
+    .atc {
+        font-size: 14px;
+    }
+
+    .sellers {
+        flex-direction: column;
+    }
+
+    .badge {
+        overflow: hidden;
+    }
+
+    .pfp {
+        overflow-x: unset !important;
+    }
+
+    .achievementsContainer {
+        height: 350px !important;
+        flex-wrap: wrap;
+        row-gap: 10px;
+        box-sizing: unset;
+        padding: 30px 0;
+    }
+
+    form {
+        max-width: 95vw;
+    }
+    .subDescription{
+        text-align: center;
+        max-width: 95vw;
+    }
+
+    input.btn[type="submit"] {
+        color: var(--background);
+        padding: 0 15px !important;
+    }
+
+    footer>div {
+        flex-direction: column;
+    }
+
+    .footerSection {
+        width: 100% !important;
+    }
+
+    .navbar{
+        right: 15px !important;
+    }
+
+    .section,
+    .profile {
+        display: none !important;
+    }
+
+    header>h1{
+        font-size: 20px;
+    }
+}

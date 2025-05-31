@@ -244,7 +244,7 @@ function Featured() {
 	return (
 		<div className="featuredContainer">
 			<h1 className="featured">Featured Products</h1>
-			<div className="">
+			<div className="featuredText">
 				<p style={{ fontSize: 18 }}>Handpicked items from our top-rated sellers</p>
 				<div onClick={() => (location.pathname = "/products")} className="btn viewAll">
 					View All →
