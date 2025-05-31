@@ -63,14 +63,14 @@ function Body() {
 	}
 
 	useEffect(() => {
-		if (!getCookie("username")) location.pathname = "";
+		if (!getCookie("username")) location.pathname = "/signin";
 
 		if (!settings.loaded) return;
 
 		(async () => {
 			const products = JSON.parse(await (await fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/wishList?username=" + getCookie("username"))).json());
 
-			setProducts(products.wishList);
+			if (products.length) setProducts(products.wishList);
 		})();
 	}, [settings.loaded]);
 

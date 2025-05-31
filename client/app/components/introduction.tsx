@@ -16,7 +16,7 @@ function Introduction() {
 			<div className="mrt100" style={{ display: "flex", justifyContent: "center", alignItems: "center", columnGap: 50 }}>
 				<div
 					onClick={() => {
-						location.href = ("../products");
+						location.pathname = "/products";
 						// router.push("../products");
 					}}
 					className="btn introBtn br bold"
@@ -25,7 +25,7 @@ function Introduction() {
 				</div>
 				<div
 					onClick={() => {
-						location.href = ("../products");
+						location.pathname = "/signup";
 						// router.push("../products");
 					}}
 					className="btn introBtn  br bold"

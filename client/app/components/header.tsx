@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import "./header.css";
 import "./theme.css";
 import Theme from "./theme";
-import Link from "next/link";
+
 function heart() {
 	return (
 		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-heart w-4 h-4">
@@ -123,14 +123,11 @@ function Header() {
 				>
 					Contact
 				</div>
-				<Link href={"#pricing"} className="section">
-					Pricing
-				</Link>
-				<div className="section">About Us</div>
+				<div onClick={() => (location.href = "/about")}  className="section">About Us</div>
 
 				{!username ? (
 					<>
-						<div className="btn wish headerBtn" onClick={() => (location.href = "/wishList")}>
+						<div  className="btn wish headerBtn" onClick={() => (location.href = "/wishList")}>
 							{heart()}Wish List
 						</div>
 						<div className="btn cart headerBtn" onClick={() => (location.href = "/cart")}>
