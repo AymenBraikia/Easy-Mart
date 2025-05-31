@@ -77,6 +77,7 @@ a {
   transition: var(--transition);
   position: relative;
   overflow: hidden;
+  color: white !important;
 }
 
 .btn:hover {

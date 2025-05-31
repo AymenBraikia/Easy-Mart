@@ -132,7 +132,7 @@ function Body() {
 							</div>
 						</div>
 						<div className="part2">
-							<h2 style={{ color: "var(--themeClr)" }}>Sign in Your Account</h2>
+							<h2>Sign in Your Account</h2>
 							<p style={{ color: "var(--foreground3)" }}>Join thousands of happy customers shopping on Easy Mart</p>
 
 							<form ref={form} action={(settings.production ? settings.serverUrl : "http://localhost:8000") + "/signin"} method="POST">
@@ -175,7 +175,6 @@ function Body() {
 								<p>
 									Don&apos;t have an account?{" "}
 									<span
-										style={{ color: "var(--themeClr)" }}
 										onClick={() => {
 											// router.push("../signup");
 											location.href = "../signup";

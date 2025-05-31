@@ -51,10 +51,6 @@
     transition: var(--transition);
 }
 
-.product:hover .productName {
-    color: var(--themeClr);
-}
-
 .product:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 30px -13px var(--foreground3);

@@ -190,6 +190,7 @@
     width: 60%;
     padding: 10px;
     background-color: var(--themeClr);
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -49,7 +49,7 @@
 }
 
 .seller:hover .name {
-    color: var(--themeClr);
+    color: white;
 }
 
 .pfp {
@@ -67,7 +67,7 @@
     justify-content: center;
     align-items: center;
     background-color: var(--themeClr);
-    color: var(--background);
+    color: white;
     border-radius: 50px;
     font-weight: 500;
 }

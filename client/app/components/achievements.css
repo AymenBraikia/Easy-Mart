@@ -10,7 +10,7 @@
 .achievement {
     width: 150px;
     height: 125px;
-    color: var(--background);
+    color: white;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

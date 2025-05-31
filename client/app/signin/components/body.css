@@ -3,7 +3,7 @@
     height: 100vh;
     display: flex;
     flex-direction: row-reverse;
-    color: var(--foreground);
+    color: white;
 }
 
 .container>* {
@@ -18,7 +18,7 @@
 .part1 {
     row-gap: 25px;
     background-color: var(--themeClr);
-    color: var(--background);
+    color: white
 }
 
 .part1>* {
@@ -104,12 +104,6 @@ input[type="submit"] {
     border: 3px solid transparent;
 }
 
-input[type="submit"]:hover {
-    color: var(--themeClr) !important;
-    background-color: transparent !important;
-    border-color: var(--themeClr);
-}
-
 input[type="text"],
 input[type="submit"],
 input[type="email"],
@@ -118,7 +112,7 @@ input[type="password"] {
     height: 50px;
     padding: 20px;
     padding-left: 50px;
-    color: var(--foreground);
+    color: white;
     background-color: var(--background2);
     outline: none;
     border: 2px solid var(--background3);
@@ -151,7 +145,7 @@ label {
 }
 
 input[type="submit"] {
-    color: var(--background3);
+    color: white;
     background-color: var(--foreground);
     padding: unset;
     font-weight: bold;
@@ -160,8 +154,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: var(--background);
-    color: var(--foreground);
+    background-color: #284385 !important;
 }
 
 form>p {
@@ -250,7 +243,8 @@ form>p>span:hover {
         width: 100vw;
         height: 100vh !important;
     }
-    .part2>*{
+
+    .part2>* {
         width: 80vw !important;
     }
 }
