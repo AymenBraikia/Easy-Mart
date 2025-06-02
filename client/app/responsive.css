@@ -1,11 +1,20 @@
 @media (min-width:300px) and (max-width:800px) {
 
-    .welcomeMessage {
-        font-size: 25px !important;
-    }
-
     .introductionContainer>* {
         max-width: 90% !important;
+
+    }
+
+    .introductionContainer>.mrt50 {
+        font-size: 20px !important;
+        line-height: 35px;
+    }
+    .introductionContainer>.mrt100 {
+        margin-top: 75px;
+    }
+
+    .welcomeMessage {
+        font-size: 25px !important;
     }
 
     .introductionContainer>.mrt100 {
