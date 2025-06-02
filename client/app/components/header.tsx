@@ -1,10 +1,11 @@
 "use client";
 
 // import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import "./header.css";
 import "./theme.css";
 import Theme from "./theme";
+import SettingsContext from "../settingsContet";
 
 function heart() {
 	return (
@@ -56,42 +57,32 @@ function Header() {
 	const wishBtn = useRef<HTMLDivElement>(null);
 
 	const [username, setUsername] = useState<string | null>(null);
-	const [settings, setSettings] = useState({ loaded: false, production: false, serverUrl: "" });
 
-	// fetch settings.json file to get the server url (localhost for dev)
+	const settings = useContext(SettingsContext);
+
+	async function get_wishList() {
+		const wishData = JSON.parse(await (await fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/wishList?username=" + name)).json()).wishList;
+
+		localStorage.setItem("wishList", JSON.stringify(wishData));
+
+		wishBtn.current?.classList.add("active");
+		wishBtn.current?.setAttribute("data-len", wishData.length.toString());
+	}
+	async function get_cartList() {
+		const url = (settings.production ? settings.serverUrl : "http://localhost:8000") + "/cart?username=" + name;
+
+		const cartData = JSON.parse(await (await fetch(url)).json()).cart;
+
+		localStorage.setItem("cartList", JSON.stringify(cartData));
+
+		cartBtn.current?.classList.add("active");
+		cartBtn.current?.setAttribute("data-len", cartData.length.toString());
+	}
+
 	useEffect(() => {
-		async function fetchSettings() {
-			if (settings.loaded) return;
-
-			const newSettings = await (await fetch("/settings.json")).json();
-			setSettings(newSettings);
-		}
-
-		fetchSettings();
-	});
-
-	useEffect(() => {
+		if (username) return;
 		const name = getCookie("username");
 		setUsername(name);
-
-		async function get_wishList() {
-			const wishData = JSON.parse(await (await fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/wishList?username=" + name)).json()).wishList;
-
-			localStorage.setItem("wishList", JSON.stringify(wishData));
-
-			wishBtn.current?.classList.add("active");
-			wishBtn.current?.setAttribute("data-len", wishData.length.toString());
-		}
-		async function get_cartList() {
-			const url = (settings.production ? settings.serverUrl : "http://localhost:8000") + "/cart?username=" + name;
-			console.log(settings.production, settings.serverUrl, url);
-			const cartData = JSON.parse(await (await fetch(url)).json()).cart;
-
-			localStorage.setItem("cartList", JSON.stringify(cartData));
-
-			cartBtn.current?.classList.add("active");
-			cartBtn.current?.setAttribute("data-len", cartData.length.toString());
-		}
 
 		if (name) {
 			get_wishList();
@@ -110,7 +101,7 @@ function Header() {
 
 		document.addEventListener("scroll", handleScroll);
 		return () => document.removeEventListener("scroll", handleScroll);
-	}, [settings.production, settings.serverUrl]);
+	}, []);
 
 	return (
 		<header ref={header}>

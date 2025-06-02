@@ -1,12 +1,5 @@
 "use client";
 import Introduction from "./introduction";
-// import Perks from "./perks";
-// import ShopCat from "./shopCat";
-// import Featured from "./featured";
-// import TopSellers from "./topSellers";
-// import Achievement from "./achievements";
-// import Subscribe from "./subscribe";
-// import Footer from "./footer";
 
 import dynamic from "next/dynamic";
 

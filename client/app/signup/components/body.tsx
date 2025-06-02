@@ -2,7 +2,8 @@
 import "./body.css";
 import Theme from "../../components/theme";
 // import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
+import SettingsContext from "@/app/settingsContet";
 
 function userIcon() {
 	return (
@@ -100,17 +101,7 @@ function Body() {
 		});
 	});
 
-	const [settings, setSettings] = useState({ production: null, serverUrl: null, loaded: false });
-
-	useEffect(() => {
-		if (settings.loaded) return;
-		fetch("/settings.json")
-			.then((resp) => resp.json())
-			.then((results) => {
-				setSettings(results);
-			})
-			.catch((err) => console.error("Failed to load settings:", err));
-	}, [settings]);
+	const settings = useContext(SettingsContext);
 
 	// const router = useRouter();
 

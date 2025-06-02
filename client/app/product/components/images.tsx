@@ -1,8 +1,9 @@
 "use client";
 import "./images.css";
 import Image from "next/image";
-import { useEffect, useRef, useState, MouseEvent } from "react";
+import { useEffect, useRef, useState, MouseEvent, useContext } from "react";
 import { useSearchParams } from "next/navigation";
+import SettingsContext from "@/app/settingsContet";
 
 interface product {
 	name: string;
@@ -155,15 +156,10 @@ function Images() {
 	const [mainUrl, setMainUrl] = useState("");
 	const [product, setProduct] = useState<product>();
 	const [imgsUrls, setImgsUrls] = useState([""]);
-	const [settings, setSettings] = useState({ serverUrl: "", loaded: false, production: null });
 
-	async function fetchSettings() {
-		if (settings.loaded) return;
+	const settings = useContext(SettingsContext);
 
-		const newSettings = await (await fetch("/settings.json")).json();
-		setSettings(newSettings);
-	}
-
+	
 	async function atc(prod: product) {
 		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/atc", {
 			method: "post",
@@ -173,9 +169,6 @@ function Images() {
 			body: JSON.stringify({ id: prod.id, username: getCookie("username") }),
 		});
 	}
-	useEffect(() => {
-		fetchSettings();
-	}, []);
 
 	useEffect(() => {
 		(async function () {

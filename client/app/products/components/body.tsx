@@ -4,10 +4,11 @@ import "./body.css";
 
 import Nav from "./nav";
 import Image from "next/image";
-import { useState, useEffect, useRef, MouseEvent, useMemo } from "react";
+import { useState, useEffect, useRef, MouseEvent, useMemo, useContext } from "react";
 // import { useRouter } from "next/navigation";
 import "./productSettings.css";
 import "./productsList.css";
+import SettingsContext from "@/app/settingsContet";
 
 function star() {
 	return (
@@ -82,7 +83,6 @@ export function getCookie(name: string): string | null {
 function Body() {
 	// const router = useRouter();
 
-	const [settings, setSettings] = useState({ loaded: false, production: false, serverUrl: "" });
 	const [products, setProducts] = useState<Product[]>([]);
 	const [sorting, setSorting] = useState("Featured");
 	const [displayStyle, setdisplayStyle] = useState("grid");
@@ -120,17 +120,7 @@ function Body() {
 		setTimeout(() => filterList.current?.classList.remove("block"), 300);
 	}
 
-	// fetch settings.json file to get the server url (localhost for dev)
-	async function fetchData() {
-		if (settings.loaded) return;
-
-		const newSettings = await (await fetch("/settings.json")).json();
-		setSettings(newSettings);
-	}
-
-	useEffect(() => {
-		fetchData();
-	}, []);
+	const settings = useContext(SettingsContext);
 
 	async function atc(prod: Product) {
 		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/atc", {

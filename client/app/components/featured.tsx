@@ -1,8 +1,9 @@
 "use client";
 import "./featured.css";
 import Image from "next/image";
-import { useEffect, useState, MouseEvent } from "react";
+import { useEffect, useState, useContext, MouseEvent } from "react";
 import { getCookie, Product } from "../products/components/body";
+import SettingsContext from "../settingsContet";
 
 function heart() {
 	return (
@@ -32,66 +33,6 @@ function star() {
 	);
 }
 
-// interface product {
-// 	name: string;
-// 	imgSrc: StaticImageData;
-// 	ratingCount: string;
-// 	rating: string;
-// 	priceNew: number;
-// 	priceOld: number;
-// }
-
-// const products: product[] = [
-// 	{
-// 		name: "Wireless Bluetooth Headphones",
-// 		imgSrc: headPhones,
-// 		ratingCount: "142",
-// 		rating: "4.5",
-// 		priceNew: 89.99,
-// 		priceOld: 129.99,
-// 	},
-// 	{
-// 		name: "Smart Fitness Watch",
-// 		imgSrc: smartWatch,
-// 		ratingCount: "324",
-// 		rating: "4.8",
-// 		priceNew: 89.99,
-// 		priceOld: 129.99,
-// 	},
-// 	{
-// 		name: "Organic Cotton T-Shirt",
-// 		imgSrc: tShirt,
-// 		ratingCount: "156",
-// 		rating: "4.6",
-// 		priceNew: 24.99,
-// 		priceOld: 34.99,
-// 	},
-// 	{
-// 		name: "Professional Camera Lens",
-// 		imgSrc: cameraLens,
-// 		ratingCount: "89",
-// 		rating: "4.9",
-// 		priceNew: 499.99,
-// 		priceOld: 599.99,
-// 	},
-// 	{
-// 		name: "Artisan Coffee Beans",
-// 		imgSrc: coffee,
-// 		ratingCount: "67",
-// 		rating: "4.7",
-// 		priceNew: 18.99,
-// 		priceOld: 24.99,
-// 	},
-// 	{
-// 		name: "Minimalist Desk Lamp",
-// 		imgSrc: deskLamp,
-// 		ratingCount: "203",
-// 		rating: "4.8",
-// 		priceNew: 79.99,
-// 		priceOld: 99.99,
-// 	},
-// ];
-
 interface product {
 	name: string;
 	description: string;
@@ -102,6 +43,7 @@ interface product {
 	id: number;
 	category: string;
 }
+
 function productComponent(info: product, index: number, atc: (prod: product) => void, atw: (prod: product) => void, wishList: product[], cart: product[]) {
 	const isInWishList = wishList.find((e) => e.id == info.id);
 	const isInCart = cart.find((e) => e.id == info.id);
@@ -157,21 +99,10 @@ function productComponent(info: product, index: number, atc: (prod: product) => 
 
 function Featured() {
 	const [products, setProducts] = useState<Product[]>([]);
-	const [settings, setSettings] = useState({ loaded: false, production: false, serverUrl: "" });
 	const [wishList, setWishList] = useState<Product[]>([]);
 	const [cartList, setCartList] = useState<Product[]>([]);
 
-	// fetch settings.json file to get the server url (localhost for dev)
-	useEffect(() => {
-		async function fetchSettings() {
-			if (settings.loaded) return;
-
-			const newSettings = await (await fetch("/settings.json")).json();
-			setSettings(newSettings);
-		}
-
-		fetchSettings();
-	});
+	const settings = useContext(SettingsContext);
 
 	useEffect(() => {
 		const wish = localStorage.getItem("wishList");

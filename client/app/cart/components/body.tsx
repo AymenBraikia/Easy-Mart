@@ -1,7 +1,8 @@
 "use client";
-import { useEffect, useState, MouseEvent } from "react";
+import { useEffect, useState, MouseEvent, useContext } from "react";
 import Image from "next/image";
 import styles from "./body.module.css";
+import SettingsContext from "@/app/settingsContet";
 
 interface productInterface {
 	name: string;
@@ -43,18 +44,8 @@ function bin() {
 function Body() {
 	const [totalPrice, setTotalPrice] = useState(0);
 	const [products, setProducts] = useState([]);
-	const [settings, setSettings] = useState({ serverUrl: "", loaded: false, production: null });
 
-	useEffect(() => {
-		async function fetchSettings() {
-			if (settings.loaded) return;
-
-			const newSettings = await (await fetch("/settings.json")).json();
-			setSettings(newSettings);
-		}
-
-		fetchSettings();
-	});
+	const settings = useContext(SettingsContext);
 
 	useEffect(() => {
 		if (!getCookie("username")) location.pathname = "/signin";

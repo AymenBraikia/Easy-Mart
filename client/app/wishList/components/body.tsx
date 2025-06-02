@@ -1,7 +1,8 @@
 "use client";
-import { useEffect, useState, MouseEvent, useRef } from "react";
+import { useEffect, useState, MouseEvent, useRef, useContext } from "react";
 import Image from "next/image";
 import styles from "./body.module.css";
+import SettingsContext from "@/app/settingsContet";
 
 interface productInterface {
 	name: string;
@@ -39,20 +40,10 @@ function getCookie(name: string): string | null {
 
 function Body() {
 	const [products, setProducts] = useState([]);
-	const [settings, setSettings] = useState({ serverUrl: "", loaded: false, production: null });
 
 	const atcBtn = useRef<HTMLDivElement>(null);
 
-	useEffect(() => {
-		fetchSettings();
-	});
-
-	async function fetchSettings() {
-		if (settings.loaded) return;
-
-		const newSettings = await (await fetch("/settings.json")).json();
-		setSettings(newSettings);
-	}
+	const settings = useContext(SettingsContext);
 
 	async function atc(prod: productInterface) {
 		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/atc", {
