@@ -83,7 +83,9 @@ function Header() {
 			wishBtn.current?.setAttribute("data-len", wishData.length.toString());
 		}
 		async function get_cartList() {
-			const cartData = JSON.parse(await (await fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/cart?username=" + name)).json()).cart;
+			const url = (settings.production ? settings.serverUrl : "http://localhost:8000") + "/cart?username=" + name;
+			console.log(settings.production, settings.serverUrl, url);
+			const cartData = JSON.parse(await (await fetch(url)).json()).cart;
 
 			localStorage.setItem("cartList", JSON.stringify(cartData));
 
