@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+// import { SpeedInsights } from "@vercel/speed-insights/next"
+import "@vercel/speed-insights/next";
 
 const myCustomFont = localFont({
 	src: [
