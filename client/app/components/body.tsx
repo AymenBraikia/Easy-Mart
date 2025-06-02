@@ -10,37 +10,37 @@ import Introduction from "./introduction";
 import dynamic from "next/dynamic";
 
 const Perks = dynamic(() => import("./perks"), {
-	loading: () => <p>Loading...</p>,
+	loading: () => <h1>Loading...</h1>,
 	ssr: true,
 });
 
 const ShopCat = dynamic(() => import("./shopCat"), {
-	loading: () => <p>Loading...</p>,
+	loading: () => <h1>Loading...</h1>,
 	ssr: true,
 });
 
 const Featured = dynamic(() => import("./featured"), {
-	loading: () => <p>Loading...</p>,
+	loading: () => <h1>Loading...</h1>,
 	ssr: true,
 });
 
 const TopSellers = dynamic(() => import("./topSellers"), {
-	loading: () => <p>Loading...</p>,
+	loading: () => <h1>Loading...</h1>,
 	ssr: true,
 });
 
 const Achievement = dynamic(() => import("./achievements"), {
-	loading: () => <p>Loading...</p>,
+	loading: () => <h1>Loading...</h1>,
 	ssr: true,
 });
 
 const Subscribe = dynamic(() => import("./subscribe"), {
-	loading: () => <p>Loading...</p>,
+	loading: () => <h1>Loading...</h1>,
 	ssr: true,
 });
 
 const Footer = dynamic(() => import("./footer"), {
-	loading: () => <p>Loading...</p>,
+	loading: () => <h1>Loading...</h1>,
 	ssr: true,
 });
 
