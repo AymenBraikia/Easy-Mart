@@ -1,4 +1,4 @@
-import Introduction from "./introduction";
+// import Introduction from "./introduction";
 // import Perks from "./perks";
 // import ShopCat from "./shopCat";
 // import Featured from "./featured";
@@ -9,6 +9,9 @@ import Introduction from "./introduction";
 
 import dynamic from "next/dynamic";
 
+const Introduction = dynamic(() => import("./introduction"), {
+	loading: () => <p>Loading...</p>,
+});
 const Perks = dynamic(() => import("./perks"), {
 	loading: () => <p>Loading...</p>,
 });
