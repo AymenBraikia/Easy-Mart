@@ -6,7 +6,7 @@ function Introduction() {
 	// const router = useRouter();
 
 	return (
-		<div className="introductionContainer">
+		<div pre-rendering className="introductionContainer">
 			<h1 className="welcomeMessage">
 				Discover Amazing Products from <br /> <span style={{ color: "#FFEB3B" }}>Trusted Sellers</span>
 			</h1>
