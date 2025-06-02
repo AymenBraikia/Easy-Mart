@@ -1,44 +1,48 @@
 import Introduction from "./introduction";
-import Perks from "./perks";
-import ShopCat from "./shopCat";
-import Featured from "./featured";
-import TopSellers from "./topSellers";
-import Achievement from "./achievements";
-import Subscribe from "./subscribe";
-import Footer from "./footer";
+// import Perks from "./perks";
+// import ShopCat from "./shopCat";
+// import Featured from "./featured";
+// import TopSellers from "./topSellers";
+// import Achievement from "./achievements";
+// import Subscribe from "./subscribe";
+// import Footer from "./footer";
 
-// import dynamic from "next/dynamic";
+import dynamic from "next/dynamic";
 
-// const Introduction = dynamic(() => import("./introduction"), {
-// 	loading: () => <p>Loading...</p>,
-// });
-// const Perks = dynamic(() => import("./perks"), {
-// 	loading: () => <p>Loading...</p>,
-// });
+const Perks = dynamic(() => import("./perks"), {
+	loading: () => <p>Loading...</p>,
+	ssr: false,
+});
 
-// const ShopCat = dynamic(() => import("./shopCat"), {
-// 	loading: () => <p>Loading...</p>,
-// });
+const ShopCat = dynamic(() => import("./shopCat"), {
+	loading: () => <p>Loading...</p>,
+	ssr: false,
+});
 
-// const Featured = dynamic(() => import("./featured"), {
-// 	loading: () => <p>Loading...</p>,
-// });
+const Featured = dynamic(() => import("./featured"), {
+	loading: () => <p>Loading...</p>,
+	ssr: false,
+});
 
-// const TopSellers = dynamic(() => import("./topSellers"), {
-// 	loading: () => <p>Loading...</p>,
-// });
+const TopSellers = dynamic(() => import("./topSellers"), {
+	loading: () => <p>Loading...</p>,
+	ssr: false,
+});
 
-// const Achievement = dynamic(() => import("./achievements"), {
-// 	loading: () => <p>Loading...</p>,
-// });
+const Achievement = dynamic(() => import("./achievements"), {
+	loading: () => <p>Loading...</p>,
+	ssr: false,
+});
 
-// const Subscribe = dynamic(() => import("./subscribe"), {
-// 	loading: () => <p>Loading...</p>,
-// });
+const Subscribe = dynamic(() => import("./subscribe"), {
+	loading: () => <p>Loading...</p>,
+	ssr: false,
+});
 
-// const Footer = dynamic(() => import("./footer"), {
-// 	loading: () => <p>Loading...</p>,
-// });
+const Footer = dynamic(() => import("./footer"), {
+	loading: () => <p>Loading...</p>,
+	ssr: false,
+});
 
 function body() {
 	return (
