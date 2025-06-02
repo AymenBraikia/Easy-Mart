@@ -1,4 +1,3 @@
-"use client";
 import "./introduction.css";
 // import { useRouter } from "next/navigation";
 
