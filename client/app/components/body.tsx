@@ -1,5 +1,5 @@
 "use client";
-import Introduction from "./introduction";
+// import Introduction from "./introduction";
 // import Perks from "./perks";
 // import ShopCat from "./shopCat";
 // import Featured from "./featured";
@@ -10,38 +10,43 @@ import Introduction from "./introduction";
 
 import dynamic from "next/dynamic";
 
-const Perks = dynamic(() => import("./perks"), {
+const Introduction = dynamic(() => import("./introduction"), {
 	loading: () => <h1>Loading...</h1>,
+	ssr: true,
+});
+
+const Perks = dynamic(() => import("./perks"), {
+	loading: () => <p>Loading...</p>,
 	ssr: true,
 });
 
 const ShopCat = dynamic(() => import("./shopCat"), {
-	loading: () => <h1>Loading...</h1>,
+	loading: () => <p>Loading...</p>,
 	ssr: true,
 });
 
 const Featured = dynamic(() => import("./featured"), {
-	loading: () => <h1>Loading...</h1>,
+	loading: () => <p>Loading...</p>,
 	ssr: true,
 });
 
 const TopSellers = dynamic(() => import("./topSellers"), {
-	loading: () => <h1>Loading...</h1>,
+	loading: () => <p>Loading...</p>,
 	ssr: true,
 });
 
 const Achievement = dynamic(() => import("./achievements"), {
-	loading: () => <h1>Loading...</h1>,
+	loading: () => <p>Loading...</p>,
 	ssr: true,
 });
 
 const Subscribe = dynamic(() => import("./subscribe"), {
-	loading: () => <h1>Loading...</h1>,
+	loading: () => <p>Loading...</p>,
 	ssr: true,
 });
 
 const Footer = dynamic(() => import("./footer"), {
-	loading: () => <h1>Loading...</h1>,
+	loading: () => <p>Loading...</p>,
 	ssr: true,
 });
 
