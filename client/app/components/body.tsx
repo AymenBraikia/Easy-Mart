@@ -11,37 +11,37 @@ import dynamic from "next/dynamic";
 
 const Perks = dynamic(() => import("./perks"), {
 	loading: () => <p>Loading...</p>,
-	ssr: false,
+	ssr: true,
 });
 
 const ShopCat = dynamic(() => import("./shopCat"), {
 	loading: () => <p>Loading...</p>,
-	ssr: false,
+	ssr: true,
 });
 
 const Featured = dynamic(() => import("./featured"), {
 	loading: () => <p>Loading...</p>,
-	ssr: false,
+	ssr: true,
 });
 
 const TopSellers = dynamic(() => import("./topSellers"), {
 	loading: () => <p>Loading...</p>,
-	ssr: false,
+	ssr: true,
 });
 
 const Achievement = dynamic(() => import("./achievements"), {
 	loading: () => <p>Loading...</p>,
-	ssr: false,
+	ssr: true,
 });
 
 const Subscribe = dynamic(() => import("./subscribe"), {
 	loading: () => <p>Loading...</p>,
-	ssr: false,
+	ssr: true,
 });
 
 const Footer = dynamic(() => import("./footer"), {
 	loading: () => <p>Loading...</p>,
-	ssr: false,
+	ssr: true,
 });
 
 function body() {
