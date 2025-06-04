@@ -105,13 +105,18 @@ function Featured() {
 	const settings = useContext(SettingsContext);
 
 	useEffect(() => {
-		const wish = localStorage.getItem("wishList");
+		try {
+			const wish = localStorage.getItem("wishList");
 
-		if (wish) setWishList(JSON.parse(wish));
+			if (wish) setWishList(JSON.parse(wish));
 
-		const cart = localStorage.getItem("CartList");
+			const cart = localStorage.getItem("CartList");
 
-		if (cart) setCartList(JSON.parse(cart));
+			if (cart) setCartList(JSON.parse(cart));
+		} catch {
+			setWishList([]);
+			setCartList([]);
+		}
 	}, []);
 
 	async function atc(prod: Product) {
