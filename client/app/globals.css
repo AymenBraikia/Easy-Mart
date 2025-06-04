@@ -41,10 +41,6 @@ body {
   display: none;
 }
 
-/* 
-::-webkit-scrollbar-thumb {
-  background-color: black;
-} */
 
 * {
   box-sizing: border-box;
@@ -52,7 +48,6 @@ body {
   margin: 0;
   font-family: var(--font-ubuntu);
   font-display: swap;
-  /* position: relative; */
 }
 
 a {
