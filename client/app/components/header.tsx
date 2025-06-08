@@ -61,7 +61,7 @@ function Header() {
 	const settings = useContext(SettingsContext);
 
 	async function get_wishList() {
-		const wishData = JSON.parse(await (await fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/wishList?username=" + name)).json()).wishList;
+		const wishData = JSON.parse(await (await fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/wishList?username=" + getCookie("username"))).json()).wishList;
 
 		localStorage.setItem("wishList", JSON.stringify(wishData));
 
@@ -69,7 +69,7 @@ function Header() {
 		wishBtn.current?.setAttribute("data-len", wishData.length.toString());
 	}
 	async function get_cartList() {
-		const url = (settings.production ? settings.serverUrl : "http://localhost:8000") + "/cart?username=" + name;
+		const url = (settings.production ? settings.serverUrl : "http://localhost:8000") + "/cart?username=" + getCookie("username");
 
 		const cartData = JSON.parse(await (await fetch(url)).json()).cart;
 
