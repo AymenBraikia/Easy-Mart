@@ -83,7 +83,7 @@ function Body() {
 						return;
 					}
 
-					document.cookie = `token='${token}';`;
+					document.cookie = `token=${token};`;
 
 					if (result.cookie) document.cookie = `${result.cookie.name} = ${result.cookie.val};`;
 

@@ -5,6 +5,9 @@ import { useEffect, useState, useContext, MouseEvent } from "react";
 import { getCookie, Product } from "../products/components/body";
 import SettingsContext from "../settingsContet";
 
+import atw from "../utils/atwAction";
+import atc from "../utils/atcAction";
+
 function heart() {
 	return (
 		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-heart w-4 h-4">
@@ -119,8 +122,8 @@ function Featured() {
 		}
 	}, []);
 
-	async function atc(prod: Product) {
-		const isAlreadyIn = cartList.find((e: Product) => e.id == prod.id);
+	async function atcCheck(prod: Product) {
+		const isAlreadyIn = cartList.find((e: Product) => e.id == prod.id) ? true : false;
 
 		const atcBtn = document.querySelector(`[data-id="${prod.id}"] .atc`);
 
@@ -128,14 +131,7 @@ function Featured() {
 			if (isAlreadyIn) atcBtn.textContent = "Add to Cart";
 			else atcBtn.textContent = "Remove from Cart";
 
-		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + (isAlreadyIn ? "/removeCart" : "/atc"), {
-			method: "post",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${getCookie("token")}`,
-			},
-			body: JSON.stringify({ id: prod.id, username: getCookie("username") }),
-		});
+		atc(settings, getCookie("token"), prod, isAlreadyIn);
 
 		const updatedCartList: Product[] = isAlreadyIn ? cartList.filter((e: Product) => e.id !== prod.id) : [...cartList, prod];
 
@@ -145,17 +141,10 @@ function Featured() {
 		document.querySelector(".cart")?.setAttribute("data-len", updatedCartList.length.toString());
 	}
 
-	async function atw(prod: Product) {
-		const isAlreadyIn = wishList.find((e: Product) => e.id == prod.id);
+	async function atwCheck(prod: Product) {
+		const isAlreadyIn = wishList.find((e: Product) => e.id == prod.id) ? true : false;
 
-		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + (isAlreadyIn ? "/removeWishList" : "/atw"), {
-			method: "post",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${getCookie("token")}`,
-			},
-			body: JSON.stringify({ id: prod.id, username: getCookie("username") }),
-		});
+		atw(settings, getCookie("token"), prod, isAlreadyIn);
 
 		const updatedWishList: Product[] = isAlreadyIn ? wishList.filter((e: Product) => e.id !== prod.id) : [...wishList, prod];
 
@@ -190,7 +179,7 @@ function Featured() {
 			</div>
 			<div className="productsList">
 				{...products.map((el: product, index: number) => {
-					return productComponent(el, index, atc, atw, wishList, cartList);
+					return productComponent(el, index, atcCheck, atwCheck, wishList, cartList);
 				})}
 			</div>
 		</div>

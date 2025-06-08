@@ -1,7 +1,7 @@
 import express from "express";
 import connectDB from "./db";
 import cors from "cors";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 const JWT_KEY = process.env.SECRET_KEY || "c353195d5a3b7852a2df6b08dd7c59c8085f534fa44c013840baef5559f2ae05";
 
@@ -118,14 +118,24 @@ app.post("/removeWishList", async (req, res) => {
 });
 
 app.post("/atc", async (req, res) => {
-	const data = await (await db).collection("users").findOne({ username: req.body.username });
+	const token = req.headers.authorization?.split(" ")[1];
+
+	if (!token) {
+		res.status(400).json(JSON.stringify({ success: false, reason: "You are not logged in" }));
+		return;
+	}
+	const userTokenInfo = jwt.decode(token) as JwtPayload;
+	const username = userTokenInfo.cookie.val;
+
+	const data = await (await db).collection("users").findOne({ username: username });
+
 	if (!data) {
 		res.status(400).json(JSON.stringify({ success: false, reason: "user not found" }));
 		return;
 	}
 
 	(await db).collection("users").updateOne(
-		{ username: req.body.username },
+		{ username: username },
 		{
 			$set: {
 				cart: [...data.cart, req.body.id],

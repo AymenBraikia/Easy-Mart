@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState, MouseEvent, useContext } from "react";
 import { useSearchParams } from "next/navigation";
 import SettingsContext from "@/app/settingsContet";
+import atc from "@/app/utils/atcAction";
 
 interface product {
 	name: string;
@@ -159,17 +160,6 @@ function Images() {
 
 	const settings = useContext(SettingsContext);
 
-	async function atc(prod: product) {
-		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/atc", {
-			method: "post",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${getCookie("token")}`,
-			},
-			body: JSON.stringify({ id: prod.id, username: getCookie("username") }),
-		});
-	}
-
 	useEffect(() => {
 		(async function () {
 			if (!settings.loaded) return;
@@ -178,8 +168,6 @@ function Images() {
 				.then((e) => e.json())
 				.then((data) => JSON.parse(data))
 				.then((results) => {
-					console.log(results);
-
 					setProduct(results);
 					setImgsUrls(results.secondaryImgs);
 				});
@@ -269,7 +257,7 @@ function Images() {
 					<div
 						ref={atcBtn}
 						onClick={() => {
-							if (getCookie("username")) atc(product);
+							if (getCookie("username")) atc(settings, getCookie("token"), product);
 							else location.pathname = "/signup";
 						}}
 						className="btn atc"

@@ -9,6 +9,7 @@ import { useState, useEffect, useRef, MouseEvent, useMemo, useContext } from "re
 import "./productSettings.css";
 import "./productsList.css";
 import SettingsContext from "@/app/settingsContet";
+import atc from "@/app/utils/atcAction";
 
 function star() {
 	return (
@@ -121,17 +122,6 @@ function Body() {
 	}
 
 	const settings = useContext(SettingsContext);
-
-	async function atc(prod: Product) {
-		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/atc", {
-			method: "post",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${getCookie("token")}`,
-			},
-			body: JSON.stringify({ id: prod.id, username: getCookie("username") }),
-		});
-	}
 
 	// gets products data
 	useEffect(() => {
@@ -254,7 +244,7 @@ function Body() {
 								<div
 									ref={atcBtn}
 									onClick={() => {
-										if (getCookie("username")) atc(product);
+										if (getCookie("username")) atc(settings, getCookie("token"), product);
 										else location.pathname = "/signup";
 									}}
 									className="btn atc"
