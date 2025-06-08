@@ -4,6 +4,7 @@ import Theme from "../../components/theme";
 // import { useRouter } from "next/navigation";
 import { useContext, useEffect, useRef } from "react";
 import SettingsContext from "@/app/settingsContet";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 function errIcon() {
 	return (
@@ -74,7 +75,15 @@ function Body() {
 					return resp.json();
 				})
 				.then((data) => {
-					const result = JSON.parse(data);
+					const token = JSON.parse(data).Token;
+					const result = jwt.decode(token) as JwtPayload;
+
+					if (!result) {
+						err("Something went wrong please try again or contact support");
+						return;
+					}
+
+					document.cookie = `token='${token}';`;
 
 					if (result.cookie) document.cookie = `${result.cookie.name} = ${result.cookie.val};`;
 
@@ -123,14 +132,14 @@ function Body() {
 									<label className="icon" htmlFor="email">
 										{mail()}
 									</label>
-									<input ref={emailInp} required type="email" id="email" name="email" className="email" placeholder="Email address" />
+									<input ref={emailInp} required type="email" id="email" name="email" className="email" placeholder="Email address" defaultValue={"aymenbraikia1@gmail.com"} />
 								</div>
 
 								<div style={{ position: "relative", width: "100%" }}>
 									<label className="icon" htmlFor="password">
 										{lock()}
 									</label>
-									<input ref={passwordInp} required type="password" id="password" name="password" className="password" placeholder="Password" />
+									<input ref={passwordInp} required type="password" id="password" name="password" className="password" placeholder="Password" defaultValue={"Far_cry_6"} />
 								</div>
 
 								<div style={{ position: "relative", width: "100%", display: "flex", justifyContent: "flex-start", alignItems: "center" }}>

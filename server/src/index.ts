@@ -1,6 +1,9 @@
 import express from "express";
 import connectDB from "./db";
 import cors from "cors";
+import jwt from "jsonwebtoken";
+
+const JWT_KEY = process.env.SECRET_KEY || "c353195d5a3b7852a2df6b08dd7c59c8085f534fa44c013840baef5559f2ae05";
 
 const db = (async () => {
 	return (await connectDB()).db("easyMart");
@@ -210,12 +213,15 @@ app.post("/signup", async (req, res) => {
 
 	users.insertOne({ username: info.username, email: info.email, password: info.password, cart: [], wishList: [] });
 
-	res.json(
-		JSON.stringify({
+	const token = jwt.sign(
+		{
 			cookie: { name: "username", val: info.username },
 			url: req.headers.origin || "http://localhost:3000/",
-		})
+		},
+		JWT_KEY
 	);
+
+	res.json(JSON.stringify({ Token: token }));
 });
 
 app.post("/signin", async (req, res) => {
@@ -242,12 +248,15 @@ app.post("/signin", async (req, res) => {
 		return;
 	}
 
-	res.json(
-		JSON.stringify({
+	const token = jwt.sign(
+		{
 			cookie: { name: "username", val: data.username },
 			url: req.headers.origin || "http://localhost:3000/",
-		})
+		},
+		JWT_KEY
 	);
+
+	res.json(JSON.stringify({ Token: token }));
 });
 
 app.listen(port, () => {
