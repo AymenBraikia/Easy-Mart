@@ -19,8 +19,11 @@
 ## 🛠️ Tech Stack
 
 - **Frontend**: React, TypeScript, Next.js
-- **Icons**: React Icons
+- **Backend**: Node.js/Express
+- **Database**: Mongodb
+- **Styling**: Pure CSS
 - **Hosting**: Vercel/Render
+- **Auth**: JWT
 
 ---
 
