@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
-
 const myCustomFont = localFont({
 	src: [
 		{
@@ -27,7 +26,7 @@ const myCustomFont = localFont({
 		// Add more font variations (italic, different weights) as needed
 	],
 	display: "swap",
-	variable: "--font-ubuntu",
+	variable: "--font-main",
 });
 
 import "./globals.css";
