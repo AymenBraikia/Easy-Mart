@@ -18,9 +18,9 @@
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React, TypeScript, Next.js, Tailwind CSS
+- **Frontend**: React, TypeScript, Next.js
 - **Icons**: React Icons
-- **Hosting**: Vercel
+- **Hosting**: Vercel/Render
 
 ---
 
