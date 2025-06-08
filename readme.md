@@ -26,10 +26,10 @@
 
 ## 📸 Screenshots
 
-<img src="https://easy-mart-five.vercel.app/screenshot1.png" alt="Easy Mart Home" width="600" />
-<img src="https://easy-mart-five.vercel.app/screenshot2.png" alt="Product Filtering" width="600" />
-
-*(Replace with actual screenshots if available)*
+<img src="./client/public/Screenshot_1png.png" alt="Easy Mart Home" width="600" />
+<img src="./client/public/Screenshot_2.png" alt="Top sellers" width="600" />
+<img src="./client/public/Screenshot_3.png" alt="view all" width="600" />
+<img src="./client/public/Screenshot_4.png" alt="sign up" width="600" />
 
 ---
 
