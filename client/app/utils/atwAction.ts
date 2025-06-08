@@ -4,7 +4,7 @@ interface Settings {
 	serverUrl: string;
 }
 
-function atw(settings: Settings, token: string | null, product: { id: number }, isAlreadyIn: boolean) {
+function atw(settings: Settings, token: string | null, product: { id: number }, isAlreadyIn?: boolean) {
 	if (!token) return;
 
 	if (isAlreadyIn)

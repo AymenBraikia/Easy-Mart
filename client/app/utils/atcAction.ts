@@ -5,7 +5,7 @@ interface Settings {
 }
 
 function atc(settings: Settings, token: string | null, product: { id: number }, isAlreadyIn?: boolean) {
-	if (!token) return;
+	if (!token || !settings || !product) return;
 
 	if (isAlreadyIn)
 		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/removeCat", {
