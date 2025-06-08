@@ -132,6 +132,7 @@ function Featured() {
 			method: "post",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization: `Bearer ${getCookie("token")}`,
 			},
 			body: JSON.stringify({ id: prod.id, username: getCookie("username") }),
 		});
@@ -151,6 +152,7 @@ function Featured() {
 			method: "post",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization: `Bearer ${getCookie("token")}`,
 			},
 			body: JSON.stringify({ id: prod.id, username: getCookie("username") }),
 		});

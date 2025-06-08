@@ -81,6 +81,7 @@ function Body() {
 			method: "post",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization: `Bearer ${getCookie("token")}`,
 			},
 			body: JSON.stringify({ username: getCookie("username"), id: id }),
 		});

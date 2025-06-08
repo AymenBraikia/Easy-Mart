@@ -159,12 +159,12 @@ function Images() {
 
 	const settings = useContext(SettingsContext);
 
-	
 	async function atc(prod: product) {
 		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/atc", {
 			method: "post",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization: `Bearer ${getCookie("token")}`,
 			},
 			body: JSON.stringify({ id: prod.id, username: getCookie("username") }),
 		});
