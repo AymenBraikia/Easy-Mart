@@ -2,7 +2,7 @@
 import "./featured.css";
 import Image from "next/image";
 import { useEffect, useState, useContext, MouseEvent } from "react";
-import { getCookie, Product } from "../products/components/body";
+import { Product } from "../products/components/body";
 import SettingsContext from "../settingsContet";
 
 import atw from "../utils/atwAction";
@@ -98,6 +98,11 @@ function productComponent(info: product, index: number, atc: (prod: product) => 
 			</div>
 		</div>
 	);
+}
+
+function getCookie(name: string): string | null {
+	const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+	return match ? match[2] : null;
 }
 
 function Featured() {

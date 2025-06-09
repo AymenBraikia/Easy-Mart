@@ -67,6 +67,11 @@ function err(reason: string) {
 	setTimeout(() => document.querySelector(".alert")?.classList.remove("active"), 4000);
 }
 
+function getCookie(name: string): string | null {
+	const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+	return match ? match[2] : null;
+}
+
 function Body() {
 	const form = useRef<HTMLFormElement>(null);
 	const emailInp = useRef<HTMLInputElement>(null);
@@ -79,7 +84,7 @@ function Body() {
 
 			fetch(settings.production ? settings.serverUrl + "/signup" : "http://localhost:8000/signup", {
 				method: "post",
-				headers: { "Content-Type": "application/json" },
+				headers: { "Content-Type": "application/json", authorization: `Bearer ${getCookie("token")}` },
 				body: JSON.stringify({
 					email: emailInp.current?.value,
 					password: passwordInp.current?.value,
@@ -91,6 +96,14 @@ function Body() {
 				})
 				.then((data) => {
 					const result = JSON.parse(data);
+					const token = result.Token;
+
+					if (!result) {
+						err("Something went wrong please try again or contact support");
+						return;
+					}
+
+					document.cookie = `token=${token};`;
 
 					if (result.cookie) document.cookie = `${result.cookie.name} = ${result.cookie.val};`;
 

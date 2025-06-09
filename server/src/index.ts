@@ -25,8 +25,6 @@ const port = 8000;
 
 function middleWare(req: Request, res: Response, next: NextFunction) {
 	const token = req.headers.authorization?.split(" ")[1];
-	console.clear();
-	console.log(token, req.headers.authorization);
 
 	if (!token) {
 		res.status(401).json(JSON.stringify({ success: false, reason: "You are not logged in" }));
@@ -39,6 +37,7 @@ function middleWare(req: Request, res: Response, next: NextFunction) {
 			res.status(403).json(JSON.stringify({ success: false, reason: "Bad request" }));
 			return;
 		}
+		console.log(data);
 		req.body = data;
 		next();
 	});
@@ -48,13 +47,13 @@ app.get("/", (req, res) => {
 	res.send("Hello TypeScript with Express!");
 });
 
-app.get("/products", middleWare, async (req, res) => {
+app.get("/products", async (req, res) => {
 	const data = await getAllProducts();
 
 	res.json(JSON.stringify(data));
 });
 
-app.get("/singleProduct", middleWare, async (req, res) => {
+app.get("/singleProduct", async (req, res) => {
 	const { id } = req.query;
 
 	const data = await (await db).collection("products").findOne({ id: Number(id) });
@@ -210,7 +209,7 @@ function validate(obj: userInfo) {
 	return [true];
 }
 
-app.post("/signup", middleWare, async (req, res) => {
+app.post("/signup", async (req, res) => {
 	const info = req.body;
 
 	const validation = validate(info);
@@ -244,15 +243,9 @@ app.post("/signup", middleWare, async (req, res) => {
 
 	users.insertOne({ username: info.username, email: info.email, password: info.password, cart: [], wishList: [] });
 
-	const token = jwt.sign(
-		{
-			cookie: { name: "username", val: info.username },
-			url: req.headers.origin || "http://localhost:3000/",
-		},
-		JWT_KEY
-	);
+	const token = jwt.sign({ username: info.username }, JWT_KEY);
 
-	res.json(JSON.stringify({ Token: token }));
+	res.json(JSON.stringify({ Token: token, cookie: { name: "username", val: info.username }, url: req.headers.origin || "http://localhost:3000/" }));
 });
 
 app.post("/signin", async (req, res) => {

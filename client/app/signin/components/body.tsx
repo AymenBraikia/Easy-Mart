@@ -4,7 +4,6 @@ import Theme from "../../components/theme";
 // import { useRouter } from "next/navigation";
 import { useContext, useEffect, useRef } from "react";
 import SettingsContext from "@/app/settingsContet";
-import jwt, { JwtPayload } from "jsonwebtoken";
 
 function errIcon() {
 	return (
@@ -52,6 +51,11 @@ function err(reason: string) {
 	setTimeout(() => document.querySelector(".alert")?.classList.remove("active"), 4000);
 }
 
+function getCookie(name: string): string | null {
+	const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+	return match ? match[2] : null;
+}
+
 function Body() {
 	const form = useRef<HTMLFormElement>(null);
 	const emailInp = useRef<HTMLInputElement>(null);
@@ -64,7 +68,7 @@ function Body() {
 
 			fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/signin", {
 				method: "post",
-				headers: { "Content-Type": "application/json" },
+				headers: { "Content-Type": "application/json", authorization: `Bearer ${getCookie("token")}` },
 				body: JSON.stringify({
 					email: emailInp.current?.value,
 					password: passwordInp.current?.value,
@@ -75,8 +79,8 @@ function Body() {
 					return resp.json();
 				})
 				.then((data) => {
-					const token = JSON.parse(data).Token;
-					const result = jwt.decode(token) as JwtPayload;
+					const result = JSON.parse(data);
+					const token = result.Token;
 
 					if (!result) {
 						err("Something went wrong please try again or contact support");
