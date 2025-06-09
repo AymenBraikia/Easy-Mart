@@ -1,4 +1,4 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import connectDB from "./db";
 import cors from "cors";
 import jwt, { JwtPayload } from "jsonwebtoken";
@@ -23,17 +23,38 @@ app.use(express.json());
 
 const port = 8000;
 
+function middleWare(req: Request, res: Response, next: NextFunction) {
+	const token = req.headers.authorization?.split(" ")[1];
+	console.clear();
+	console.log(token, req.headers.authorization);
+
+	if (!token) {
+		res.status(401).json(JSON.stringify({ success: false, reason: "You are not logged in" }));
+		return;
+	}
+
+	jwt.verify(token, JWT_KEY, (err, data) => {
+		if (err) {
+			console.log(err);
+			res.status(403).json(JSON.stringify({ success: false, reason: "Bad request" }));
+			return;
+		}
+		req.body = data;
+		next();
+	});
+}
+
 app.get("/", (req, res) => {
 	res.send("Hello TypeScript with Express!");
 });
 
-app.get("/products", async (req, res) => {
+app.get("/products", middleWare, async (req, res) => {
 	const data = await getAllProducts();
 
 	res.json(JSON.stringify(data));
 });
 
-app.get("/singleProduct", async (req, res) => {
+app.get("/singleProduct", middleWare, async (req, res) => {
 	const { id } = req.query;
 
 	const data = await (await db).collection("products").findOne({ id: Number(id) });
@@ -41,7 +62,7 @@ app.get("/singleProduct", async (req, res) => {
 	res.json(JSON.stringify(data));
 });
 
-app.get("/wishList", async (req, res) => {
+app.get("/wishList", middleWare, async (req, res) => {
 	const { username } = req.query;
 
 	const userData = await (await db).collection("users").findOne({ username: username });
@@ -60,7 +81,7 @@ app.get("/wishList", async (req, res) => {
 	res.json(JSON.stringify({ wishList: data }));
 });
 
-app.get("/cart", async (req, res) => {
+app.get("/cart", middleWare, async (req, res) => {
 	const { username } = req.query;
 
 	const userData = await (await db).collection("users").findOne({ username: username });
@@ -79,7 +100,7 @@ app.get("/cart", async (req, res) => {
 	res.json(JSON.stringify({ cart: data }));
 });
 
-app.post("/removeCart", async (req, res) => {
+app.post("/removeCart", middleWare, async (req, res) => {
 	const data = await (await db).collection("users").findOne({ username: req.body.username });
 	if (!data) {
 		res.status(400).json(JSON.stringify({ success: false, reason: "user not found" }));
@@ -98,7 +119,7 @@ app.post("/removeCart", async (req, res) => {
 	res.json(JSON.stringify({ success: true }));
 });
 
-app.post("/removeWishList", async (req, res) => {
+app.post("/removeWishList", middleWare, async (req, res) => {
 	const data = await (await db).collection("users").findOne({ username: req.body.username });
 	if (!data) {
 		res.status(400).json(JSON.stringify({ success: false, reason: "user not found" }));
@@ -117,7 +138,7 @@ app.post("/removeWishList", async (req, res) => {
 	res.json(JSON.stringify({ success: true }));
 });
 
-app.post("/atc", async (req, res) => {
+app.post("/atc", middleWare, async (req, res) => {
 	const token = req.headers.authorization?.split(" ")[1];
 
 	if (!token) {
@@ -146,7 +167,7 @@ app.post("/atc", async (req, res) => {
 	res.json(JSON.stringify({ success: true }));
 });
 
-app.post("/atw", async (req, res) => {
+app.post("/atw", middleWare, async (req, res) => {
 	const data = await (await db).collection("users").findOne({ username: req.body.username });
 	if (!data) {
 		res.status(400).json(JSON.stringify({ success: false, reason: "user not found" }));
@@ -189,7 +210,7 @@ function validate(obj: userInfo) {
 	return [true];
 }
 
-app.post("/signup", async (req, res) => {
+app.post("/signup", middleWare, async (req, res) => {
 	const info = req.body;
 
 	const validation = validate(info);

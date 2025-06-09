@@ -160,7 +160,7 @@ function Featured() {
 
 		const url = settings.production ? settings.serverUrl : "http://localhost:8000";
 
-		fetch(url + "/products")
+		fetch(url + "/products", { headers: { authorization: `Bearer ${getCookie("token")}` } })
 			.then((resp) => resp.json())
 			.then((data) => JSON.parse(data))
 			.then((results: Product[]) => {
