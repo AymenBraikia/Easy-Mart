@@ -53,6 +53,9 @@ function err(reason: string) {
 
 function getCookie(name: string): string | null {
 	const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+
+	if (match && ["null", "undefined"].includes(match[2])) return null;
+
 	return match ? match[2] : null;
 }
 
@@ -68,7 +71,7 @@ function Body() {
 
 			fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/signin", {
 				method: "post",
-				headers: { "Content-Type": "application/json", authorization: `Bearer ${getCookie("token")}` },
+				headers: getCookie("token") ? { "Content-Type": "application/json", authorization: `Bearer ${getCookie("token")}` } : { "Content-Type": "application/json" },
 				body: JSON.stringify({
 					email: emailInp.current?.value,
 					password: passwordInp.current?.value,
@@ -87,7 +90,7 @@ function Body() {
 						return;
 					}
 
-					document.cookie = `token=${token};`;
+					if(token) document.cookie = `token=${token};`;
 
 					if (result.cookie) document.cookie = `${result.cookie.name} = ${result.cookie.val};`;
 

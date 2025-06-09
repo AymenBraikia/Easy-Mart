@@ -3,6 +3,8 @@ import connectDB from "./db";
 import cors from "cors";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
+console.clear();
+
 const JWT_KEY = process.env.SECRET_KEY || "c353195d5a3b7852a2df6b08dd7c59c8085f534fa44c013840baef5559f2ae05";
 
 const db = (async () => {
@@ -271,16 +273,22 @@ app.post("/signin", async (req, res) => {
 		);
 		return;
 	}
+	if (typeof data.username !== "string") return;
 
-	const token = jwt.sign(
-		{
-			cookie: { name: "username", val: data.username },
-			url: req.headers.origin || "http://localhost:3000/",
-		},
-		JWT_KEY
-	);
+	const token = req.headers.authorization?.split(" ")[1];
 
-	res.json(JSON.stringify({ Token: token }));
+	if (!token) {
+		const newToken = jwt.sign(data.username, JWT_KEY);
+
+		res.status(200).json(JSON.stringify({ Token: newToken, cookie: { name: "username", val: data.username }, url: req.headers.origin || "http://localhost:3000/" }));
+		return;
+	}
+
+	jwt.verify(token, JWT_KEY, (err, data) => {
+		if (err) return res.status(403).json(JSON.stringify({ success: false, reason: "Bad request" }));
+
+		res.json(JSON.stringify({ cookie: { name: "username", val: data }, url: req.headers.origin || "http://localhost:3000/" }));
+	});
 });
 
 app.listen(port, () => {
