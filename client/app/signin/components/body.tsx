@@ -90,7 +90,7 @@ function Body() {
 						return;
 					}
 
-					if(token) document.cookie = `token=${token};`;
+					if (token) document.cookie = `token=${token};`;
 
 					if (result.cookie) document.cookie = `${result.cookie.name} = ${result.cookie.val};`;
 
@@ -139,14 +139,14 @@ function Body() {
 									<label className="icon" htmlFor="email">
 										{mail()}
 									</label>
-									<input ref={emailInp} required type="email" id="email" name="email" className="email" placeholder="Email address" defaultValue={"aymenbraikia1@gmail.com"} />
+									<input ref={emailInp} required type="email" id="email" name="email" className="email" placeholder="Email address" />
 								</div>
 
 								<div style={{ position: "relative", width: "100%" }}>
 									<label className="icon" htmlFor="password">
 										{lock()}
 									</label>
-									<input ref={passwordInp} required type="password" id="password" name="password" className="password" placeholder="Password" defaultValue={"Far_cry_6"} />
+									<input ref={passwordInp} required type="password" id="password" name="password" className="password" placeholder="Password" />
 								</div>
 
 								<div style={{ position: "relative", width: "100%", display: "flex", justifyContent: "flex-start", alignItems: "center" }}>
