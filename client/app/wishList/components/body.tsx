@@ -59,22 +59,28 @@ function Body() {
 	}
 
 	useEffect(() => {
-		if (!getCookie("username")) router.push("/signin");
+		try {
+			(async function () {
+				const url = settings.production ? settings.serverUrl : "http://localhost:8000";
 
-		const data = localStorage.getItem("wishList");
+				const wish = JSON.parse(
+					await (
+						await fetch(url + "/wishList", {
+							headers: {
+								authorization: `Bearer ${getCookie("token")}`,
+							},
+						})
+					).json()
+				);
 
-		if (!data) return;
+				if (wish.success == false) return console.log("Error: could not get wishlist Data");
 
-		const prods = JSON.parse(data);
-
-		if (!prods.length) return;
-
-		setProducts(prods);
-
-		let total = 0;
-
-		prods.forEach((e: productInterface) => (total += e.price));
-	}, [settings.loaded]);
+				setProducts(wish);
+			})();
+		} catch {
+			setProducts([]);
+		}
+	}, []);
 
 	return (
 		<div className={styles.container}>

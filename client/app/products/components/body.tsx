@@ -189,7 +189,6 @@ function Body() {
 				if (wish.success == false) return console.log("Error: could not get wishlist Data");
 
 				setWishList(wish);
-				console.log(wish)
 
 				const cart = JSON.parse(
 					await (
