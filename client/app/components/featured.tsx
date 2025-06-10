@@ -28,9 +28,62 @@ interface product {
 	category: string;
 }
 
-function ProductComponent(info: product, index: number, settings: Settings, wishList: number[], cart: number[], updateWishList: (list: number[]) => void, updateCartList: (list: number[]) => void) {
-	const isInWishList: boolean = wishList.find((e) => e == info.id) ? true : false;
-	const isInCart: boolean = cart.find((e) => e == info.id) ? true : false;
+// function ProductComponent(info: product, index: number, settings: Settings, wishList: number[], cart: number[], updateWishList: (list: number[]) => void, updateCartList: (list: number[]) => void) {
+// 	const isInWishList: boolean = wishList.find((e) => e == info.id) ? true : false;
+// 	const isInCart: boolean = cart.find((e) => e == info.id) ? true : false;
+
+// 	const router = useRouter();
+
+// 	return (
+// 		<div key={index} data-id={info.id} className={styles.product}>
+// 			<div className={styles.productImg}>
+// 				{AtwBtn(info, isInWishList, settings, updateWishList, wishList)}
+// 				<Image
+// 					onClick={(ev: MouseEvent) => {
+// 						if ((ev.currentTarget as HTMLElement).classList.contains("atw")) return;
+
+// 						router.push(`/product?id=${info.id}`);
+// 					}}
+// 					fill
+// 					src={info.secondaryImgs[0]}
+// 					alt="headphones"
+// 				/>
+// 			</div>
+
+// 			<div className={styles.productInfo}>
+// 				<div>
+// 					<div className={styles.productName}>{info.name}</div>
+// 					<div className={styles.rating}>
+// 						{star()}
+// 						{info.rating.rate}
+// 						<span style={{ color: "var(--foreground4)", fontWeight: 400, marginLeft: 5, fontSize: 16 }}>({info.rating.count})</span>
+// 					</div>
+// 				</div>
+// 				<div>
+// 					<div className={styles.productPrice}>
+// 						<div className={styles.new}>${info.price}</div>
+// 						<div className={styles.old}>${(info.price + info.price * 0.3).toFixed(2)}</div>
+// 					</div>
+// 					{AtcBtn(info, isInCart, settings, updateCartList, cart)}
+// 				</div>
+// 			</div>
+// 		</div>
+// 	);
+// }
+
+interface ProductComponentProps {
+	info: product;
+	index: number;
+	settings: Settings;
+	wishList: number[];
+	cart: number[];
+	updateWishList: (list: number[]) => void;
+	updateCartList: (list: number[]) => void;
+}
+
+function ProductComponent({ info, index, settings, wishList, cart, updateWishList, updateCartList }: ProductComponentProps) {
+	const isInWishList = wishList.includes(info.id);
+	const isInCart = cart.includes(info.id);
 
 	const router = useRouter();
 
@@ -41,7 +94,6 @@ function ProductComponent(info: product, index: number, settings: Settings, wish
 				<Image
 					onClick={(ev: MouseEvent) => {
 						if ((ev.currentTarget as HTMLElement).classList.contains("atw")) return;
-
 						router.push(`/product?id=${info.id}`);
 					}}
 					fill
@@ -49,7 +101,6 @@ function ProductComponent(info: product, index: number, settings: Settings, wish
 					alt="headphones"
 				/>
 			</div>
-
 			<div className={styles.productInfo}>
 				<div>
 					<div className={styles.productName}>{info.name}</div>
@@ -204,7 +255,7 @@ function Featured() {
 			</div>
 			<div className={styles.productsList}>
 				{...products.map((el: product, index: number) => {
-					return ProductComponent(el, index, settings, wishList, cartList, updateWishList, updateCartList);
+					return <ProductComponent key={index} info={el} index={index} settings={settings} wishList={wishList} cart={cartList} updateWishList={updateWishList} updateCartList={updateCartList} />;
 				})}
 			</div>
 		</div>
