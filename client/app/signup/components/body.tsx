@@ -4,6 +4,7 @@ import Theme from "../../components/theme";
 // import { useRouter } from "next/navigation";
 import { useContext, useEffect, useRef } from "react";
 import SettingsContext from "@/app/settingsContext";
+import { useRouter } from "next/navigation";
 
 function userIcon() {
 	return (
@@ -107,7 +108,7 @@ function Body() {
 
 					if (result.cookie) document.cookie = `${result.cookie.name} = ${result.cookie.val};`;
 
-					if (result.url) location.href = result.url;
+					if (result.url) router.push(result.url);
 
 					if (result.reason) err(result.reason);
 				});
@@ -116,7 +117,7 @@ function Body() {
 
 	const settings = useContext(SettingsContext);
 
-	// const router = useRouter();
+	const router = useRouter();
 
 	return (
 		<>
@@ -183,8 +184,7 @@ function Body() {
 									Already have an account?{" "}
 									<span
 										onClick={() => {
-											// router.push("../signin");
-											location.href = "../signin";
+											router.push("../signin");
 										}}
 									>
 										Sign in

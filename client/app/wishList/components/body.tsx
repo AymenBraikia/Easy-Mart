@@ -3,7 +3,7 @@ import { useEffect, useState, MouseEvent, useRef, useContext } from "react";
 import Image from "next/image";
 import styles from "./body.module.css";
 import SettingsContext from "@/app/settingsContext";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 interface productInterface {
 	name: string;
@@ -89,8 +89,7 @@ function Body() {
 									onClick={(ev: MouseEvent) => {
 										if ((ev.target as HTMLElement).textContent?.trim() == "Add to Cart") return;
 
-										location.href = `/product?id=${prod.id}`;
-										// router.push(`/product?${params.toString()}`);
+										router.push(`/product?id=${prod.id}`);
 									}}
 									className={styles.product}
 								>

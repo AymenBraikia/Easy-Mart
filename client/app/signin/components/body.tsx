@@ -1,7 +1,7 @@
 "use client";
 import "./body.css";
 import Theme from "../../components/theme";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useContext, useEffect, useRef } from "react";
 import SettingsContext from "@/app/settingsContext";
 
@@ -65,6 +65,10 @@ function Body() {
 	const usernameInp = useRef<HTMLInputElement>(null);
 	const passwordInp = useRef<HTMLInputElement>(null);
 
+	const router = useRouter();
+
+	const settings = useContext(SettingsContext);
+
 	useEffect(() => {
 		form.current?.addEventListener("submit", (ev) => {
 			ev.preventDefault();
@@ -94,16 +98,12 @@ function Body() {
 
 					if (result.cookie) document.cookie = `${result.cookie.name} = ${result.cookie.val};`;
 
-					if (result.url) location.href = result.url;
+					if (result.url) router.push(result.url);
 
 					if (result.reason) err(result.reason);
 				});
 		});
 	});
-
-	const settings = useContext(SettingsContext);
-
-	// const router = useRouter();
 
 	return (
 		<>
@@ -168,8 +168,7 @@ function Body() {
 									Don&apos;t have an account?{" "}
 									<span
 										onClick={() => {
-											// router.push("../signup");
-											location.href = "../signup";
+											router.push("../signup");
 										}}
 									>
 										Sign up

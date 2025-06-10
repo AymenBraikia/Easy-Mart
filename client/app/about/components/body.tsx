@@ -1,6 +1,6 @@
-"use client"
+"use client";
 import styles from "./body.module.css";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 function quality() {
 	return (
@@ -39,7 +39,7 @@ function trust() {
 }
 
 function Body() {
-	const router = useRouter()
+	const router = useRouter();
 	return (
 		<div className={styles.contaienrcontainer}>
 			<div className={styles.intro}>
@@ -118,10 +118,16 @@ function Body() {
 			</div>
 			<div className={styles.community}>
 				<h1 className={styles.communityTitle}>Join Our Community</h1>
-				<p className={styles.communityDescription}>Whether you&apos;re looking to shop or sell, Easy Mart welcomes you to our <br /> global marketplace.</p>
+				<p className={styles.communityDescription}>
+					Whether you&apos;re looking to shop or sell, Easy Mart welcomes you to our <br /> global marketplace.
+				</p>
 				<div className={styles.btns}>
-					<button onClick={()=>Router.push("/signup")} className={styles.signup}>Creat an Account</button>
-					<button className={styles.seller}>Become a Seller</button>
+					<button onClick={() => router.push("/signup")} className={styles.signup}>
+						Creat an Account
+					</button>
+					<button onClick={() => router.push("/signup")} className={styles.seller}>
+						Become a Seller
+					</button>
 				</div>
 			</div>
 		</div>

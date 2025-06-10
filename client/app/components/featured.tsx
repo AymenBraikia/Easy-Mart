@@ -28,9 +28,11 @@ interface product {
 	category: string;
 }
 
-function productComponent(info: product, index: number, settings: Settings, wishList: number[], cart: number[], updateWishList: (list: number[]) => void, updateCartList: (list: number[]) => void) {
+function ProductComponent(info: product, index: number, settings: Settings, wishList: number[], cart: number[], updateWishList: (list: number[]) => void, updateCartList: (list: number[]) => void) {
 	const isInWishList: boolean = wishList.find((e) => e == info.id) ? true : false;
 	const isInCart: boolean = cart.find((e) => e == info.id) ? true : false;
+
+	const router = useRouter();
 
 	return (
 		<div key={index} data-id={info.id} className={styles.product}>
@@ -40,8 +42,7 @@ function productComponent(info: product, index: number, settings: Settings, wish
 					onClick={(ev: MouseEvent) => {
 						if ((ev.currentTarget as HTMLElement).classList.contains("atw")) return;
 
-						location.href = `/product?id=${info.id}`;
-						// router.push(`/product?${params.toString()}`);
+						router.push(`/product?id=${info.id}`);
 					}}
 					fill
 					src={info.secondaryImgs[0]}
@@ -203,7 +204,7 @@ function Featured() {
 			</div>
 			<div className={styles.productsList}>
 				{...products.map((el: product, index: number) => {
-					return productComponent(el, index, settings, wishList, cartList, updateWishList, updateCartList);
+					return ProductComponent(el, index, settings, wishList, cartList, updateWishList, updateCartList);
 				})}
 			</div>
 		</div>
