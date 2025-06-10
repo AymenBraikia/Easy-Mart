@@ -61,7 +61,7 @@ function productComponent(info: product, index: number, settings: Settings, wish
 				<div>
 					<div className={styles.productPrice}>
 						<div className={styles.new}>${info.price}</div>
-						<div className={styles.old}>{(info.price + info.price * 0.3).toFixed(2)}</div>
+						<div className={styles.old}>${(info.price + info.price * 0.3).toFixed(2)}</div>
 					</div>
 					{AtcBtn(info, isInCart, settings, updateCartList, cart)}
 				</div>
