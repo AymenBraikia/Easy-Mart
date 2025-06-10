@@ -43,7 +43,7 @@ function AtcBtn(product: Product, isAlreadyIn: boolean, settings: Settings, next
 	}
 
 	return (
-		<div onClick={handleAdd} className={"addToCartBtn"}>
+		<div onClick={handleAdd} className={"addToCartBtn btn br"}>
 			{cart()} {isAlreadyIn ? "Remove from Cart" : "Add to Cart"}
 		</div>
 	);
