@@ -2,7 +2,7 @@ import { createContext } from "react";
 
 const settings = {
 	loaded: true,
-	production: false,
+	production: true,
 	serverUrl: "https://easy-mart-4upi.onrender.com",
 };
 const SettingsContext = createContext(settings);
