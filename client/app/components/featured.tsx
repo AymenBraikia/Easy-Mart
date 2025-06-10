@@ -4,9 +4,8 @@ import Image from "next/image";
 import { useEffect, useState, useContext, MouseEvent } from "react";
 import { Product } from "../products/components/body";
 import SettingsContext from "../settingsContext";
+import { useRouter } from "next/navigation";
 
-// import atw from "../utils/atwAction";
-// import atc from "../utils/atcAction";
 import AtcBtn from "../utils/atcBtn";
 import AtwBtn from "../utils/atwBtn";
 
@@ -87,6 +86,7 @@ function Featured() {
 	const [cartList, setCartList] = useState<number[]>([]);
 
 	const settings = useContext(SettingsContext);
+	const Router = useRouter();
 
 	function updateWishList(newList: number[]) {
 		setWishList(newList);
@@ -183,7 +183,7 @@ function Featured() {
 			<h1 className={styles.featured}>Featured Products</h1>
 			<div className={styles.featuredText}>
 				<p style={{ fontSize: 18 }}>Handpicked items from our top-rated sellers</p>
-				<div onClick={() => (location.pathname = "/products")} className={styles.viewAll}>
+				<div onClick={() => Router.push("/products")} className={styles.viewAll}>
 					View All →
 				</div>
 			</div>

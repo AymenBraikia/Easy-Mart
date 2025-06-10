@@ -3,6 +3,7 @@ import { useEffect, useState, MouseEvent, useContext } from "react";
 import Image from "next/image";
 import styles from "./body.module.css";
 import SettingsContext from "@/app/settingsContext";
+import { useRouter } from "next/navigation";
 
 interface productInterface {
 	name: string;
@@ -46,9 +47,10 @@ function Body() {
 	const [products, setProducts] = useState([]);
 
 	const settings = useContext(SettingsContext);
+	const Router = useRouter();
 
 	useEffect(() => {
-		if (!getCookie("username")) location.pathname = "/signin";
+		if (!getCookie("username")) Router.push("/signin");
 		try {
 			const data = localStorage.getItem("cartList");
 
@@ -163,7 +165,7 @@ function Body() {
 					{cart()}
 					<h1>Your cart is empty</h1>
 					<p>Looks like you haven&apos;t added any products to your cart yet.</p>
-					<button onClick={() => (location.pathname = "/products")} className={styles.shoppingBtn}>
+					<button onClick={() => Router.push("/products")} className={styles.shoppingBtn}>
 						Continue Shopping
 					</button>
 				</div>

@@ -2,7 +2,7 @@
 import "./images.css";
 import Image from "next/image";
 import { useEffect, useRef, useState, MouseEvent, useContext } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import SettingsContext from "@/app/settingsContext";
 import atc from "@/app/utils/atcAction";
 
@@ -158,6 +158,7 @@ function Images() {
 	const [product, setProduct] = useState<product>();
 	const [imgsUrls, setImgsUrls] = useState([""]);
 
+	const router = useRouter()
 	const settings = useContext(SettingsContext);
 
 	useEffect(() => {
@@ -258,7 +259,7 @@ function Images() {
 						ref={atcBtn}
 						onClick={() => {
 							if (getCookie("username")) atc(settings, getCookie("token"), product);
-							else location.pathname = "/signup";
+							else router.push("/signup");
 						}}
 						className="btn atc"
 					>

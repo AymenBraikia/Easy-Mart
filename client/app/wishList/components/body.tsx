@@ -3,6 +3,7 @@ import { useEffect, useState, MouseEvent, useRef, useContext } from "react";
 import Image from "next/image";
 import styles from "./body.module.css";
 import SettingsContext from "@/app/settingsContext";
+import {useRouter} from "next/navigation";
 
 interface productInterface {
 	name: string;
@@ -44,6 +45,7 @@ function Body() {
 	const atcBtn = useRef<HTMLDivElement>(null);
 
 	const settings = useContext(SettingsContext);
+	const router = useRouter();
 
 	async function atc(prod: productInterface) {
 		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/atc", {
@@ -57,7 +59,7 @@ function Body() {
 	}
 
 	useEffect(() => {
-		if (!getCookie("username")) location.pathname = "/signin";
+		if (!getCookie("username")) router.push("/signin");
 
 		const data = localStorage.getItem("wishList");
 
@@ -105,7 +107,7 @@ function Body() {
 											ref={atcBtn}
 											onClick={() => {
 												if (getCookie("username")) atc(prod);
-												else location.pathname = "/signup";
+												else router.push("/signup");
 											}}
 											className={styles.atc}
 										>
@@ -124,7 +126,7 @@ function Body() {
 					<p>
 						Save items you love to your wishlist and find them here <br /> anytime.
 					</p>
-					<button onClick={() => (location.pathname = "/products")} className={styles.shoppingBtn}>
+					<button onClick={() => router.push("/products")} className={styles.shoppingBtn}>
 						Continue Shopping
 					</button>
 				</div>

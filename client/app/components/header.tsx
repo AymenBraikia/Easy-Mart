@@ -1,6 +1,6 @@
 "use client";
 
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, useContext } from "react";
 import "./header.css";
 import "./theme.css";
@@ -56,7 +56,7 @@ interface Settings {
 }
 
 function Header() {
-	// const router = useRouter();
+	const router = useRouter();
 	const scrollProgress = useRef<HTMLDivElement>(null);
 	const header = useRef<HTMLDivElement>(null);
 	const cartBtn = useRef<HTMLDivElement>(null);
@@ -67,9 +67,7 @@ function Header() {
 	const settings: Settings = useContext(SettingsContext);
 
 	async function get_wishList() {
-		const wishData = JSON.parse(
-			await (await fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/wishList?username=" + getCookie("username"), { headers: { authorization: `Bearer ${getCookie("token")}` } })).json()
-		).wishList;
+		const wishData = JSON.parse(await (await fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/wishList", { headers: { idsOnly: "true", authorization: `Bearer ${getCookie("token")}` } })).json());
 
 		localStorage.setItem("wishList", JSON.stringify(wishData));
 
@@ -77,9 +75,9 @@ function Header() {
 		wishBtn.current?.setAttribute("data-len", wishData.length.toString());
 	}
 	async function get_cartList() {
-		const url = (settings.production ? settings.serverUrl : "http://localhost:8000") + "/cart?username=" + getCookie("username");
+		const url = (settings.production ? settings.serverUrl : "http://localhost:8000") + "/cart";
 
-		const cartData = JSON.parse(await (await fetch(url, { headers: { authorization: `Bearer ${getCookie("token")}` } })).json()).cart;
+		const cartData = JSON.parse(await (await fetch(url, { headers: { idsOnly: "true", authorization: `Bearer ${getCookie("token")}` } })).json());
 
 		localStorage.setItem("cartList", JSON.stringify(cartData));
 
@@ -113,7 +111,7 @@ function Header() {
 
 	return (
 		<header ref={header}>
-			<h1 onClick={() => (location.pathname = "/")} style={{ position: "relative", left: "10%" }}>
+			<h1 onClick={() => (router.push("/"))} style={{ position: "relative", left: "10%" }}>
 				Easy Mart
 			</h1>
 
@@ -135,24 +133,15 @@ function Header() {
 
 				{!username ? (
 					<>
-						<div className="btn wish headerBtn" onClick={() => (location.href = "/wishList")}>
+						<div className="btn wish headerBtn" onClick={() => router.push("/wishList")}>
 							{heart()}
 						</div>
-						<div className="btn cart headerBtn" onClick={() => (location.href = "/cart")}>
+						<div className="btn cart headerBtn" onClick={() => router.push("/cart")}>
 							{cart()}
 						</div>
-						<div className="btn headerBtn signin" onClick={() => (location.href = "/signin")}>
+						<div className="btn headerBtn signin" onClick={() => router.push("/signin")}>
 							{profile()}Sign In
 						</div>
-						{/* <div className="btn headerBtn" onClick={() => router.push("/signin")}>
-							{heart()}Wish List
-						</div>
-						<div className="btn headerBtn" onClick={() => router.push("/signin")}>
-							{cart()}
-						</div>
-						<div className="btn headerBtn" onClick={() => router.push("/signin")}>
-							{profile()}Sign In
-						</div> */}
 					</>
 				) : (
 					<>

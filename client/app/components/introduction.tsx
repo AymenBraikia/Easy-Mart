@@ -14,7 +14,6 @@ function Introduction() {
 			<div style={{ marginTop: 100, display: "flex", justifyContent: "center", alignItems: "center", columnGap: 50 }}>
 				<button
 					onClick={() => {
-						// location.pathname = "/products";
 						router.push("../products");
 					}}
 					className={styles.introBtn}
@@ -23,7 +22,6 @@ function Introduction() {
 				</button>
 				<button
 					onClick={() => {
-						// location.pathname = "/signup";
 						router.push("../products");
 					}}
 					className={styles.introBtn}

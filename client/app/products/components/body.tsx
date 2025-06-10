@@ -10,6 +10,7 @@ import "./productSettings.css";
 import "./productsList.css";
 import SettingsContext from "@/app/settingsContext";
 import atc from "@/app/utils/atcAction";
+import { useRouter } from "next/navigation";
 
 function star() {
 	return (
@@ -91,6 +92,8 @@ function Body() {
 	const filterList = useRef<HTMLDivElement>(null);
 	const selectBtn = useRef<HTMLButtonElement>(null);
 	const atcBtn = useRef<HTMLDivElement>(null);
+
+	const router = useRouter()
 
 	function handleDisplayClick(ev: MouseEvent) {
 		document.querySelector(".gridIcon")?.parentElement?.classList.remove("active");
@@ -245,7 +248,7 @@ function Body() {
 									ref={atcBtn}
 									onClick={() => {
 										if (getCookie("username")) atc(settings, getCookie("token"), product);
-										else location.pathname = "/signup";
+										else router.push("/signup");
 									}}
 									className="btn atc"
 								>
