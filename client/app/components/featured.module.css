@@ -111,10 +111,12 @@
     font-weight: 500;
 }
 
-
-
 .rating {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.atcWrapper{
+    width: fit-content;
 }

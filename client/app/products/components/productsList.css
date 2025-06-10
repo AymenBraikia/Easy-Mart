@@ -14,7 +14,6 @@
     min-height: 450px;
     background-color: var(--background2);
     position: relative;
-    cursor: pointer;
     transition: transform var(--transition), box-shadow var(--transition);
     border-radius: 15px;
     overflow: hidden;
@@ -44,6 +43,8 @@
     min-height: 300px;
     width: 300px;
     height: 300px;
+    cursor: pointer;
+
 }
 
 .productInfo {
@@ -75,25 +76,6 @@
 .new {
     font-size: 20px;
     font-weight: 500;
-}
-
-
-
-.atc {
-    color: var(--background);
-    font-weight: bold;
-    background-image: var(--gradient);
-    position: relative;
-    text-align: center;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-}
-
-.atc:hover {
-    filter: brightness(0.8);
 }
 
 .rating {
