@@ -2,7 +2,7 @@
 import { useEffect, useState, MouseEvent, useContext } from "react";
 import Image from "next/image";
 import styles from "./body.module.css";
-import SettingsContext from "@/app/settingsContet";
+import SettingsContext from "@/app/settingsContext";
 
 interface productInterface {
 	name: string;

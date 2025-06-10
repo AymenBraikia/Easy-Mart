@@ -25,6 +25,13 @@
 }
 
 .viewAll {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    color: white !important;
+    font-weight: bold;
     border: 1px solid var(--background3);
     color: var(--foreground) !important;
 }
@@ -104,45 +111,7 @@
     font-weight: 500;
 }
 
-.atc {
-    color: var(--background);
-    font-weight: bold;
-    background-image: var(--gradient);
-    position: relative;
-    margin-top: 20px;
-    width: fit-content !important;
-    cursor: pointer;
-}
 
-.atw {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    z-index: 3;
-    color: #fa2a55;
-    background-color: var(--background2);
-    width: 35px;
-    height: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.atw>svg {
-    transition: var(--transition);
-    fill: transparent;
-}
-
-.atw.active>svg,
-.atw:hover>svg {
-    fill: #fa2a55;
-}
-
-.atc:hover {
-    filter: brightness(0.9);
-}
 
 .rating {
     display: flex;

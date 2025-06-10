@@ -35,12 +35,12 @@ function middleWare(req: Request, res: Response, next: NextFunction) {
 
 	jwt.verify(token, JWT_KEY, (err, data) => {
 		if (err) {
-			console.log(err);
 			res.status(403).json(JSON.stringify({ success: false, reason: "Bad request" }));
 			return;
 		}
-		console.log(data);
-		req.body = data;
+
+		req.body = {};
+		req.body.username = data;
 		next();
 	});
 }
@@ -64,7 +64,7 @@ app.get("/singleProduct", async (req, res) => {
 });
 
 app.get("/wishList", middleWare, async (req, res) => {
-	const { username } = req.query;
+	const { username } = req.body;
 
 	const userData = await (await db).collection("users").findOne({ username: username });
 
@@ -78,12 +78,14 @@ app.get("/wishList", middleWare, async (req, res) => {
 	for (const e of data) {
 		e.secondaryImgs.length = 1;
 	}
+	const idsOnly = req.headers.idsonly;
+	console.log(idsOnly);
 
-	res.json(JSON.stringify({ wishList: data }));
+	res.json(JSON.stringify(idsOnly ? data.map((e) => e.id) : data));
 });
 
 app.get("/cart", middleWare, async (req, res) => {
-	const { username } = req.query;
+	const { username } = req.body;
 
 	const userData = await (await db).collection("users").findOne({ username: username });
 
@@ -98,7 +100,10 @@ app.get("/cart", middleWare, async (req, res) => {
 		e.secondaryImgs.length = 1;
 	}
 
-	res.json(JSON.stringify({ cart: data }));
+	const idsOnly = req.headers.idsonly;
+	console.log(idsOnly);
+
+	res.json(JSON.stringify(idsOnly ? data.map((e) => e.id) : data));
 });
 
 app.post("/removeCart", middleWare, async (req, res) => {
@@ -245,7 +250,7 @@ app.post("/signup", async (req, res) => {
 
 	users.insertOne({ username: info.username, email: info.email, password: info.password, cart: [], wishList: [] });
 
-	const token = jwt.sign({ username: info.username }, JWT_KEY);
+	const token = jwt.sign(info.username, JWT_KEY);
 
 	res.json(JSON.stringify({ Token: token, cookie: { name: "username", val: info.username }, url: req.headers.origin || "http://localhost:3000/" }));
 });

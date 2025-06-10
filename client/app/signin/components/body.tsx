@@ -3,7 +3,7 @@ import "./body.css";
 import Theme from "../../components/theme";
 // import { useRouter } from "next/navigation";
 import { useContext, useEffect, useRef } from "react";
-import SettingsContext from "@/app/settingsContet";
+import SettingsContext from "@/app/settingsContext";
 
 function errIcon() {
 	return (

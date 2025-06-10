@@ -62,7 +62,3 @@
     color: var(--foreground3);
 }
 
-.step.active {
-    margin: 0;
-    opacity: 1;
-}

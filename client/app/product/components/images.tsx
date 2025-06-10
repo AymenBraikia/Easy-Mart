@@ -3,7 +3,7 @@ import "./images.css";
 import Image from "next/image";
 import { useEffect, useRef, useState, MouseEvent, useContext } from "react";
 import { useSearchParams } from "next/navigation";
-import SettingsContext from "@/app/settingsContet";
+import SettingsContext from "@/app/settingsContext";
 import atc from "@/app/utils/atcAction";
 
 interface product {

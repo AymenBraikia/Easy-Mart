@@ -1,36 +1,18 @@
 "use client";
-import "./featured.css";
+import styles from "./featured.module.css";
 import Image from "next/image";
 import { useEffect, useState, useContext, MouseEvent } from "react";
 import { Product } from "../products/components/body";
-import SettingsContext from "../settingsContet";
+import SettingsContext from "../settingsContext";
 
-import atw from "../utils/atwAction";
-import atc from "../utils/atcAction";
-
-function heart() {
-	return (
-		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-heart w-4 h-4">
-			<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-		</svg>
-	);
-}
+// import atw from "../utils/atwAction";
+// import atc from "../utils/atcAction";
+import AtcBtn from "../utils/atcBtn";
+import AtwBtn from "../utils/atwBtn";
 
 function star() {
 	return (
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			width="16"
-			height="16"
-			viewBox="0 0 24 24"
-			fill="rgb(250 204 21)"
-			stroke="rgb(250 204 21)"
-			strokeWidth="2"
-			strokeLinecap="round"
-			strokeLinejoin="round"
-			style={{ marginRight: 5 }}
-			className="lucide lucide-star w-4 h-4 fill-yellow-400 text-yellow-400"
-		>
+		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="rgb(250 204 21)" stroke="rgb(250 204 21)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: 5 }}>
 			<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
 		</svg>
 	);
@@ -47,23 +29,14 @@ interface product {
 	category: string;
 }
 
-function productComponent(info: product, index: number, atc: (prod: product) => void, atw: (prod: product) => void, wishList: product[], cart: product[]) {
-	const isInWishList = wishList.find((e) => e.id == info.id);
-	const isInCart = cart.find((e) => e.id == info.id);
+function productComponent(info: product, index: number, settings: Settings, wishList: number[], cart: number[], updateWishList: (list: number[]) => void, updateCartList: (list: number[]) => void) {
+	const isInWishList: boolean = wishList.find((e) => e == info.id) ? true : false;
+	const isInCart: boolean = cart.find((e) => e == info.id) ? true : false;
 
 	return (
-		<div key={index} data-id={info.id} className="product">
-			<div className="productImg">
-				<div
-					data-wish={info.id}
-					className={`atw ${isInWishList ? "active" : ""}`}
-					onClick={() => {
-						atw(info);
-						document.querySelector(`[data-wish="${info.id}"]`)?.classList.toggle("active");
-					}}
-				>
-					{heart()}
-				</div>
+		<div key={index} data-id={info.id} className={styles.product}>
+			<div className={styles.productImg}>
+				{AtwBtn(info, isInWishList, settings, updateWishList)}
 				<Image
 					onClick={(ev: MouseEvent) => {
 						if ((ev.currentTarget as HTMLElement).classList.contains("atw")) return;
@@ -77,23 +50,21 @@ function productComponent(info: product, index: number, atc: (prod: product) => 
 				/>
 			</div>
 
-			<div className="productInfo">
+			<div className={styles.productInfo}>
 				<div>
-					<div className="productName">{info.name}</div>
-					<div className="rating">
+					<div className={styles.productName}>{info.name}</div>
+					<div className={styles.rating}>
 						{star()}
 						{info.rating.rate}
 						<span style={{ color: "var(--foreground4)", fontWeight: 400, marginLeft: 5, fontSize: 16 }}>({info.rating.count})</span>
 					</div>
 				</div>
 				<div>
-					<div className="productPrice">
-						<div className="new">${info.price}</div>
-						<div className="old">${(info.price + info.price * 0.3).toFixed(2)}</div>
+					<div className={styles.productPrice}>
+						<div className={styles.new}>${info.price}</div>
+						<div className={styles.old}>{(info.price + info.price * 0.3).toFixed(2)}</div>
 					</div>
-					<div onClick={() => (getCookie("username") ? atc(info) : (location.pathname = "/signup"))} className={"atc btn br"}>
-						{isInCart ? "Remove from Cart" : "Add to Cart"}
-					</div>
+					{AtcBtn(info, isInCart, settings, updateCartList)}
 				</div>
 			</div>
 		</div>
@@ -104,60 +75,94 @@ function getCookie(name: string): string | null {
 	const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
 	return match ? match[2] : null;
 }
+interface Settings {
+	loaded: boolean;
+	production: boolean;
+	serverUrl: string;
+}
 
 function Featured() {
 	const [products, setProducts] = useState<Product[]>([]);
-	const [wishList, setWishList] = useState<Product[]>([]);
-	const [cartList, setCartList] = useState<Product[]>([]);
+	const [wishList, setWishList] = useState<number[]>([]);
+	const [cartList, setCartList] = useState<number[]>([]);
 
 	const settings = useContext(SettingsContext);
 
+	function updateWishList(newList: number[]) {
+		setWishList(newList);
+	}
+	function updateCartList(newList: number[]) {
+		setCartList(newList);
+	}
+
 	useEffect(() => {
 		try {
-			const wish = localStorage.getItem("wishList");
+			(async function () {
+				const url = settings.production ? settings.serverUrl : "http://localhost:8000";
 
-			if (wish) setWishList(JSON.parse(wish));
+				const wish = JSON.parse(
+					await (
+						await fetch(url + "/wishList", {
+							headers: {
+								authorization: `Bearer ${getCookie("token")}`,
+								idsOnly: "true",
+							},
+						})
+					).json()
+				);
 
-			const cart = localStorage.getItem("CartList");
+				setWishList(wish);
 
-			if (cart) setCartList(JSON.parse(cart));
+				const cart = JSON.parse(
+					await (
+						await fetch(url + "/cart", {
+							headers: {
+								authorization: `Bearer ${getCookie("token")}`,
+								idsOnly: "true",
+							},
+						})
+					).json()
+				);
+
+				setCartList(cart);
+			})();
 		} catch {
 			setWishList([]);
 			setCartList([]);
 		}
 	}, []);
 
-	async function atcCheck(prod: Product) {
-		const isAlreadyIn = cartList.find((e: Product) => e.id == prod.id) ? true : false;
+	// async function atcCheck(prod: Product) {
+	// 	const isAlreadyIn = cartList.find((e: Product) => e.id == prod.id) ? true : false;
 
-		const atcBtn = document.querySelector(`[data-id="${prod.id}"] .atc`);
+	// 	const atcBtn = document.querySelector(`[data-id="${prod.id}"] .atc`);
 
-		if (atcBtn)
-			if (isAlreadyIn) atcBtn.textContent = "Add to Cart";
-			else atcBtn.textContent = "Remove from Cart";
+	// 	if (atcBtn)
+	// 		if (isAlreadyIn) atcBtn.textContent = "Add to Cart";
+	// 		else atcBtn.textContent = "Remove from Cart";
 
-		atc(settings, getCookie("token"), prod, isAlreadyIn);
+	// 	atc(settings, getCookie("token"), prod, isAlreadyIn);
 
-		const updatedCartList: Product[] = isAlreadyIn ? cartList.filter((e: Product) => e.id !== prod.id) : [...cartList, prod];
+	// 	const updatedCartList: Product[] = isAlreadyIn ? cartList.filter((e: Product) => e.id !== prod.id) : [...cartList, prod];
 
-		setCartList(updatedCartList);
-		localStorage.setItem("CartList", JSON.stringify(updatedCartList));
+	// 	setCartList(updatedCartList);
+	// 	localStorage.setItem("CartList", JSON.stringify(updatedCartList));
 
-		document.querySelector(".cart")?.setAttribute("data-len", updatedCartList.length.toString());
-	}
+	// 	document.querySelector(".cart")?.setAttribute("data-len", updatedCartList.length.toString());
+	// }
 
-	async function atwCheck(prod: Product) {
-		const isAlreadyIn = wishList.find((e: Product) => e.id == prod.id) ? true : false;
+	// async function atwCheck(prod: Product) {
+	// 	const isAlreadyIn = wishList.find((e: Product) => e.id == prod.id) ? true : false;
 
-		atw(settings, getCookie("token"), prod, isAlreadyIn);
+	// 	atw(settings, getCookie("token"), prod, isAlreadyIn);
 
-		const updatedWishList: Product[] = isAlreadyIn ? wishList.filter((e: Product) => e.id !== prod.id) : [...wishList, prod];
+	// 	const updatedWishList: Product[] = isAlreadyIn ? wishList.filter((e: Product) => e.id !== prod.id) : [...wishList, prod];
 
-		setWishList(updatedWishList);
-		localStorage.setItem("wishList", JSON.stringify(updatedWishList));
+	// 	setWishList(updatedWishList);
+	// 	localStorage.setItem("wishList", JSON.stringify(updatedWishList));
 
-		document.querySelector(".wish")?.setAttribute("data-len", updatedWishList.length.toString());
-	}
+	// 	document.querySelector(".wish")?.setAttribute("data-len", updatedWishList.length.toString());
+	// }
 
 	// gets products data
 	useEffect(() => {
@@ -174,17 +179,17 @@ function Featured() {
 			.catch((err) => console.error("Failed to load products:", err));
 	}, [products, settings]);
 	return (
-		<div className="featuredContainer">
-			<h1 className="featured">Featured Products</h1>
-			<div className="featuredText">
+		<div className={styles.featuredContainer}>
+			<h1 className={styles.featured}>Featured Products</h1>
+			<div className={styles.featuredText}>
 				<p style={{ fontSize: 18 }}>Handpicked items from our top-rated sellers</p>
-				<div onClick={() => (location.pathname = "/products")} className="btn viewAll">
+				<div onClick={() => (location.pathname = "/products")} className={styles.viewAll}>
 					View All →
 				</div>
 			</div>
-			<div className="productsList">
+			<div className={styles.productsList}>
 				{...products.map((el: product, index: number) => {
-					return productComponent(el, index, atcCheck, atwCheck, wishList, cartList);
+					return productComponent(el, index, settings, wishList, cartList, updateWishList, updateCartList);
 				})}
 			</div>
 		</div>

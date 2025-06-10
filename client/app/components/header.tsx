@@ -5,7 +5,7 @@ import { useEffect, useRef, useState, useContext } from "react";
 import "./header.css";
 import "./theme.css";
 import Theme from "./theme";
-import SettingsContext from "../settingsContet";
+import SettingsContext from "../settingsContext";
 
 function heart() {
 	return (
@@ -49,6 +49,12 @@ function DeleteCookie(name: string): void {
 	document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 
+interface Settings {
+	serverUrl: string;
+	production: boolean;
+	loaded: boolean;
+}
+
 function Header() {
 	// const router = useRouter();
 	const scrollProgress = useRef<HTMLDivElement>(null);
@@ -58,7 +64,7 @@ function Header() {
 
 	const [username, setUsername] = useState<string | null>(null);
 
-	const settings = useContext(SettingsContext);
+	const settings: Settings = useContext(SettingsContext);
 
 	async function get_wishList() {
 		const wishData = JSON.parse(

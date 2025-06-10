@@ -16,7 +16,7 @@
     align-items: center;
 }
 
-.list>* {
+.listChild {
     height: 150px;
     width: 200px;
     display: flex;
@@ -30,11 +30,11 @@
     transition: var(--transition);
 }
 
-.list>*:hover>.ico {
+.listChild:hover>.ico {
     font-size: 55px;
 }
 
-.list>*:hover {
+.listChild:hover {
     transform: translateY(-20px);
     box-shadow: 0 15px 30px -13px var(--foreground3);
 }

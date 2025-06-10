@@ -1,41 +1,48 @@
-import "./shopCat.css";
+import styles from "./shopCat.module.css";
 function ShopCat() {
 	return (
-		<div className="shopContainer">
+		<div className={styles.shopContainer}>
 			<h1>Shop By Category</h1>
-        	<p>Explore our diverse range of categories and find exactly what you&apos;re looking for</p>
-            <div className="list">
-                <div>
-                    <div className="ico">📱</div>
-                    <div className="category">Electronics</div>
-                    <div className="itemCount">2.5k+ items</div>
-                </div>
-                <div>
-                    <div className="ico">👕</div>
-                    <div className="category">Fashion</div>
-                    <div className="itemCount">1.8k+ items</div>
-                </div>
-                <div>
-                    <div className="ico">🏠</div>
-                    <div className="category">Home & Garden</div>
-                    <div className="itemCount">950+ items</div>
-                </div>
-                <div>
-                    <div className="ico">⚽</div>
-                    <div className="category">Sports</div>
-                    <div className="itemCount">720+ items</div>
-                </div>
-                <div>
-                    <div className="ico">📚</div>
-                    <div className="category">Books</div>
-                    <div className="itemCount">1.2k+ items</div>
-                </div>
-                <div>
-                    <div className="ico">🧸</div>
-                    <div className="category">Toys</div>
-                    <div className="itemCount">680+ items</div>
-                </div>
-            </div>
+			<p>Explore our diverse range of categories and find exactly what you&apos;re looking for</p>
+			<div className={styles.list}>
+
+				<div className={styles.listChild}>
+					<div className={styles.ico}>📱</div>
+					<div className={styles.category}>Electronics</div>
+					<div className={styles.itemCount}>2.5k+ items</div>
+				</div>
+
+				<div className={styles.listChild}>
+					<div className={styles.ico}>👕</div>
+					<div className={styles.category}>Fashion</div>
+					<div className={styles.itemCount}>1.8k+ items</div>
+				</div>
+
+				<div className={styles.listChild}>
+					<div className={styles.ico}>🏠</div>
+					<div className={styles.category}>Home & Garden</div>
+					<div className={styles.itemCount}>950+ items</div>
+				</div>
+
+				<div className={styles.listChild}>
+					<div className={styles.ico}>⚽</div>
+					<div className={styles.category}>Sports</div>
+					<div className={styles.itemCount}>720+ items</div>
+				</div>
+
+				<div className={styles.listChild}>
+					<div className={styles.ico}>📚</div>
+					<div className={styles.category}>Books</div>
+					<div className={styles.itemCount}>1.2k+ items</div>
+				</div>
+
+				<div className={styles.listChild}>
+					<div className={styles.ico}>🧸</div>
+					<div className={styles.category}>Toys</div>
+					<div className={styles.itemCount}>680+ items</div>
+				</div>
+                
+			</div>
 		</div>
 	);
 }

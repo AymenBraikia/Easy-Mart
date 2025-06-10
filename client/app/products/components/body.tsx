@@ -8,7 +8,7 @@ import { useState, useEffect, useRef, MouseEvent, useMemo, useContext } from "re
 // import { useRouter } from "next/navigation";
 import "./productSettings.css";
 import "./productsList.css";
-import SettingsContext from "@/app/settingsContet";
+import SettingsContext from "@/app/settingsContext";
 import atc from "@/app/utils/atcAction";
 
 function star() {
