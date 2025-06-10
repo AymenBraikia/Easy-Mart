@@ -35,7 +35,7 @@ function productComponent(info: product, index: number, settings: Settings, wish
 	return (
 		<div key={index} data-id={info.id} className={styles.product}>
 			<div className={styles.productImg}>
-				{AtwBtn(info, isInWishList, settings, updateWishList)}
+				{AtwBtn(info, isInWishList, settings, updateWishList, wishList)}
 				<Image
 					onClick={(ev: MouseEvent) => {
 						if ((ev.currentTarget as HTMLElement).classList.contains("atw")) return;
@@ -63,7 +63,7 @@ function productComponent(info: product, index: number, settings: Settings, wish
 						<div className={styles.new}>${info.price}</div>
 						<div className={styles.old}>{(info.price + info.price * 0.3).toFixed(2)}</div>
 					</div>
-					{AtcBtn(info, isInCart, settings, updateCartList)}
+					{AtcBtn(info, isInCart, settings, updateCartList, cart)}
 				</div>
 			</div>
 		</div>
@@ -100,7 +100,7 @@ function Featured() {
 			(async function () {
 				const url = settings.production ? settings.serverUrl : "http://localhost:8000";
 
-				const wish = JSON.parse(
+				let wish = JSON.parse(
 					await (
 						await fetch(url + "/wishList", {
 							headers: {
@@ -111,9 +111,16 @@ function Featured() {
 					).json()
 				);
 
+				if (!wish.success) {
+					console.log("Error: could not get wishlist Data");
+					document.cookie = "token='';";
+					Router.refresh();
+					wish = [NaN, NaN];
+				}
+
 				setWishList(wish);
 
-				const cart = JSON.parse(
+				let cart = JSON.parse(
 					await (
 						await fetch(url + "/cart", {
 							headers: {
@@ -123,6 +130,12 @@ function Featured() {
 						})
 					).json()
 				);
+				if (!cart.success) {
+					console.log("Error: could not get cart Data");
+					document.cookie = "token='';";
+					Router.refresh();
+					cart = [];
+				}
 
 				setCartList(cart);
 			})();
@@ -170,7 +183,7 @@ function Featured() {
 
 		const url = settings.production ? settings.serverUrl : "http://localhost:8000";
 
-		fetch(url + "/products", { headers: { authorization: `Bearer ${getCookie("token")}` } })
+		fetch(url + "/products")
 			.then((resp) => resp.json())
 			.then((data) => JSON.parse(data))
 			.then((results: Product[]) => {

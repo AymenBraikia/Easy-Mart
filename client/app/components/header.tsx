@@ -69,7 +69,7 @@ function Header() {
 	async function get_wishList() {
 		const wishData = JSON.parse(await (await fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/wishList", { headers: { idsOnly: "true", authorization: `Bearer ${getCookie("token")}` } })).json());
 
-		localStorage.setItem("wishList", JSON.stringify(wishData));
+		if (!wishData.success) return;
 
 		wishBtn.current?.classList.add("active");
 		wishBtn.current?.setAttribute("data-len", wishData.length.toString());
@@ -79,7 +79,7 @@ function Header() {
 
 		const cartData = JSON.parse(await (await fetch(url, { headers: { idsOnly: "true", authorization: `Bearer ${getCookie("token")}` } })).json());
 
-		localStorage.setItem("cartList", JSON.stringify(cartData));
+		if (!cartData.success) return;
 
 		cartBtn.current?.classList.add("active");
 		cartBtn.current?.setAttribute("data-len", cartData.length.toString());
@@ -111,7 +111,7 @@ function Header() {
 
 	return (
 		<header ref={header}>
-			<h1 onClick={() => (router.push("/"))} style={{ position: "relative", left: "10%" }}>
+			<h1 onClick={() => router.push("/")} style={{ position: "relative", left: "10%" }}>
 				Easy Mart
 			</h1>
 

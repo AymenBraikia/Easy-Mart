@@ -21,14 +21,12 @@ interface Settings {
 	serverUrl: string;
 }
 
-function AtcBtn(product: Product, isAlreadyIn: boolean, settings: Settings, next: (newList: number[]) => void) {
+function AtwBtn(product: Product, isAlreadyIn: boolean, settings: Settings, next: (newList: number[]) => void, oldWishList: number[]) {
 	function handleAdd(e: MouseEvent<HTMLElement>) {
 		const token = getCookie("token");
 
 		if (token) atw(settings, getCookie("token"), product, isAlreadyIn);
 		else location.pathname = "/signup";
-
-		const oldWishList: number[] = JSON.parse(localStorage.getItem("cartList") || "[]") || [];
 
 		if (isAlreadyIn) {
 			e.currentTarget.classList.remove("active");
@@ -46,4 +44,4 @@ function AtcBtn(product: Product, isAlreadyIn: boolean, settings: Settings, next
 	);
 }
 
-export default AtcBtn;
+export default AtwBtn;
