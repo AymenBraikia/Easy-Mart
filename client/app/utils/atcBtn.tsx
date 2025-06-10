@@ -23,14 +23,12 @@ interface Settings {
 	serverUrl: string;
 }
 
-function AtcBtn(product: Product, isAlreadyIn: boolean, settings: Settings, next: (newList: number[]) => void) {
+function AtcBtn(product: Product, isAlreadyIn: boolean, settings: Settings, next: (newList: number[]) => void, oldCartList: number[]) {
 	function handleAdd(e: MouseEvent<HTMLElement>) {
 		const token = getCookie("token");
 
 		if (token) atc(settings, getCookie("token"), product, isAlreadyIn);
 		else location.pathname = "/signup";
-
-		const oldCartList: number[] = JSON.parse(localStorage.getItem("cartList") || "[]") || [];
 
 		if (isAlreadyIn) {
 			e.currentTarget.classList.remove("active");
