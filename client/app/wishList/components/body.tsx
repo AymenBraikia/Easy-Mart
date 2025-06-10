@@ -1,9 +1,11 @@
 "use client";
-import { useEffect, useState, MouseEvent, useRef, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import Image from "next/image";
 import styles from "./body.module.css";
 import SettingsContext from "@/app/settingsContext";
 import { useRouter } from "next/navigation";
+import AtcBtn from "@/app/utils/atcBtn";
+import AtwBtn from "@/app/utils/atwBtn";
 
 interface productInterface {
 	name: string;
@@ -24,39 +26,17 @@ function heart() {
 	);
 }
 
-function cart() {
-	return (
-		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-shopping-cart w-4 h-4">
-			<circle cx="8" cy="21" r="1"></circle>
-			<circle cx="19" cy="21" r="1"></circle>
-			<path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
-		</svg>
-	);
-}
-
 function getCookie(name: string): string | null {
 	const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
 	return match ? match[2] : null;
 }
 
 function Body() {
-	const [products, setProducts] = useState([]);
-
-	const atcBtn = useRef<HTMLDivElement>(null);
+	const [products, setProducts] = useState<productInterface[]>([]);
+	const [cartList, setCartList] = useState<number[]>([]);
 
 	const settings = useContext(SettingsContext);
 	const router = useRouter();
-
-	async function atc(prod: productInterface) {
-		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/atc", {
-			method: "post",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${getCookie("token")}`,
-			},
-			body: JSON.stringify({ id: prod.id, username: getCookie("username") }),
-		});
-	}
 
 	useEffect(() => {
 		try {
@@ -76,11 +56,34 @@ function Body() {
 				if (wish.success == false) return console.log("Error: could not get wishlist Data");
 
 				setProducts(wish);
+
+				const cart = JSON.parse(
+					await (
+						await fetch(url + "/cart", {
+							headers: {
+								authorization: `Bearer ${getCookie("token")}`,
+								idsOnly: "true",
+							},
+						})
+					).json()
+				);
+
+				if (cart.success == false) return console.log("Error: could not get cart Data");
+
+				setCartList(cart);
 			})();
 		} catch {
 			setProducts([]);
+			setCartList([]);
 		}
 	}, []);
+
+	function updateWishList(newList: number[]) {
+		setProducts(products.filter((e) => newList.includes(e.id)));
+	}
+	function updateCartList(newList: number[]) {
+		setCartList(newList);
+	}
 
 	return (
 		<div className={styles.container}>
@@ -90,17 +93,16 @@ function Body() {
 					<div className={styles.products}>
 						{...products.map((prod: productInterface) => {
 							return (
-								<div
-									key={prod.id}
-									onClick={(ev: MouseEvent) => {
-										if ((ev.target as HTMLElement).textContent?.trim() == "Add to Cart") return;
-
-										router.push(`/product?id=${prod.id}`);
-									}}
-									className={styles.product}
-								>
+								<div key={prod.id} className={styles.product}>
 									<div className={styles.prodImg}>
-										<Image fill src={prod.secondaryImgs[0]} alt={prod.name} />
+										{AtwBtn(
+											prod,
+											true,
+											settings,
+											updateWishList,
+											products.map((e) => e.id)
+										)}
+										<Image onClick={() => router.push(`/product?id=${prod.id}`)} fill src={prod.secondaryImgs[0]} alt={prod.name} />
 									</div>
 									<div className={styles.prodInfo}>
 										<h3>{prod.name}</h3>
@@ -108,16 +110,8 @@ function Body() {
 											<h3 className={styles.new}>${prod.price}</h3>
 											<div className={styles.old}>${(prod.price + prod.price * 0.3).toFixed(2)}</div>
 										</div>
-										<div
-											ref={atcBtn}
-											onClick={() => {
-												if (getCookie("username")) atc(prod);
-												else router.push("/signup");
-											}}
-											className={styles.atc}
-										>
-											{cart()} Add to Cart
-										</div>
+
+										{AtcBtn(prod, cartList.includes(prod.id), settings, updateCartList, cartList)}
 									</div>
 								</div>
 							);

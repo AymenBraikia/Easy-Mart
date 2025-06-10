@@ -44,33 +44,41 @@ function bin() {
 
 function Body() {
 	const [totalPrice, setTotalPrice] = useState(0);
-	const [products, setProducts] = useState([]);
+	const [products, setProducts] = useState<productInterface[]>([]);
 
 	const settings = useContext(SettingsContext);
 	const Router = useRouter();
 
 	useEffect(() => {
-		if (!getCookie("username")) Router.push("/signin");
 		try {
-			const data = localStorage.getItem("cartList");
+			if (!getCookie("token")) Router.push("/signin");
+			(async function () {
+				const url = settings.production ? settings.serverUrl : "http://localhost:8000";
 
-			if (!data) return;
+				const cart = JSON.parse(
+					await (
+						await fetch(url + "/cart", {
+							headers: {
+								authorization: `Bearer ${getCookie("token")}`,
+							},
+						})
+					).json()
+				);
 
-			const prods = JSON.parse(data);
+				if (cart.success == false) return console.log("Error: could not get cart Data");
 
-			if (!prods.length) return;
+				setProducts(cart);
 
-			setProducts(prods);
+				let total = 0;
 
-			let total = 0;
+				cart.forEach((e: productInterface) => (total += e.price));
 
-			prods.forEach((e: productInterface) => (total += e.price));
-
-			setTotalPrice(total);
+				setTotalPrice(total);
+			})();
 		} catch {
-			return;
+			setProducts([]);
 		}
-	}, [settings.loaded]);
+	}, []);
 
 	function remove(click: MouseEvent) {
 		const id = Number(click.currentTarget.getAttribute("data-id"));
