@@ -8,11 +8,9 @@ import SettingsContext from "./settingsContext";
 
 export default function Home() {
 	return (
-		<>
-			<SettingsContext.Provider value={useContext(SettingsContext)}>
-				<Header />
-				<Body />
-			</SettingsContext.Provider>
-		</>
+		<SettingsContext.Provider value={useContext(SettingsContext)}>
+			<Header />
+			<Body />
+		</SettingsContext.Provider>
 	);
 }

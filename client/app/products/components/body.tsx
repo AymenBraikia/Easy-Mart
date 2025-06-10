@@ -5,12 +5,13 @@ import "./body.css";
 import Nav from "./nav";
 import Image from "next/image";
 import { useState, useEffect, useRef, MouseEvent, useMemo, useContext } from "react";
-// import { useRouter } from "next/navigation";
 import "./productSettings.css";
 import "./productsList.css";
 import SettingsContext from "@/app/settingsContext";
-import atc from "@/app/utils/atcAction";
 import { useRouter } from "next/navigation";
+import AtcBtn from "@/app/utils/atcBtn";
+import AtwBtn from "@/app/utils/atwBtn";
+// import atc from "@/app/utils/atcAction";
 
 function star() {
 	return (
@@ -31,16 +32,6 @@ function star() {
 		</svg>
 	);
 }
-function cart() {
-	return (
-		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-shopping-cart w-4 h-4">
-			<circle cx="8" cy="21" r="1"></circle>
-			<circle cx="19" cy="21" r="1"></circle>
-			<path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
-		</svg>
-	);
-}
-
 function grid() {
 	return (
 		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="gridIcon active lucide lucide-grid3x3 h-4 w-4">
@@ -83,17 +74,25 @@ function getCookie(name: string): string | null {
 }
 
 function Body() {
-	// const router = useRouter();
-
+	const [wishList, setWishList] = useState<number[]>([]);
+	const [cartList, setCartList] = useState<number[]>([]);
 	const [products, setProducts] = useState<Product[]>([]);
 	const [sorting, setSorting] = useState("Featured");
 	const [displayStyle, setdisplayStyle] = useState("grid");
 
 	const filterList = useRef<HTMLDivElement>(null);
 	const selectBtn = useRef<HTMLButtonElement>(null);
-	const atcBtn = useRef<HTMLDivElement>(null);
 
-	const router = useRouter()
+	const router = useRouter();
+
+	const settings = useContext(SettingsContext);
+
+	function updateWishList(newList: number[]) {
+		setWishList(newList);
+	}
+	function updateCartList(newList: number[]) {
+		setCartList(newList);
+	}
 
 	function handleDisplayClick(ev: MouseEvent) {
 		document.querySelector(".gridIcon")?.parentElement?.classList.remove("active");
@@ -123,8 +122,6 @@ function Body() {
 
 		setTimeout(() => filterList.current?.classList.remove("block"), 300);
 	}
-
-	const settings = useContext(SettingsContext);
 
 	// gets products data
 	useEffect(() => {
@@ -173,6 +170,47 @@ function Body() {
 				return sorted;
 		}
 	}, [products, sorting]);
+	useEffect(() => {
+		try {
+			(async function () {
+				const url = settings.production ? settings.serverUrl : "http://localhost:8000";
+
+				const wish = JSON.parse(
+					await (
+						await fetch(url + "/wishList", {
+							headers: {
+								authorization: `Bearer ${getCookie("token")}`,
+								idsOnly: "true",
+							},
+						})
+					).json()
+				);
+
+				if (wish.success == false) return console.log("Error: could not get wishlist Data");
+
+				setWishList(wish);
+				console.log(wish)
+
+				const cart = JSON.parse(
+					await (
+						await fetch(url + "/cart", {
+							headers: {
+								authorization: `Bearer ${getCookie("token")}`,
+								idsOnly: "true",
+							},
+						})
+					).json()
+				);
+
+				if (cart.success == false) return console.log("Error: could not get cart Data");
+
+				setCartList(cart);
+			})();
+		} catch {
+			setWishList([]);
+			setCartList([]);
+		}
+	}, []);
 
 	return (
 		<div className="body">
@@ -217,21 +255,19 @@ function Body() {
 				<Nav />
 				<div className="productsContainer">
 					{sortedProducts.map((product) => (
-						<div
-							onClick={(ev: MouseEvent) => {
-								if ((ev.target as HTMLElement).classList.contains("atc")) return;
-
-								location.href = `/product?id=${product.id}`;
-								// router.push(`/product?${params.toString()}`);
-							}}
-							key={product.id}
-							data-price={product.price}
-							data-rating={product.rating.rate}
-							data-category={product.category}
-							className="productItem"
-						>
+						<div key={product.id} data-price={product.price} data-rating={product.rating.rate} data-category={product.category} className="productItem">
 							<div className="imgWrapper">
-								<Image fill src={product.secondaryImgs[0]} alt={product.name} />
+								{AtwBtn(product, wishList.includes(product.id), settings, updateWishList, wishList)}
+								<Image
+									onClick={(ev: MouseEvent) => {
+										if ((ev.target as HTMLElement).classList.contains("addToWishBtn")) return;
+
+										router.push(`/product?id=${product.id}`);
+									}}
+									fill
+									src={product.secondaryImgs[0]}
+									alt={product.name}
+								/>
 							</div>
 							<div className="productInfo">
 								<h3>{product.name}</h3>
@@ -244,16 +280,8 @@ function Body() {
 									<div className="new">${product.price}</div>
 									<div className="old">${(product.price + product.price + product.price * 0.3).toFixed(2)}</div>
 								</div>
-								<div
-									ref={atcBtn}
-									onClick={() => {
-										if (getCookie("username")) atc(settings, getCookie("token"), product);
-										else router.push("/signup");
-									}}
-									className="btn atc"
-								>
-									{cart()}Add to Cart
-								</div>
+
+								{AtcBtn(product, cartList.includes(product.id), settings, updateCartList, cartList)}
 							</div>
 						</div>
 					))}

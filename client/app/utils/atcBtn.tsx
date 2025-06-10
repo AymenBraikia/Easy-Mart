@@ -23,7 +23,7 @@ interface Settings {
 	serverUrl: string;
 }
 
-function AtcBtn(product: Product, isAlreadyIn: boolean, settings: Settings, next: (newList: number[]) => void, oldCartList: number[]) {
+function AtcBtn(product: Product, isAlreadyIn: boolean = false, settings: Settings, next: (newList: number[]) => void = () => {}, oldCartList: number[] = []) {
 	function handleAdd(e: MouseEvent<HTMLElement>) {
 		const token = getCookie("token");
 
@@ -32,6 +32,8 @@ function AtcBtn(product: Product, isAlreadyIn: boolean, settings: Settings, next
 			location.pathname = "/signup";
 			return;
 		}
+
+		if (isAlreadyIn == undefined && next == undefined) return;
 
 		if (isAlreadyIn) {
 			e.currentTarget.classList.remove("active");

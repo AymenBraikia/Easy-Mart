@@ -39,7 +39,7 @@ function middleWare(req: Request, res: Response, next: NextFunction) {
 			return;
 		}
 
-		req.body = {};
+		if (!req.body) req.body = {};
 		req.body.username = data;
 		next();
 	});
@@ -79,7 +79,8 @@ app.get("/wishList", middleWare, async (req, res) => {
 		e.secondaryImgs.length = 1;
 	}
 	const idsOnly = req.headers.idsonly;
-	
+
+	console.log(data);
 
 	res.json(JSON.stringify(idsOnly ? data.map((e) => e.id) : data));
 });
@@ -101,7 +102,6 @@ app.get("/cart", middleWare, async (req, res) => {
 	}
 
 	const idsOnly = req.headers.idsonly;
-	
 
 	res.json(JSON.stringify(idsOnly ? data.map((e) => e.id) : data));
 });
@@ -175,14 +175,15 @@ app.post("/atc", middleWare, async (req, res) => {
 });
 
 app.post("/atw", middleWare, async (req, res) => {
-	const data = await (await db).collection("users").findOne({ username: req.body.username });
+	const username = req.body.username;
+	const data = await (await db).collection("users").findOne({ username: username });
 	if (!data) {
 		res.status(400).json(JSON.stringify({ success: false, reason: "user not found" }));
 		return;
 	}
 
 	(await db).collection("users").updateOne(
-		{ username: req.body.username },
+		{ username: username },
 		{
 			$set: {
 				wishList: [...data.wishList, req.body.id],
