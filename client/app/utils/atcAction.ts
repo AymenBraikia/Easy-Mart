@@ -8,7 +8,7 @@ function atc(settings: Settings, token: string | null, product: { id: number }, 
 	if (!token || !settings || !product) return;
 
 	if (isAlreadyIn)
-		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/removeCat", {
+		fetch((settings.production ? settings.serverUrl : "http://localhost:8000") + "/removeCart", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

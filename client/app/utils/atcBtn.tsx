@@ -28,7 +28,10 @@ function AtcBtn(product: Product, isAlreadyIn: boolean, settings: Settings, next
 		const token = getCookie("token");
 
 		if (token) atc(settings, getCookie("token"), product, isAlreadyIn);
-		else location.pathname = "/signup";
+		else {
+			location.pathname = "/signup";
+			return;
+		}
 
 		if (isAlreadyIn) {
 			e.currentTarget.classList.remove("active");

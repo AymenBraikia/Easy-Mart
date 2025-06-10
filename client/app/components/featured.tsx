@@ -100,7 +100,7 @@ function Featured() {
 			(async function () {
 				const url = settings.production ? settings.serverUrl : "http://localhost:8000";
 
-				let wish = JSON.parse(
+				const wish = JSON.parse(
 					await (
 						await fetch(url + "/wishList", {
 							headers: {
@@ -111,16 +111,16 @@ function Featured() {
 					).json()
 				);
 
-				if (!wish.success) {
+				if (wish.success == false) {
 					console.log("Error: could not get wishlist Data");
-					document.cookie = "token='';";
-					Router.refresh();
-					wish = [NaN, NaN];
+
+					setWishList([]);
+					return;
 				}
 
 				setWishList(wish);
 
-				let cart = JSON.parse(
+				const cart = JSON.parse(
 					await (
 						await fetch(url + "/cart", {
 							headers: {
@@ -130,11 +130,12 @@ function Featured() {
 						})
 					).json()
 				);
-				if (!cart.success) {
+
+				if (cart.success == false) {
 					console.log("Error: could not get cart Data");
-					document.cookie = "token='';";
-					Router.refresh();
-					cart = [];
+
+					setCartList([]);
+					return;
 				}
 
 				setCartList(cart);

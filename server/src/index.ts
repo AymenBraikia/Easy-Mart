@@ -107,7 +107,10 @@ app.get("/cart", middleWare, async (req, res) => {
 });
 
 app.post("/removeCart", middleWare, async (req, res) => {
-	const data = await (await db).collection("users").findOne({ username: req.body.username });
+	const username = req.body.username;
+	console.log(username);
+
+	const data = await (await db).collection("users").findOne({ username: username });
 	if (!data) {
 		res.status(400).json(JSON.stringify({ success: false, reason: "user not found" }));
 		return;
@@ -151,8 +154,7 @@ app.post("/atc", middleWare, async (req, res) => {
 		res.status(400).json(JSON.stringify({ success: false, reason: "You are not logged in" }));
 		return;
 	}
-	const userTokenInfo = jwt.decode(token) as JwtPayload;
-	const username = userTokenInfo.cookie.val;
+	const username = req.body.username;
 
 	const data = await (await db).collection("users").findOne({ username: username });
 
