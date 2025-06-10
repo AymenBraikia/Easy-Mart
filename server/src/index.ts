@@ -79,7 +79,7 @@ app.get("/wishList", middleWare, async (req, res) => {
 		e.secondaryImgs.length = 1;
 	}
 	const idsOnly = req.headers.idsonly;
-	console.log(idsOnly);
+	
 
 	res.json(JSON.stringify(idsOnly ? data.map((e) => e.id) : data));
 });
@@ -101,14 +101,13 @@ app.get("/cart", middleWare, async (req, res) => {
 	}
 
 	const idsOnly = req.headers.idsonly;
-	console.log(idsOnly);
+	
 
 	res.json(JSON.stringify(idsOnly ? data.map((e) => e.id) : data));
 });
 
 app.post("/removeCart", middleWare, async (req, res) => {
 	const username = req.body.username;
-	console.log(username);
 
 	const data = await (await db).collection("users").findOne({ username: username });
 	if (!data) {
