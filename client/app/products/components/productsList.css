@@ -83,3 +83,12 @@
     justify-content: center;
     align-items: center;
 }
+
+@media (min-width:300px) and (max-width:800px) {
+
+    .productItem,
+    .productImg {
+        width: 300px !important;
+        min-width: 300px !important;
+    }
+}
