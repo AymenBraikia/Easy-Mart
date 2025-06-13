@@ -9,12 +9,12 @@ import Introduction from "./introduction";
 
 const Perks = dynamic(() => import("./perks"), {
 	loading: () => <p>Loading...</p>,
-	ssr: true,
+	ssr: false,
 });
 
 const ShopCat = dynamic(() => import("./shopCat"), {
 	loading: () => <p>Loading...</p>,
-	ssr: true,
+	ssr: false,
 });
 
 const Featured = dynamic(() => import("./featured"), {
