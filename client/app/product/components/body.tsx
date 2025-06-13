@@ -1,10 +1,11 @@
-"use client"
+"use client";
 import Images from "./images";
-import "./responsive.css"
+import "./responsive.module.css";
 
 function Body() {
 	return (
-		<div className="mainBody"
+		<div
+			className="mainBody"
 			style={{
 				position: "absolute",
 				top: 80,
