@@ -7,13 +7,16 @@ import Introduction from "./introduction";
 // 	ssr: true,
 // });
 
-const Perks = dynamic(() => import("./perks"), {
-	loading: () => <p>Loading...</p>,
-});
+import Perks from "./perks";
 
-const ShopCat = dynamic(() => import("./shopCat"), {
-	loading: () => <p>Loading...</p>,
-});
+import ShopCat from "./shopCat";
+// const Perks = dynamic(() => import("./perks"), {
+// 	loading: () => <p>Loading...</p>,
+// });
+
+// const ShopCat = dynamic(() => import("./shopCat"), {
+// 	loading: () => <p>Loading...</p>,
+// });
 
 const Featured = dynamic(() => import("./featured"), {
 	loading: () => <p>Loading...</p>,
