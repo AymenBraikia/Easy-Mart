@@ -30,6 +30,15 @@
     border: 15px !important;
 }
 
+.introBtn {
+    background-color: var(--background);
+    color: #284385 !important;
+    border: 15px !important;
+    padding: 10px;
+    border-radius: 5px;
+    transition: var(--transition);
+}
+
 .introBtn:hover {
     color: white !important;
     background-color: transparent;

@@ -1,9 +1,10 @@
-"use client";
+// "use client";
+import Link from "next/link";
 import styles from "./introduction.module.css";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 function Introduction() {
-	const router = useRouter();
+	// const router = useRouter();
 
 	return (
 		<div className={styles.introductionContainer}>
@@ -12,22 +13,16 @@ function Introduction() {
 			</h1>
 			<p style={{ fontSize: 22, fontWeight: 400, marginTop: 50, width: "720px", textAlign: "center", position: "relative" }}>Shop with confidence from thousands of verified sellers offering quality products at great prices.</p>
 			<div style={{ marginTop: 100, display: "flex", justifyContent: "center", alignItems: "center", columnGap: 50 }}>
-				<button
-					onClick={() => {
-						router.push("../products");
-					}}
+				<Link
+					// router.push("../products");
+					href={"../products"}
 					className={styles.introBtn}
 				>
 					Start Shopping
-				</button>
-				<button
-					onClick={() => {
-						router.push("../products");
-					}}
-					className={styles.introBtn}
-				>
+				</Link>
+				<Link href={"../products"} className={styles.introBtn}>
 					Become a Seller
-				</button>
+				</Link>
 			</div>
 		</div>
 	);
