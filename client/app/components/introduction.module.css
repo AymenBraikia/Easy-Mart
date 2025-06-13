@@ -45,6 +45,22 @@
     transform: scale(1.1);
 }
 
+.introductionP {
+    font-size: 22;
+    font-weight: 400;
+    margin-Top: 50;
+    width: 720px;
+    text-align: center;
+    position: relative;
+}
+
+.btnsContainer {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 50px
+}
 
 @media (min-width:300px) and (max-width:800px) {
 

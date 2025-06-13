@@ -9,9 +9,9 @@ function Introduction() {
 				Discover Amazing Products from <br /> <span style={{ color: "#FFEB3B" }}>Trusted Sellers</span>
 			</h1>
 
-			<p style={{ fontSize: 22, fontWeight: 400, marginTop: 50, width: "720px", textAlign: "center", position: "relative" }}>Shop with confidence from thousands of verified sellers offering quality products at great prices.</p>
+			<p className={styles.introductionP}>Shop with confidence from thousands of verified sellers offering quality products at great prices.</p>
 
-			<div style={{ marginTop: 100, display: "flex", justifyContent: "center", alignItems: "center", columnGap: 50 }}>
+			<div className={styles.btnsContainer}>
 				<Link href={"../products"} className={styles.introBtn}>
 					Start Shopping
 				</Link>
