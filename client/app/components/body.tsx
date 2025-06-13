@@ -25,7 +25,7 @@ const Featured = dynamic(() => import("./featured"), {
 
 const TopSellers = dynamic(() => import("./topSellers"), {
 	loading: () => <p>Loading...</p>,
-	ssr: true,
+	ssr: false,
 });
 
 const Achievement = dynamic(() => import("./achievements"), {
