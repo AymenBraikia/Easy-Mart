@@ -1,6 +1,11 @@
-import Introduction from "./introduction";
-
 import dynamic from "next/dynamic";
+
+// import Introduction from "./introduction";
+
+const Introduction = dynamic(() => import("./introduction"), {
+	loading: () => <p>Loading...</p>,
+	ssr: true,
+});
 
 const Perks = dynamic(() => import("./perks"), {
 	loading: () => <p>Loading...</p>,
