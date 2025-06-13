@@ -9,8 +9,7 @@
   --background3: #eee;
   --background4: #e7e7e7;
   --background-opacity: #ffffff99;
-  /* --gradient: linear-gradient(135deg, #81fbb8, #28c76f); */
-  /* --themeClr: #28c76f; */
+
   --gradient: linear-gradient(135deg, #284385, #0f172a);
   --themeClr: #0f172a;
   --transition: .3s ease;
@@ -21,7 +20,6 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   scroll-behavior: smooth;
-
 }
 
 body {
@@ -47,7 +45,6 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'myCustomFont';
-  font-display: swap;
 }
 
 a {
@@ -132,20 +129,4 @@ button,
 
 .bold {
   font-weight: bold;
-}
-
-.mrt50 {
-  margin: 50px 0 0 0;
-}
-
-.mrt100 {
-  margin: 100px 0 0 0;
-}
-
-.mrt150 {
-  margin: 150px 0 0 0;
-}
-
-.mrt200 {
-  margin: 200px 0 0 0;
 }
