@@ -34,12 +34,12 @@ const Achievement = dynamic(() => import("./achievements"), {
 
 const Subscribe = dynamic(() => import("./subscribe"), {
 	loading: () => <p>Loading...</p>,
-	ssr: true,
+	ssr: false,
 });
 
 const Footer = dynamic(() => import("./footer"), {
 	loading: () => <p>Loading...</p>,
-	ssr: true,
+	ssr: false,
 });
 
 function body() {
