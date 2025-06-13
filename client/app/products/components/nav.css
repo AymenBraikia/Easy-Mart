@@ -59,3 +59,26 @@ label {
     border-radius: 5px;
     ;
 }
+
+@media (min-width:300px) and (max-width:800px) {
+
+
+    .sortingContainer {
+        padding: 0 15px !important;
+        border: unset !important;
+        border-radius: 0 !important;
+        width: 100vw !important;
+    }
+
+    .display {
+        width: 100%;
+    }
+
+    .sortingContainer>.count {
+        display: none;
+    }
+
+    nav {
+        display: none;
+    }
+}

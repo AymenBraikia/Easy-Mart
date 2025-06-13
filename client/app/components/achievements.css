@@ -25,3 +25,13 @@
     font-weight: bold;
     font-size: 40px;
 }
+
+@media (min-width:300px) and (max-width:800px) {
+    .achievementsContainer {
+        height: 350px !important;
+        flex-wrap: wrap;
+        row-gap: 10px;
+        box-sizing: unset;
+        padding: 30px 0;
+    }
+}

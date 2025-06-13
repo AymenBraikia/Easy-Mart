@@ -141,3 +141,26 @@
 .visit:hover {
     filter: brightness(0.9);
 }
+
+
+
+@media (min-width:300px) and (max-width:800px) {
+    .sellers {
+        flex-direction: column;
+    }
+
+    .seller {
+        height: unset !important;
+        width: 90vw !important;
+        aspect-ratio: 1/1;
+        padding: 20px;
+    }
+
+    .badge {
+        overflow: hidden;
+    }
+
+    .pfp {
+        overflow-x: unset !important;
+    }
+}

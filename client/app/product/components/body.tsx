@@ -1,6 +1,6 @@
 "use client";
 import Images from "./images";
-import "./responsive.module.css";
+import "./responsive.css";
 
 function Body() {
 	return (

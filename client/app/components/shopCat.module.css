@@ -44,3 +44,23 @@
     font-size: 40px;
     transition: var(--transition);
 }
+
+@media (min-width:300px) and (max-width:800px) {
+
+    .shopContainer {
+        height: fit-content !important;
+        text-align: center;
+    }
+
+    .list {
+        flex-wrap: wrap;
+        height: fit-content !important;
+        gap: 20px;
+    }
+
+    .listChild {
+        width: 150px !important;
+        font-size: 14px;
+        padding: unset !important;
+    }
+}

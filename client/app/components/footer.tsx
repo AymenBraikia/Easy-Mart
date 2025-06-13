@@ -1,4 +1,4 @@
-import "./footer.css";
+import styles from "./footer.module.css";
 import Link from "next/link";
 
 function masterCard() {
@@ -28,7 +28,7 @@ function visa() {
 
 function paypal() {
 	return (
-		<svg style={{width:18}} viewBox="-1.5 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg">
+		<svg style={{ width: 18 }} viewBox="-1.5 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg">
 			<title>paypal [#140]</title>
 			<desc>Created with Sketch.</desc>
 			<defs></defs>
@@ -113,35 +113,35 @@ function facebook() {
 
 function Footer() {
 	return (
-		<footer>
+		<footer className={styles.footer}>
 			<div style={{ rowGap: 50 }}>
-				<div className="footerSection">
-					<h2 style={{ color: "var(--themeClr)" }} className="footerTitle">
+				<div className={styles.footerSection}>
+					<h2 style={{ color: "var(--themeClr)" }} className={styles.footerTitle}>
 						Easy Mart
 					</h2>
 					<p>Your trusted marketplace for quality products from verified sellers worldwide.</p>
-					<div className="socialMedia">
+					<div className={styles.socialMedia}>
 						{linkedIn()}
 						{twitter()}
 						{facebook()}
 					</div>
 				</div>
-				<div className="footerSection">
-					<h2 className="footerTitle">Quick Links</h2>
+				<div className={styles.footerSection}>
+					<h2 className={styles.footerTitle}>Quick Links</h2>
 					<Link href={"#"}>About Us</Link>
 					<Link href={"#"}>How It Works</Link>
 					<Link href={"#"}>Become a Seller</Link>
 					<Link href={"#"}>Affiliate Program</Link>
 				</div>
-				<div className="footerSection">
-					<h2 className="footerTitle">Support</h2>
+				<div className={styles.footerSection}>
+					<h2 className={styles.footerTitle}>Support</h2>
 					<Link href={"#"}>Help Center</Link>
 					<Link href={"#"}>Contact Us</Link>
 					<Link href={"#"}>Shipping Info</Link>
 					<Link href={"#"}>Returns</Link>
 				</div>
-				<div className="footerSection">
-					<h2 className="footerTitle">Legal</h2>
+				<div className={styles.footerSection}>
+					<h2 className={styles.footerTitle}>Legal</h2>
 					<Link href={"#"}>Privacy Policy</Link>
 					<Link href={"#"}>Terms of service</Link>
 					<Link href={"#"}>Cookie Policy</Link>
@@ -150,8 +150,8 @@ function Footer() {
 			</div>
 			<hr />
 			<div>
-				<div className="copyRight">© 2025 Easy Mart. All rights reserved.</div>
-				<div className="payments">
+				<div className={styles.copyRight}>© 2025 Easy Mart. All rights reserved.</div>
+				<div className={styles.payments}>
 					Accepted Payments: {paypal()}
 					{visa()}
 					{masterCard()}

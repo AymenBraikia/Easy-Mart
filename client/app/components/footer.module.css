@@ -1,4 +1,4 @@
-footer {
+.footer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,7 +10,7 @@ footer {
     padding: 30px 0;
 }
 
-footer>div {
+.footer>div {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -50,7 +50,7 @@ footer>div {
     color: white;
 }
 
-footer hr {
+.footer hr {
     width: 80%;
     background-color: #1e293b;
     border: unset;
@@ -68,11 +68,22 @@ footer hr {
     width: 30px;
 }
 
-footer a {
+.footer a {
     transition: var(--transition);
 }
 
-footer a:hover {
+.footer a:hover {
     color: #284385;
     text-decoration: underline;
+}
+
+@media (min-width:300px) and (max-width:800px) {
+    .footer>div {
+        flex-direction: column;
+    }
+
+    .footerSection {
+        width: 100% !important;
+    }
+
 }

@@ -165,11 +165,25 @@ header>h1 {
 }
 
 @media (min-width: 300px) and (max-width: 800px) {
+
     header .signin {
         font-size: 0;
     }
 
+    .navbar {
+        right: 15px !important;
+    }
+
     .headerBtn {
         padding: 5px 10px;
+    }
+
+    .section,
+    .profile {
+        display: none !important;
+    }
+
+    .header>h1 {
+        font-size: 20px;
     }
 }

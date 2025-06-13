@@ -35,3 +35,39 @@
     background-color: transparent;
     transform: scale(1.1);
 }
+
+
+@media (min-width:300px) and (max-width:800px) {
+
+    .introductionContainer>div,
+    .introductionContainer>p,
+    .introductionContainer>h1 {
+        max-width: 90% !important;
+
+    }
+
+    .introductionContainer>.mrt50 {
+        font-size: 20px !important;
+        line-height: 35px;
+    }
+
+    .introductionContainer>.mrt100 {
+        margin-top: 75px;
+    }
+
+    .welcomeMessage {
+        font-size: 25px !important;
+    }
+
+    .introductionContainer>.mrt100 {
+        max-width: 100vw !important;
+        width: 100% !important;
+        gap: 15px !important;
+    }
+
+    .introBtn {
+        text-align: center;
+        padding: 10px 15px !important;
+    }
+
+}

@@ -110,7 +110,7 @@ function Header() {
 	}, []);
 
 	return (
-		<header ref={header}>
+		<header className="header" ref={header}>
 			<h1 onClick={() => router.push("/")} style={{ position: "relative", left: "10%" }}>
 				Easy Mart
 			</h1>
