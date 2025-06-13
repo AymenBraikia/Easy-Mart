@@ -105,54 +105,55 @@ function Featured() {
 	}
 
 	useEffect(() => {
-		try {
-			(async function () {
-				const url = settings.production ? settings.serverUrl : "http://localhost:8000";
+		if (getCookie("token"))
+			try {
+				(async function () {
+					const url = settings.production ? settings.serverUrl : "http://localhost:8000";
 
-				const wish = JSON.parse(
-					await (
-						await fetch(url + "/wishList", {
-							headers: {
-								authorization: `Bearer ${getCookie("token")}`,
-								idsOnly: "true",
-							},
-						})
-					).json()
-				);
+					const wish = JSON.parse(
+						await (
+							await fetch(url + "/wishList", {
+								headers: {
+									authorization: `Bearer ${getCookie("token")}`,
+									idsOnly: "true",
+								},
+							})
+						).json()
+					);
 
-				if (wish.success == false) {
-					console.log("Error: could not get wishlist Data");
+					if (wish.success == false) {
+						console.log("Error: could not get wishlist Data");
 
-					setWishList([]);
-					return;
-				}
+						setWishList([]);
+						return;
+					}
 
-				setWishList(wish);
+					setWishList(wish);
 
-				const cart = JSON.parse(
-					await (
-						await fetch(url + "/cart", {
-							headers: {
-								authorization: `Bearer ${getCookie("token")}`,
-								idsOnly: "true",
-							},
-						})
-					).json()
-				);
+					const cart = JSON.parse(
+						await (
+							await fetch(url + "/cart", {
+								headers: {
+									authorization: `Bearer ${getCookie("token")}`,
+									idsOnly: "true",
+								},
+							})
+						).json()
+					);
 
-				if (cart.success == false) {
-					console.log("Error: could not get cart Data");
+					if (cart.success == false) {
+						console.log("Error: could not get cart Data");
 
-					setCartList([]);
-					return;
-				}
+						setCartList([]);
+						return;
+					}
 
-				setCartList(cart);
-			})();
-		} catch {
-			setWishList([]);
-			setCartList([]);
-		}
+					setCartList(cart);
+				})();
+			} catch {
+				setWishList([]);
+				setCartList([]);
+			}
 	}, []);
 
 	// async function atcCheck(prod: Product) {
