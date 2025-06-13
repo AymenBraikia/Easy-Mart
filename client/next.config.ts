@@ -22,4 +22,10 @@ const nextConfig: NextConfig = {
 	devIndicators: false,
 };
 
-export default nextConfig;
+import bundleAnLyzer from "@next/bundle-analyzer";
+
+const withBundleAnalyzer = bundleAnLyzer({
+	enabled: process.env.ANALYZE === "true",
+});
+
+module.exports = withBundleAnalyzer(nextConfig);
