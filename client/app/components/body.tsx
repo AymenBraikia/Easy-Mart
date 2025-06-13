@@ -1,3 +1,4 @@
+import styles from "./body.module.css";
 import dynamic from "next/dynamic";
 
 import Introduction from "./introduction";
@@ -42,7 +43,7 @@ const Footer = dynamic(() => import("./footer"), {
 
 function body() {
 	return (
-		<div className="mainBody">
+		<div className={styles.mainBody}>
 			<Introduction />
 			<Perks />
 			<ShopCat />
