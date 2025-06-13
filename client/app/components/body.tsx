@@ -9,12 +9,10 @@ import Introduction from "./introduction";
 
 const Perks = dynamic(() => import("./perks"), {
 	loading: () => <p>Loading...</p>,
-	ssr: false,
 });
 
 const ShopCat = dynamic(() => import("./shopCat"), {
 	loading: () => <p>Loading...</p>,
-	ssr: false,
 });
 
 const Featured = dynamic(() => import("./featured"), {
@@ -34,12 +32,10 @@ const Achievement = dynamic(() => import("./achievements"), {
 
 const Subscribe = dynamic(() => import("./subscribe"), {
 	loading: () => <p>Loading...</p>,
-	ssr: false,
 });
 
 const Footer = dynamic(() => import("./footer"), {
 	loading: () => <p>Loading...</p>,
-	ssr: false,
 });
 
 function body() {
